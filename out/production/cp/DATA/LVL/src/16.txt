@@ -1,0 +1,52 @@
+%define-terrain 1t 6t 240t 35t 0 0 0
+%swall 147t 9t 15t 1t 1 0
+
+%swall 0t 0t 1t 35t 0 0
+%swall 1t 0t 300t 1t 0 0
+%swall 1t 17t 138t 1t 0 0 ;нижн€€
+%swall 1t 34t 300t 1t 0 0
+
+%swall 30t 1t 13t 4t 0 0
+%swall 30t 11t 14t 7t 0 0
+%swall 43t 10t 1t 1t 0 0
+
+%swall 50t 1t 13t 4t 0 0
+%swall 50t 11t 14t 7t 0 0
+%swall 63t 10t 1t 1t 0 0
+
+%swall 70t 1t 13t 4t 0 0
+%swall 70t 11t 14t 7t 0 0
+%swall 83t 10t 1t 1t 0 0
+
+%swall 90t 1t 13t 4t 0 0
+%swall 90t 10t 16t 8t 0 0
+%swall 105t 9t 1t 1t 0 0
+
+%swall 112t 1t 13t 4t 0 0
+%swall 112t 10t 16t 8t 0 0
+%swall 127t 9t 1t 1t 0 0
+
+%swall 147t 17t 300t 1t 0 0
+
+%swall 147t 1t 15t 4t 0 0
+%swall 147t 10t 15t 8t 0 0
+
+%swall 168t 1t 13t 4t 0 0
+%swall 168t 11t 14t 7t 0 0
+%swall 181t 10t 1t 1t 0 0
+
+%swall 188t 1t 13t 4t 0 0
+%swall 188t 11t 14t 7t 0 0
+%swall 201t 10t 1t 1t 0 0
+
+%swall 208t 1t 13t 4t 0 0
+%swall 208t 10t 15t 8t 0 0
+%swall 222t 9t 1t 1t 0 0
+
+%dwall 160t 19t 1t 1t 0 0 01 160t 25t 0 176
+%dwall 170t 26t 1t 1t 0 0 01 170t 33t 0 -176
+%dwall 180t 19t 1t 1t 0 0 01 180t 25t 0 176
+%dwall 194t 26t 1t 1t 0 0 01 194t 33t 0 176
+%dwall 205t 26t 1t 1t 0 0 01 205t 33t 0 -176
+
+%swall 239t 18t 1t 17t 0 0

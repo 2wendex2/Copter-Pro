@@ -1,0 +1,11 @@
+%define-terrain 0t 286 94t 18t 0 0 0
+%swall 0t 0t 94t 1t 0 0
+%swall 0t 17t 94t 1t 0 0
+%dwall 20t 1t 1t 1t 0 0 01 20t 8t 0 5t
+%dwall 33t 9t 1t 1t 0 0 01 33t 17t 0 -5t
+%dwall 46t 1t 1t 1t 0 0 01 46t 8t 0 5t
+%dwall 60t 9t 1t 1t 0 0 01 60t 17t 0 5t
+%dwall 67t 1t 1t 1t 0 0 01 67t 8t 0 5t
+%dwall 73t 9t 1t 1t 0 0 01 73t 17t 0 -5t
+%dwall 84t 1t 1t 1t 0 0 01 84t 8t 0 5t
+%dwall 93t 9t 1t 1t 0 0 01 93t 17t 0 -5t

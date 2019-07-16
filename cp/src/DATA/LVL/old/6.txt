@@ -1,0 +1,25 @@
+%define-terrain 0t 286 94t 18t
+
+%swall 0t 0t 94t 2t
+%swall 0t 16t 94t 2t
+%swall 0t 2t 19t 1t
+%swall 0t 3t 2t 1t
+%swall 0t 4t 1t 1t
+%swall 3t 3t 4t 1t
+%swall 4t 4t 2t 1t
+
+;треть€ углова€
+%swall 8t 3t 3t 1t
+%swall 9t 4t 1t 1t
+
+;четвЄрта€ углова€
+%swall 12t 3t 5t 1t
+%swall 13t 4t 1t 1t
+%swall 16t 4t 1t 1t
+
+;средн€€ полоса
+%swall 24t 7t 13t 1t
+%swall 24t 13t 13t 3t
+
+%swall-v 87t 2t 1t 1t 6t
+%swall-v 67t 8t 1t 1t 6t

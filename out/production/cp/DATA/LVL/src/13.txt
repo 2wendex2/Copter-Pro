@@ -1,0 +1,273 @@
+%define-terrain 0t 2t 118t 118t 0 0 0 
+
+;верхняя хуйня
+%swall 0t 0t 108t 1t 0 0
+
+;хуйня =| в начале
+%swall 16t 9t 13t 1t 0 0
+%swall 28t 10t 1t 5t 0 0 
+%swall 15t 15t 14t 1t 0 0
+
+;ромб в начале
+%swall 31t 19t 1t 7t 0 0
+%swall 31t 16t 1t 1t 0 0
+%swall 32t 14t 1t 2t 0 0
+%swall 33t 13t 1t 1t 0 0
+%swall 34t 12t 1t 1t 0 0
+%swall 33t 24t 1t 1t 0 0
+%swall 34t 23t 1t 1t 0 0
+%swall 36t 21t 1t 1t 0 0
+%swall 37t 17t 1t 3t 0 0
+%swall 37t 11t 1t 5t 0 0
+
+;справа ебучего ромба
+%swall 39t 18t 1t 1t 0 0
+%swall 39t 19t 5t 1t 0 0
+%swall 46t 18t 1t 8t 0 0
+%swall 47t 24t 4t 1t 0 0
+%swall 50t 23t 2t 1t 0 0
+%swall 51t 22t 1t 1t 0 0
+%swall 52t 20t 1t 2t 0 0
+
+;хуй
+%swall 46t 11t 1t 2t 0 0
+%swall 47t 12t 4t 1t 0 0
+%swall 51t 11t 1t 2t 0 0
+%swall 48t 6t 2t 6t 0 0
+
+;П
+%swall 26t 31t 7t 1t 0 0
+%swall 26t 32t 1t 8t 0 0
+%swall 32t 32t 1t 9t 0 0
+
+;Справа П
+%swall 43t 32t 1t 1t 0 0
+%swall 42t 31t 1t 1t 0 0
+%swall 44t 29t 3t 1t 0 0
+%swall 47t 28t 1t 1t 0 0
+%swall 47t 30t 1t 1t 0 0
+%swall 48t 32t 1t 1t 0 0
+%swall 48t 34t 1t 1t 0 0
+%swall 49t 38t 1t 2t 0 0
+%swall 48t 40t 1t 1t 0 0
+%swall 46t 41t 1t 2t 0 0
+%swall 52t 34t 1t 1t 0 0
+%swall 52t 36t 1t 1t 0 0
+%swall 53t 33t 2t 1t 0 0
+%swall 56t 32t 1t 2t 0 0
+
+
+;закрытие
+%swall 60t 34t 2t 1t 0 0
+%swall 64t 38t 1t 2t 0 0
+
+
+;нижние хуйни
+%swall 22t 45t 1t 1t 0 0
+%swall 21t 46t 1t 1t 0 0
+%swall 24t 46t 1t 8t 0 0 
+%swall 19t 48t 1t 2t 0 0
+%swall 18t 49t 1t 1t 0 0
+%swall 18t 51t 1t 1t 0 0
+%swall 20t 53t 4t 1t 0 0
+%swall 23t 54t 1t 1t 0 0
+
+%swall 0t 59t 19t 1t 0 0
+%swall 20t 59t 11t 1t 0 0
+%swall 31t 55t 1t 4t 0 0
+%swall 32t 52t 1t 2t 0 0
+%swall 31t 49t 1t 2t 0 0
+%swall 33t 48t 1t 1t 0 0
+%swall 29t 47t 1t 1t 0 0
+%swall 43t 53t 4t 1t 0 0
+%swall 45t 58t 1t 1t 0 0
+
+
+;=|2
+%swall 56t 2t 11t 1t 0 0
+%swall 56t 8t 11t 1t 0 0
+%swall 66t 3t 1t 5t 0 0
+
+%swall 62t 13t 1t 1t 0 0
+%swall 62t 15t 1t 1t 0 0
+%swall 61t 14t 1t 1t 0 0
+
+
+
+
+
+
+
+%swall 36t 72t 1t 1t 0 0
+%swall 46t 72t 1t 1t 0 0
+%swall 37t 71t 1t 1t 0 0
+%swall 47t 71t 1t 1t 0 0
+%swall 38t 70t 1t 1t 0 0
+%swall 48t 70t 1t 1t 0 0
+%swall 39t 69t 1t 1t 0 0
+%swall 49t 69t 1t 1t 0 0
+%swall 40t 68t 1t 1t 0 0
+%swall 50t 68t 1t 1t 0 0
+%swall 41t 67t 1t 1t 0 0
+%swall 51t 67t 1t 1t 0 0
+%swall 42t 66t 1t 1t 0 0
+%swall 52t 66t 1t 1t 0 0
+%swall 43t 65t 1t 1t 0 0
+%swall 53t 65t 1t 1t 0 0
+%swall 44t 64t 1t 1t 0 0
+%swall 54t 64t 1t 1t 0 0
+%swall 45t 63t 1t 1t 0 0
+%swall 55t 63t 1t 1t 0 0
+%swall 46t 62t 1t 1t 0 0
+%swall 56t 62t 1t 1t 0 0
+%swall 47t 61t 1t 1t 0 0
+%swall 57t 61t 1t 1t 0 0
+%swall 48t 60t 1t 1t 0 0
+%swall 58t 60t 1t 1t 0 0
+%swall 49t 59t 1t 1t 0 0
+%swall 59t 59t 1t 1t 0 0
+%swall 50t 58t 1t 1t 0 0
+%swall 60t 58t 1t 1t 0 0
+%swall 51t 57t 1t 1t 0 0
+%swall 61t 57t 1t 1t 0 0
+%swall 52t 56t 1t 1t 0 0
+%swall 62t 56t 1t 1t 0 0
+%swall 53t 55t 1t 1t 0 0
+%swall 63t 55t 1t 1t 0 0
+%swall 54t 54t 1t 1t 0 0
+%swall 64t 54t 1t 1t 0 0
+%swall 55t 53t 1t 1t 0 0
+%swall 65t 53t 1t 1t 0 0
+%swall 56t 52t 1t 1t 0 0
+%swall 66t 52t 1t 1t 0 0
+%swall 57t 51t 1t 1t 0 0
+%swall 67t 51t 1t 1t 0 0
+%swall 58t 50t 1t 1t 0 0
+%swall 68t 50t 1t 1t 0 0
+%swall 59t 49t 1t 1t 0 0
+%swall 69t 49t 1t 1t 0 0
+%swall 60t 48t 1t 1t 0 0
+%swall 70t 48t 1t 1t 0 0
+%swall 61t 47t 1t 1t 0 0
+%swall 71t 47t 1t 1t 0 0
+%swall 62t 46t 1t 1t 0 0
+%swall 72t 46t 1t 1t 0 0
+%swall 63t 45t 1t 1t 0 0
+%swall 73t 45t 1t 1t 0 0
+%swall 64t 44t 1t 1t 0 0
+%swall 74t 44t 1t 1t 0 0
+%swall 65t 43t 1t 1t 0 0
+%swall 75t 43t 1t 1t 0 0
+;66 42
+;67 41
+;68 40
+;69 39
+;70 38
+;%swall 80t 38t 1t 1t 0 0
+;%swall 71t 37t 1t 1t 0 0
+%swall 81t 37t 1t 1t 0 0
+;%swall 72t 36t 1t 1t 0 0
+%swall 82t 36t 1t 1t 0 0
+;%swall 73t 35t 1t 1t 0 0
+%swall 83t 35t 1t 1t 0 0
+;%swall 74t 34t 1t 1t 0 0
+%swall 84t 34t 1t 1t 0 0
+;%swall 75t 33t 1t 1t 0 0
+%swall 85t 33t 1t 1t 0 0
+%swall 76t 32t 1t 1t 0 0
+%swall 86t 32t 1t 1t 0 0
+%swall 77t 31t 1t 1t 0 0
+%swall 87t 31t 1t 1t 0 0
+%swall 78t 30t 1t 1t 0 0
+%swall 88t 30t 1t 1t 0 0
+%swall 79t 29t 1t 1t 0 0
+%swall 89t 29t 1t 1t 0 0
+%swall 80t 28t 1t 1t 0 0
+%swall 90t 28t 1t 1t 0 0
+%swall 81t 27t 1t 1t 0 0
+%swall 91t 27t 1t 1t 0 0
+%swall 82t 26t 1t 1t 0 0
+%swall 92t 26t 1t 1t 0 0
+%swall 83t 25t 1t 1t 0 0
+%swall 93t 25t 1t 1t 0 0
+
+%swall 84t 24t 1t 1t 0 0
+%swall 94t 24t 1t 1t 0 0
+%swall 85t 23t 1t 1t 0 0
+%swall 95t 23t 1t 1t 0 0
+%swall 86t 22t 1t 1t 0 0
+%swall 96t 22t 1t 1t 0 0
+%swall 87t 21t 1t 1t 0 0
+%swall 97t 21t 1t 1t 0 0
+%swall 88t 20t 1t 1t 0 0
+%swall 98t 20t 1t 1t 0 0
+%swall 89t 19t 1t 1t 0 0
+%swall 99t 19t 1t 1t 0 0
+%swall 90t 18t 1t 1t 0 0
+%swall 100t 18t 1t 1t 0 0
+%swall 91t 17t 1t 1t 0 0
+%swall 101t 17t 1t 1t 0 0
+%swall 92t 16t 1t 1t 0 0
+%swall 102t 16t 1t 1t 0 0
+%swall 93t 15t 1t 1t 0 0
+%swall 103t 15t 1t 1t 0 0
+
+%swall 94t 14t 1t 1t 0 0
+%swall 104t 14t 1t 1t 0 0
+%swall 95t 13t 1t 1t 0 0
+%swall 105t 13t 1t 1t 0 0
+%swall 96t 12t 1t 1t 0 0
+%swall 106t 12t 1t 1t 0 0
+%swall 97t 11t 1t 1t 0 0
+%swall 107t 11t 1t 1t 0 0
+%swall 98t 10t 1t 1t 0 0
+%swall 108t 10t 1t 1t 0 0
+%swall 99t 9t 1t 1t 0 0
+%swall 109t 9t 1t 1t 0 0
+%swall 100t 8t 1t 1t 0 0
+%swall 110t 8t 1t 1t 0 0
+%swall 101t 7t 1t 1t 0 0
+%swall 111t 7t 1t 1t 0 0
+%swall 102t 6t 1t 1t 0 0
+%swall 112t 6t 1t 1t 0 0
+%swall 103t 5t 1t 1t 0 0
+%swall 113t 5t 1t 1t 0 0
+
+;%swall 108t 5t 1t 1t 0 0
+;%swall 118t 5t 1t 1t 0 0
+;%swall 109t 4t 1t 1t 0 0
+;%swall 119t 4t 1t 1t 0 0
+;%swall 110t 3t 1t 1t 0 0
+;%swall 120t 3t 1t 1t 0 0
+;%swall 111t 2t 1t 1t 0 0
+;%swall 121t 2t 1t 1t 0 0
+;%swall 112t 1t 1t 1t 0 0
+;%swall 122t 1t 1t 1t 0 0
+
+%swall 104t 4t 1t 1t 0 0
+%swall 114t 4t 1t 1t 0 0
+%swall 105t 3t 1t 1t 0 0
+%swall 115t 3t 1t 1t 0 0
+%swall 106t 2t 1t 1t 0 0
+%swall 116t 2t 1t 1t 0 0
+%swall 107t 1t 1t 1t 0 0
+;%swall 117t 1t 1t 1t 0 0
+
+
+%swall 117t 0t 1t 118t 0 0
+%swall 0t 117t 89t 1t 0 0
+%swall 96t 117t 22t 1t 0 0
+
+
+
+%dwall 96t 23t 1t 1t 0 0 01 96t 116t 0 6t
+%dwall 98t 21t 1t 1t 0 0 01 98t 116t 0 6t
+%dwall 100t 19t 1t 1t 0 0 01 100t 116t 0 6t
+%dwall 102t 17t 1t 1t 0 0 01 102t 116t 0 6t
+%dwall 104t 15t 1t 1t 0 0 01 104t 116t 0 6t
+%dwall 106t 13t 1t 1t 0 0 01 106t 116t 0 6t
+%dwall 108t 11t 1t 1t 0 0 01 108t 116t 0 6t
+%dwall 110t 9t 1t 1t 0 0 01 110t 116t 0 6t
+%dwall 112t 7t 1t 1t 0 0 01 112t 116t 0 6t
+%dwall 114t 5t 1t 1t 0 0 01 114t 116t 0 6t
+%dwall 116t 3t 1t 1t 0 0 01 116t 116t 0 6t

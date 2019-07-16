@@ -1,0 +1,4 @@
+%define-terrain 0 222 25t 18t 0 0 0
+%swall 0t 0t 25t 6t 0 0
+%swall 0t 12t 25t 6t 0 0
+%swall 11t 11t 15t 1t 0 0

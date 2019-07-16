@@ -1,0 +1,5 @@
+%define-terrain 0t 6t 25t 18t 111 5 0
+%swall 18t 0t 8t 1t 0 0
+%swall 18t 17t 8t 1t 0 0
+%swall 24t 1t 1t 16t 0 0
+%enemy 0 618 6t
