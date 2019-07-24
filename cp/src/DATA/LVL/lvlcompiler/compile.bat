@@ -1,1 +1,0 @@
-java LvlCompile ..\src\%1.txt ..\%1.dat

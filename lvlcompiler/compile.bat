@@ -1,0 +1,1 @@
+java LvlCompile ..\cp\lvls\%1.txt ..\cp\src\DATA\LVL\%1.dat

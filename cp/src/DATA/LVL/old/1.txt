@@ -1,9 +1,0 @@
-%define-terrain 0 206 4512 576
-%swall 0t 0t 141t 1t
-%swall 0t 16t 141t 2t
-%swall 140t 1t 1t 5t
-%swall 140t 11t 1t 5t
-%swall 12t 1t 7t 2t
-%swall 12t 14t 7t 2t
-%swall 71t 1t 1t 3t
-%swall 101t 11t 1t 5t
