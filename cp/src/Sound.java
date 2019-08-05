@@ -1,10 +1,9 @@
+import control.Main;
 import org.lwjgl.openal.AL10;
-import org.lwjgl.openal.ALC10;
 import org.lwjgl.stb.STBVorbisInfo;
 import org.lwjgl.stb.STBVorbis;
 import org.lwjgl.system.MemoryUtil;
 
-import java.awt.*;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -26,7 +25,7 @@ public class Sound {
         path.append(".dat");
         STBVorbisInfo info = STBVorbisInfo.malloc();
         try {
-            InputStream is = Main.class.getResourceAsStream(path.toString());
+            InputStream is = control.Main.class.getResourceAsStream(path.toString());
             ByteBuffer vorbis = ByteBuffer.allocateDirect(4*1024*1024).order(ByteOrder.nativeOrder());
             vorbis.put(is.readAllBytes());
             is.close();

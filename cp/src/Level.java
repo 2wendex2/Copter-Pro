@@ -1,9 +1,8 @@
-import java.io.File;
-import java.io.FileInputStream;
+import control.Main;
+
 import java.io.DataInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.io.*;
 import java.util.Iterator;
 
 
@@ -47,7 +46,7 @@ public class Level {
 
         try {
             //FileInputStream stream = new FileInputStream(file);
-            InputStream stream = Main.class.getResourceAsStream(path.toString());
+            InputStream stream = control.Main.class.getResourceAsStream(path.toString());
             DataInputStream data = new DataInputStream(stream);
             //terrain
             x = data.readInt();

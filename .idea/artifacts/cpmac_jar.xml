@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="cpmac:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/cpmac_jar</output-path>
+    <root id="archive" name="cp.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/cp/src/mac/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="cp" />
+      <element id="extracted-dir" path="Q:/Sdks/lwjgl-3.2.1/lwjgl/lwjgl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="Q:/Sdks/lwjgl-3.2.1/lwjgl/lwjgl-natives-macos.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="Q:/Sdks/lwjgl-3.2.1/lwjgl-glfw/lwjgl-glfw.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="Q:/Sdks/lwjgl-3.2.1/lwjgl-glfw/lwjgl-glfw-natives-macos.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="Q:/Sdks/lwjgl-3.2.1/lwjgl-openal/lwjgl-openal.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="Q:/Sdks/lwjgl-3.2.1/lwjgl-openal/lwjgl-openal-natives-macos.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="Q:/Sdks/lwjgl-3.2.1/lwjgl-opengl/lwjgl-opengl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="Q:/Sdks/lwjgl-3.2.1/lwjgl-opengl/lwjgl-opengl-natives-macos.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="Q:/Sdks/lwjgl-3.2.1/lwjgl-stb/lwjgl-stb.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="Q:/Sdks/lwjgl-3.2.1/lwjgl-stb/lwjgl-stb-natives-macos.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
