@@ -1,4 +1,5 @@
-import control.Main;
+import game.Game;
+import game.Input;
 
 import java.io.DataInputStream;
 import java.io.InputStream;

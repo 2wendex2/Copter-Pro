@@ -1,3 +1,5 @@
+import game.Level;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Boss1m extends MovingSolidActor implements Boss{

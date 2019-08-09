@@ -1,3 +1,5 @@
+import game.Level;
+
 public class Boss1b extends Boss1m {
     public Boss1b(int x, int y) {
         super(x, y);

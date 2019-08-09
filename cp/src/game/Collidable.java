@@ -1,3 +1,5 @@
+package game;
+
 public interface CollidableActor {
     boolean testCollision(CollidableActor other);
     boolean testCollisionRect(Rect other);

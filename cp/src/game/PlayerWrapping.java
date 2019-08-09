@@ -1,3 +1,5 @@
+import game.Level;
+
 public class PlayerWrapping extends Player {
     private Player wrapping;
     private int wrape;

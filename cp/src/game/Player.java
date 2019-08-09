@@ -1,4 +1,4 @@
-import org.lwjgl.opengl.GL11;
+import game.Level;
 
 public class Player extends CollidableActor.Rect implements DrawableActor{
     private int vspeed; //fixed 1 = 1/32

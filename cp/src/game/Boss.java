@@ -1,3 +1,5 @@
+import game.Level;
+
 public interface Boss extends CollidableActor, DrawableActor{
     boolean isEnd();
     void update(Level level);
