@@ -4,8 +4,20 @@ package control;
 //Этот класс — костыль на него
 //Использовать исключительно как обёртку над нормальным исключением
 
-public class GLFWCallbackException extends RuntimeException{
-    public GLFWCallbackException(Throwable exception) {
-        super(exception);
+import menu.MenuException;
+
+class InputCallbackException extends RuntimeException{
+    private Exception exc;
+
+    public InputCallbackException(MenuException exception) {
+        exc = exception;
+    }
+
+    public InputCallbackException(ControlException exception) {
+        exc = exception;
+    }
+
+    public Exception getException() {
+        return exc;
     }
 }

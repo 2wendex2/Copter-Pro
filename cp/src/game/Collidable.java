@@ -1,11 +1,11 @@
 package game;
 
-public interface CollidableActor {
-    boolean testCollision(CollidableActor other);
+public interface Collidable {
+    boolean testCollision(Collidable other);
     boolean testCollisionRect(Rect other);
 
-    class Rect implements CollidableActor {
-        public boolean testCollision(CollidableActor other) {
+    class Rect implements Collidable {
+        public boolean testCollision(Collidable other) {
             return other.testCollisionRect(this);
         }
 

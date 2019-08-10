@@ -1,11 +1,7 @@
 package menu;
 
-import java.util.ArrayList;
-
-import control.ControlState;
-import control.Control;
+import control.*;
 import org.lwjgl.glfw.GLFW;
-import control.ControlException;
 
 /*
 Состояние меню, передаётся в Control.getInstance().changeState при необходимости сменить состояние на меню
@@ -17,24 +13,26 @@ import control.ControlException;
     Данный объект используется внутри фу
 */
 
-public class Menu implements ControlState {
-    private Iterable<Selectable> selectables;
+public abstract class Menu implements ControlState {
+    private Iterable<? extends Selectable> selectables;
     private Selectable selected;
-    private Window wnd;
 
     public static Menu getInstance() {
         return (Menu)Control.getInstance().getState();
     }
 
-    public Menu(Window wnd) {
-        this.wnd = wnd;
+    public void draw() {
+        selected.drawSelected();
+        for (Selectable i : selectables)
+            i.draw();
     }
 
-    public void init() throws ControlException {
-        wnd.init();
-        Control.getInstance().changeInput((long window, int key, int scancode, int action, int mods) -> {
-            if (action == GLFW.GLFW_PRESS)
-                switch (key) {
+    public abstract void onExit() throws MenuException, ControlException;
+
+    @Override
+    public void inputCallback(int key, int scancode, int action, int mods) throws MenuException, ControlException {
+        if (action == GLFW.GLFW_PRESS) {
+            switch (key) {
                 case GLFW.GLFW_KEY_LEFT:
                     selected = selected.getLeft();
                     break;
@@ -51,27 +49,12 @@ public class Menu implements ControlState {
                     selected.onPress();
                     break;
                 case GLFW.GLFW_KEY_ESCAPE:
-                    wnd.onExit();
-                }
-        });
+                    onExit();
+            }
+        }
     }
 
-    public void input() {
-        GLFW.glfwPollEvents();
-    }
-
-    public void update() {}
-
-    public void draw() {
-        wnd.draw();
-        selected.drawSelected();
-        for (Selectable i : selectables)
-            i.draw();
-    }
-
-    public void destroy() {}
-
-    void setSelectables(Iterable<Selectable> selectables, Selectable selected) {
+    protected void setSelectables(Iterable<? extends Selectable> selectables, Selectable selected) {
         this.selectables = selectables;
         this.selected = selected;
     }

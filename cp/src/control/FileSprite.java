@@ -1,5 +1,6 @@
 package control;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -15,10 +16,13 @@ import org.lwjgl.system.MemoryStack;
 public class FileSprite implements Sprite {
     protected int w, h, texture;
 
-    public FileSprite(String path) throws ControlException {
+    public FileSprite(String path) throws IOException {
         try {
             ByteBuffer data;
             InputStream is = Resourse.getResourseAsInputStream("IMG", path);
+            if (is == null)
+                throw new IOException("Sprite " + path + " loading error: unable to read resourse");
+
             byte[] bytes = is.readAllBytes();
             is.close();
             data = ByteBuffer.allocateDirect(bytes.length);
@@ -32,7 +36,8 @@ public class FileSprite implements Sprite {
 
             ByteBuffer image = STBImage.stbi_load_from_memory(data, w, h, channels, 4);
             if (image == null)
-                throw new ControlException("STBImage error: " + STBImage.stbi_failure_reason());
+                throw new IOException("Sprite " + path + " loading error: STBImage error: " +
+                        STBImage.stbi_failure_reason());
 
             int internalFormat, format;
                 internalFormat = GL11.GL_RGBA8;
@@ -47,9 +52,9 @@ public class FileSprite implements Sprite {
             GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, internalFormat, this.w, this.h, 0,
                     format, GL11.GL_UNSIGNED_BYTE, image);
 
-            ControlNative.glThrowIfError();
+            //ControlNative.glThrowIfError();
         } catch (Exception e) {
-            throw new ControlException("FileSprite " + path + " create error", e);
+            throw new IOException("Sprite " + path + " loading error: " + e.toString(), e);
         }
     }
 

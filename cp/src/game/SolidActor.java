@@ -1,16 +1,18 @@
-public class SolidActor extends CollidableActor.Rect implements DrawableActor{
-    private byte state;
-    private Sprite sprite;
+package game;
 
+import control.Drawable;
+import control.Graphics;
+
+public class SolidActor extends Collidable.Rect implements Drawable {
+    private byte state;
     public static final int PLAYER_NOT_KILLER = 1 << 0;
     public static final int ENEMY_KILLER = 1 << 1;
     public static final int BULLET_DESTROY = 1 << 2;
     public static final int BOMB_DESTROY = 1 << 3;
 
-    public SolidActor(int x, int y, int w, int h, byte state, Sprite sprite) {
+    public SolidActor(int x, int y, int w, int h, byte state) {
         super(x, y, w, h);
         this.state = state;
-        this.sprite = sprite;
     }
 
     public boolean isPlayerKiller() {
@@ -28,6 +30,9 @@ public class SolidActor extends CollidableActor.Rect implements DrawableActor{
     }
 
     public void draw() {
-        sprite.draw(x, y, w, h);
+        if (isPlayerKiller())
+            Graphics.drawColorRect(x, y, w, h, 1.f, 0.f, 0.f);
+        else
+            Graphics.drawColorRect(x, y, w, h, 0.f, 1.f, 0.f);
     }
 }

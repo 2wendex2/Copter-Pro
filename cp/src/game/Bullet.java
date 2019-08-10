@@ -1,12 +1,14 @@
-public class Bullet extends CollidableActor.Rect implements DrawableActor {
-    private Sprite sprite;
+package game;
 
+import control.Drawable;
+import control.Graphics;
+
+public class Bullet extends Collidable.Rect implements Drawable {
     //force: true — бомба, false — пуля
     private boolean force;
 
-    public Bullet(int x, int y, int w, int h, Sprite sprite, boolean force) {
+    public Bullet(int x, int y, int w, int h, boolean force) {
         super(x, y, w, h);
-        this.sprite = sprite;
         this.force = force;
     }
 
@@ -19,6 +21,6 @@ public class Bullet extends CollidableActor.Rect implements DrawableActor {
     }
 
     public void draw() {
-        sprite.draw(x, y, w, h);
+        Graphics.drawColorRect(x, y, w, h, 0.f, 0.f, 1.f);
     }
 }

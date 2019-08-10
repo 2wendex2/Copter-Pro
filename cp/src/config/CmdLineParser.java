@@ -7,6 +7,13 @@ package config;
     -saves-dir <SavesDirPath>.
 */
 
+import control.Main;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+
 public class CmdLineParser {
     private String[] args;
     private int ind;
@@ -45,7 +52,10 @@ public class CmdLineParser {
                 parseHelp();
             else if (n.equals("start")) {
                 parseStartCommand();
-            }
+            } else if (n.equals("version"))
+                parseVersion();
+            else if (n.equals("history"))
+                parseHistory();
             else
                 System.out.println("Command " + n + " not found, see help for commands list");
         } else
@@ -54,7 +64,7 @@ public class CmdLineParser {
 
     private void printIncorrectArgumentError(String argument, String usage) {
         if (argument.length() > 0 && argument.charAt(0) == '-')
-            System.out.println("key " + argument + " not found, see help start for details");
+            System.out.println("key " + argument + " not found, " + usage);
         else
             System.out.println("unexpected argument " + argument + ", " + usage);
     }
@@ -62,13 +72,14 @@ public class CmdLineParser {
     private void parseHelp() {
         String n = next();
         if (n == null) {
-            System.out.println("usage: [command] [keys]\ncommand list: start (default), help\n" +
+            System.out.println("usage: [command] [keys]\ncommand list: start (default), help, " +
+                    "version, history\n" +
                     "to get more detailed information, see help <command>");
             return;
         }
 
         String c = next();
-        if (c != null && (n.equals("start") || n.equals("help"))) {
+        if (c != null && (n.equals("start") || n.equals("help") || n.equals("version") || n.equals("history"))) {
             printIncorrectArgumentError(n, "usage help [command]");
             return;
         }
@@ -80,6 +91,10 @@ public class CmdLineParser {
                     "-saves-dir <path> — directory for saves files (default: <-config-dir>/saves)");
         } else if (n.equals("help")) {
             System.out.println("help — to show all commands\nhelp <command> — to show help about command");
+        } else if (n.equals("version")) {
+            System.out.println("show game version");
+        } else if (n.equals("history")) {
+            System.out.println("show game version history");
         } else {
             System.out.println("command " + n + " not found, see help for commands list");
         }
@@ -109,5 +124,47 @@ public class CmdLineParser {
         notStart = false;
     }
 
+    private void parseVersion() {
+        String n = next();
+        if (n != null) {
+            printIncorrectArgumentError(n, "usage version");
+            return;
+        }
 
+        System.out.println(Config.version);
+    }
+
+    private void parseHistory() {
+        String n = next();
+        if (n != null) {
+            printIncorrectArgumentError(n, "usage history");
+            return;
+        }
+
+
+        InputStream is = Main.class.getResourceAsStream("/history.txt");
+        if (is == null) {
+            System.out.println("Unable to open resourse history.txt");
+            return;
+        }
+
+        InputStreamReader isr;
+        try {
+            isr = new InputStreamReader(is, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            System.out.println("UTF-8 encoding not supported");
+            return;
+        }
+
+        char[] buf = new char[2048];
+
+        try {
+            for (int i = isr.read(buf, 0, buf.length); i > 0; i = isr.read(buf, 0, buf.length))
+                System.out.print(new String(buf, 0, i));
+            isr.close();
+            is.close();
+        } catch (IOException e) {
+            System.out.println("Error reading resourse history.txt");
+        }
+    }
 }

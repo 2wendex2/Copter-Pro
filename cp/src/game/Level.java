@@ -1,3 +1,6 @@
+package game;
+
+import control.Sprite;
 import game.Game;
 import game.Input;
 
@@ -17,6 +20,7 @@ public class Level {
     private ArrayList<Ammo> ammos;
     private Player player;
     private Boss boss;
+    private int id;
 
     private Sprite solidSprite;
     private Sprite solidNotKillSprite;
@@ -35,7 +39,15 @@ public class Level {
         return h;
     }
 
-    public Level(int id){
+    public Level(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public  void init(){
         StringBuilder path = new StringBuilder(17);
         path.append("/DATA");
         //path.append(File.separatorChar);
@@ -64,9 +76,6 @@ public class Level {
             movingSolid = new ArrayList<>();
             int n;
 
-            solidSprite = new Sprite(1.0f, 0.0f, 0.0f);
-            solidNotKillSprite = new Sprite(0.0f, 1.0f, 0.0f);
-
             for (int j = 0; j < classCount; j++) {
                 switch (data.readInt()) {
                     case 0:
@@ -74,17 +83,18 @@ public class Level {
                         for (int i = 0; i < n; i++) {
                             byte f;
                             solid.add(new SolidActor(data.readInt(), data.readInt(),
-                                    data.readInt(), data.readInt(), f = data.readByte(),
-                                    (f & SolidActor.PLAYER_NOT_KILLER) != 0 ? solidNotKillSprite : solidSprite));
+                                    data.readInt(), data.readInt(), f = data.readByte()));
                             data.readInt();
                         }
                         break;
                     case 1:
                         n = data.readInt();
-                        for (int i = 0; i < n; i++)
+                        for (int i = 0; i < n; i++) {
+                            int f;
                             movingSolidProto.add(new MovingSolidProtoActor(data.readInt(), data.readInt(), data.readInt(),
-                                    data.readInt(), data.readByte(), data.readInt() == 0 ? solidSprite : solidSprite, data.readByte(),
+                                    data.readInt(), data.readByte() , (byte)(data.readByte()+ (byte)((f = data.readInt()) * 0)),
                                     data.readInt(), data.readInt(), data.readInt(), data.readInt()));
+                        }
                         break;
                     case 2:
                         n = data.readInt();

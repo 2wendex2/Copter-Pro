@@ -1,9 +1,11 @@
+package game;
+
 public class MovingSolidActor extends SolidActor {
     private int ySpeed, xSpeed; //*32
     private int xOffset, yOffset;
 
-    public MovingSolidActor(int x, int y, int w, int h, byte flags, Sprite sprite, int xspeed, int yspeed) {
-        super(x, y, w, h, flags, sprite);
+    public MovingSolidActor(int x, int y, int w, int h, byte flags, int xspeed, int yspeed) {
+        super(x, y, w, h, flags);
         xSpeed = xspeed;
         ySpeed = yspeed;
         xOffset = x*32;

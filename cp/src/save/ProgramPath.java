@@ -12,7 +12,6 @@ public class ProgramPath {
     private static String programPath;
 
     public static void init() throws ControlException{
-        //throw new ControlException("азаза", new RuntimeException("хуй"));
         try {
             programPath = (new File(ProgramPath.class.getProtectionDomain().getCodeSource().getLocation()
                     .toURI())).getParentFile().toString();

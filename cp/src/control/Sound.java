@@ -1,3 +1,5 @@
+package control;
+
 import control.Main;
 import org.lwjgl.openal.AL10;
 import org.lwjgl.stb.STBVorbisInfo;
@@ -9,6 +11,14 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.ByteOrder;
 import java.nio.ShortBuffer;
+
+/*
+Хранит звук
+Звуки загружаются конструктором из файла .ogg
+Каждая загрузка неплохо притормаживает игру, звук занимает убер дохуя памяти, поэтому быть с этим классом очень
+    осторожным!
+Также звук сам не удаляется, удалять с помощью clean
+*/
 
 public class Sound {
     private int bufferId;
@@ -41,12 +51,10 @@ public class Sound {
 
             int lengthSamples = STBVorbis.stb_vorbis_stream_length_in_samples(decoder);
 
-            System.out.println(lengthSamples);
             ShortBuffer pcm = MemoryUtil.memAllocShort(lengthSamples*channels);
 
             pcm.limit(STBVorbis.stb_vorbis_get_samples_short_interleaved(decoder, channels, pcm) * channels);
             float lengthSeconds = STBVorbis.stb_vorbis_stream_length_in_seconds(decoder);
-            System.out.println(lengthSeconds);
             STBVorbis.stb_vorbis_close(decoder);
 
             AL10.alBufferData(bufferId, info.channels() == 1 ? AL10.AL_FORMAT_MONO16 : AL10.AL_FORMAT_STEREO16, pcm, info.sample_rate());

@@ -1,30 +1,51 @@
 package menu;
 
-import control.Control;
-import control.ControlException;
-import control.FileSprite;
-import control.Sprite;
-import save.PlayerSave;
+import config.MusicPool;
+import control.*;
+import config.PlayerSave;
+import game.Game;
+import game.Level;
+import logo.Logo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class MainMenu implements Window {
+public class MainMenu extends Menu {
     FileSprite cpSprite;
 
     public void init() throws ControlException {
-        FileSprite playSprite = new FileSprite("play");
-        FileSprite exitSprite = new FileSprite("exit");
-        FileSprite selectedSprite = new FileSprite("selectmain");
-        cpSprite = new FileSprite("main");
+        Graphics.changeView(0, 0);
+        Graphics.setColor(1.f, 1.f, 1.f);
+        FileSprite playSprite;
+        FileSprite exitSprite;
+        FileSprite selectedSprite;
+
+        try {
+            playSprite = new FileSprite("play");
+            exitSprite = new FileSprite("exit");
+            selectedSprite = new FileSprite("selectmain");
+            cpSprite = new FileSprite("main");
+        } catch (IOException e) {
+            throw new ControlException(e.getMessage(), e);
+        }
 
         Button playButton = new Button(playSprite, selectedSprite,
                 (Control.WINDOW_WIDTH - playSprite.getW()) / 2,
                 (Control.WINDOW_HEIGHT - playSprite.getH()) / 2 - 20 + 146,
                 (Control.WINDOW_WIDTH - selectedSprite.getW()) / 2,
                 (Control.WINDOW_HEIGHT - selectedSprite.getH()) / 2 - 20 + 146) {
-            public void onPress() {
-                PlayerSave ps = new PlayerSave("save");
-                System.out.println(ps.getGameStarted());
+            public void onPress() throws MenuException, ControlException {
+                PlayerSave save = new PlayerSave("save");
+                PlayerSave.setCurSave(save);
+                int count = save.getOpenedEpisodesCount();
+                if (count == 0)
+                    Control.getInstance().changeStateNative(new Logo());
+                else if (count == 1) {
+                    if (save.getEpisodeProgress(0) == 0)
+                        Control.getInstance().changeStateNative(new Game(new Level(1)));
+                    else
+                        Control.getInstance().changeStateNative(new LevelSelect(1, 0));
+                }
             }
         };
 
@@ -45,8 +66,10 @@ public class MainMenu implements Window {
         selectables.add(0, playButton);
         selectables.add(1, exitButton);
 
-        Menu.getInstance().setSelectables(selectables, playButton);
-        Control.getInstance().setBackgroundColor(0.f, 0.f, 0.f, 0.f);
+        setSelectables(selectables, playButton);
+        Graphics.setBackgroundColor(0.f, 0.f, 0.f, 0.f);
+
+        MusicPool.getInstance().toMainMenu();
     }
 
     public void onExit() {
@@ -54,6 +77,7 @@ public class MainMenu implements Window {
     }
 
     public void draw() {
+        super.draw();
         cpSprite.draw((Control.WINDOW_WIDTH - cpSprite.getW()) / 2, 50);
     }
 }

@@ -1,17 +1,17 @@
+package game;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MovingSolidProtoActor {
     private int x, y, w, h, xr, yr, xspeed, yspeed;
     private byte flags, dflags;
-    private Sprite sprite;
 
-    public MovingSolidProtoActor(int x, int y, int w, int h, byte flags, Sprite sprite, byte dflags, int xr, int yr, int xspeed, int yspeed) {
+    public MovingSolidProtoActor(int x, int y, int w, int h, byte flags, byte dflags, int xr, int yr, int xspeed, int yspeed) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
         this.flags = flags;
-        this.sprite = sprite;
         this.dflags = dflags;
         this.xr = xr;
         this.yr = yr;
@@ -30,7 +30,7 @@ public class MovingSolidProtoActor {
             yspeed = -yspeed;
 
         return new MovingSolidActor(ThreadLocalRandom.current().nextInt(x, xr + 1),
-                ThreadLocalRandom.current().nextInt(y, yr + 1), w, h, flags, sprite,
+                ThreadLocalRandom.current().nextInt(y, yr + 1), w, h, flags,
                 xspeed, yspeed);
     }
 }

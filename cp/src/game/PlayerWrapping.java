@@ -1,3 +1,5 @@
+package game;
+
 import game.Level;
 
 public class PlayerWrapping extends Player {
@@ -69,7 +71,7 @@ public class PlayerWrapping extends Player {
     }
 
     @Override
-    public boolean testCollision(CollidableActor other) {
+    public boolean testCollision(Collidable other) {
         return super.testCollision(other) || wrapping.testCollision(other);
     }
 }

@@ -1,3 +1,5 @@
+package game;
+
 import game.Level;
 
 public class Boss1b extends Boss1m {

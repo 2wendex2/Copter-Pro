@@ -15,10 +15,11 @@ public class Main {
             Config.defaultNull();
             ProgramPath.init();
 
-            Control.getInstance().init(new Menu(new MainMenu()));
+            Control.getInstance().init(new MainMenu());
             Control.getInstance().loop();
             Control.getInstance().destroy();
         } catch (ControlException | RuntimeException | Error e) {
+            Control.getInstance().destroy();
             ControlException.trainFatalError(e);
             throw e;
         }

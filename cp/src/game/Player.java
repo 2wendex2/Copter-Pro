@@ -1,8 +1,11 @@
+package game;
+
+import control.Drawable;
+import control.Graphics;
 import game.Level;
 
-public class Player extends CollidableActor.Rect implements DrawableActor{
+public class Player extends Collidable.Rect implements Drawable {
     private int vspeed; //fixed 1 = 1/32
-    private Sprite sprite;
     private final static int GRAVITY = 9;
     protected int yGrav;
     private int xStart, yStart;
@@ -32,7 +35,6 @@ public class Player extends CollidableActor.Rect implements DrawableActor{
 
     public Player(int xA, int yA, int state, int bulletCount, int bombCount) {
         super(xA, yA, 150, 96);
-        sprite = new Sprite(0.0f, 0.0f, 1.0f);
         this.state = state;
         yGrav = y * 32;
         xStart = xA;
@@ -112,7 +114,7 @@ public class Player extends CollidableActor.Rect implements DrawableActor{
     }
 
     public void draw() {
-        sprite.draw(x, y, w, h);
+        Graphics.drawColorRect(x, y, w, h, 0.f, 0.f, 1.f);
     }
 
     public void onCollisionSolidNK(SolidActor solid) {
@@ -170,7 +172,7 @@ public class Player extends CollidableActor.Rect implements DrawableActor{
 
     public void shoot(Level level) {
         if (bulletCount != 0 && bulletTimer == 0) {
-            level.addBullet(new Bullet(x + w, y + (h - 32) / 2, 32, 32, sprite, false));
+            level.addBullet(new Bullet(x + w, y + (h - 32) / 2, 32, 32, false));
             bulletTimer = 5;
             if (bulletCount > 0)
                 bulletCount--;

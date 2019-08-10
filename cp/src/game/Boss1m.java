@@ -1,3 +1,6 @@
+package game;
+
+import control.Graphics;
 import game.Level;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -22,7 +25,7 @@ public class Boss1m extends MovingSolidActor implements Boss{
     }
 
     public Boss1m(int x, int y) {
-        super(x, y, 150, 100, (byte)0, new Sprite(1.0f, 1.0f, 1.0f), 0, getYspeed());
+        super(x, y, 150, 100, (byte)0, 0, getYspeed());
         xStart = x;
         yStart = y;
     }
@@ -41,8 +44,12 @@ public class Boss1m extends MovingSolidActor implements Boss{
         if (alarm == 0) {
             alarm = ThreadLocalRandom.current().nextInt(25, 60);
             level.addMovingSolid(new MovingSolidActor(x - 32, y + (h - 32) / 2, 32,
-                    32, (byte)0, level.getSolidSprite(), -8*32, 0));
+                    32, (byte)0, -8*32, 0));
         }
         alarm--;
+    }
+
+    public void draw() {
+        Graphics.drawColorRect(x, y, w, h, 1.f, 1.f, 1.f);
     }
 }

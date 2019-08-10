@@ -3,7 +3,6 @@ package control;
 import org.lwjgl.opengl.GL11;
 
 public class ControlNative {
-    @
     static void glThrowIfError() throws ControlException {
         int e = GL11.glGetError();
         if (e == GL11.GL_NO_ERROR)
