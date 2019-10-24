@@ -3,68 +3,100 @@ package config;
 import control.Control;
 import control.Sound;
 
+import java.io.IOException;
+
 //Объект контролирует запуск и удаление всей музыки на протяжении всей игры
 
 //Коротко
-//MainMenu сбрасывает только Game
+//Вся музыка идентефицируется строкой из двух символов
+//Первый: номер эпизода, от 0 до 7
+//Второй: идентификатор самой музыки, может быть l, m, h, b, e
+//Означает соответственно: low, middle, high, boss, end
 
 public class MusicPool {
     private static MusicPool instance = new MusicPool();
-    private final int MAIN_MENU_STATE = 1;
-    private final int BEGIN_GAME_STATE = 2;
-    private final int GAME_STATE = 3;
-    private Sound mainMenu;
-    private Sound ep1low;
-    private Sound ep1mid;
-    private Sound ep1high;
-    private Sound ep1boss;
+    private Sound[] music;
     private Sound curMusic;
-    private int state;
     protected MusicPool() {}
 
     public static MusicPool getInstance() {return instance;}
 
-    public void toMainMenu() {
-        if (mainMenu == null)
-            mainMenu = new Sound("0l");
-        if (curMusic != mainMenu)
-            Control.getInstance().changeBgm(mainMenu);
-        curMusic = mainMenu;
+    public void initIfAudioInit() {
+        music = new Sound[5*8];
     }
 
-    public void toBeginGame() {
-        if (ep1low == null)
-            ep1low = new Sound("1l");
-        if (curMusic != ep1low)
-            Control.getInstance().changeBgm(ep1low);
-        curMusic = ep1low;
+    private int musicNum(String s) {
+        int r = Character.digit(s.charAt(0), 10) * 5;
+        switch (s.charAt(1)) {
+            case 'm':
+                r += 1;
+                break;
+            case 'h':
+                r += 2;
+                break;
+            case 'b':
+                r += 3;
+                break;
+            case 'e':
+                r += 4;
+        }
+
+        return r;
     }
 
-    public void toGame(int level) {
-        if (level < 9) {
-            if (ep1low == null)
-                ep1low = new Sound("1l");
-            if (curMusic != ep1low)
-                Control.getInstance().changeBgm(ep1low);
-            curMusic = ep1low;
-        } else if (level == 9) {
-            if (ep1mid == null)
-                ep1mid = new Sound("1m");
-            if (curMusic != ep1mid)
-                Control.getInstance().changeBgm(ep1mid);
-            curMusic = ep1mid;
-        } else if (level > 9 && level < 17) {
-            if (ep1high == null)
-                ep1high = new Sound("1h");
-            if (curMusic != ep1high)
-                Control.getInstance().changeBgm(ep1high);
-            curMusic = ep1high;
-        } else if (level == 18) {
-            if (ep1boss == null)
-                ep1boss = new Sound("1b");
-            if (curMusic != ep1boss)
-                Control.getInstance().changeBgm(ep1boss);
-            curMusic = ep1boss;
+    private void changeMusic(String newMusic) throws IOException {
+        if (music != null) {
+            int num = musicNum(newMusic);
+            if (music[num] == null)
+                music[num] = new Sound(newMusic);
+            if (curMusic != music[num])
+                Control.getInstance().changeBgm(music[num]);
+            curMusic = music[num];
+        }
+    }
+
+    public void toMainMenu() throws IOException {
+        changeMusic("0l");
+    }
+
+    public void toBeginGame() throws IOException {
+        changeMusic("1l");
+    }
+
+    public void toLevelSelect(int episode, int levelNum) throws IOException {
+        if (episode < 7) {
+            if (levelNum < 10)
+                changeMusic(episode + "l");
+            else
+                changeMusic(episode + "h");
+        } else {
+            changeMusic("7m");
+        }
+    }
+
+    public void toEpisodeSelect() throws IOException {
+        changeMusic("0h");
+    }
+
+    public void toGame(int level) throws IOException {
+        int episode = (level - 1) / 19 + 1;
+        int levelInEpisode = (level - 1) % 19 + 1;
+        if (episode < 7) {
+            if (levelInEpisode < 9)
+                changeMusic(episode + "l");
+            else if (levelInEpisode == 9)
+                changeMusic(episode + "m");
+            else if (levelInEpisode == 18)
+                changeMusic(episode + "b");
+            else if (levelInEpisode == 19)
+                changeMusic(episode + "e");
+            else
+                changeMusic(episode + "h");
+        } else {
+            if (levelInEpisode == 1)
+                changeMusic(episode + "h");
+            else
+                changeMusic(episode + "b");
         }
     }
 }

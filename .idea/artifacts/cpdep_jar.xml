@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact name="cpdep:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/cpdep_jar</output-path>
+    <root id="root">
+      <element id="archive" name="cp.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$USER_HOME$/wd/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="cp" />
+      </element>
+      <element id="library" level="project" name="lwjgl" />
+    </root>
+  </artifact>
+</component>

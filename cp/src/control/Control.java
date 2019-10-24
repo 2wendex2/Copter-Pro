@@ -1,10 +1,12 @@
 package control;
 
 import config.Config;
-import menu.MenuException;
+import config.Log;
+import config.MusicPool;
+import config.SpritePool;
+import menu.ErrorMenu;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWKeyCallbackI;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL43;
@@ -35,21 +37,18 @@ public class Control {
 
     private long window;
     private final double INTERVAL = 1. / TARGET_UPS;
-    private Audio audio = new Audio();
+    private Audio audio;
     private ControlState controlState = null;
     private ControlState newControlState = null;
-    private SoundSource bgm = new SoundSource();
+    private SoundSource bgm;
     private double lastLoopTime;
     private double accumulator;
 
     private Control() {}
 
     void init(ControlState state) throws ControlException {
-        controlState = state;
-        newControlState = state;
-
         GLFW.glfwSetErrorCallback((int error, long description) -> {
-            System.err.println("GLFW error callback: " + error + "\n" +
+            Log.println("GLFW error callback: " + error + "\n" +
                     GLFWErrorCallback.getDescription(description));
         });
 
@@ -84,18 +83,25 @@ public class Control {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
         GLFW.glfwSwapInterval(1);
-
         ControlNative.glThrowIfError();
+        SpritePool.init();
 
         try {
-            audio.init();
-            bgm.init(true);
+            audio = new Audio();
+            bgm = new SoundSource(true);
+            MusicPool.getInstance().initIfAudioInit();
 
-            state.init();
-            changeInput();
-        } catch (MenuException e) {
-            MenuException.trainError(e);
+            controlState = state;
+            newControlState = controlState;
+        } catch (ControlNativeException e) {
+            controlState = new ErrorMenu("Audio init error: " + e.getMessage(),
+                    state);
+            newControlState = controlState;
+            Log.printThrowable("Audio init error", e);
         }
+
+        changeInput();
+        controlState.init();
     }
 
     public void changeState(ControlState state) {
@@ -107,44 +113,42 @@ public class Control {
         lastLoopTime = GLFW.glfwGetTime();
     }
 
+    //Обновляет таймер
     private void updateTimer() {
         double time = GLFW.glfwGetTime();
         accumulator += time - lastLoopTime;
         lastLoopTime = time;
     }
 
+    //Меняет музыку, вызывать только в пуле музыки
     public void changeBgm(Sound snd) {
         bgm.changeSound(snd);
         bgm.play();
     }
 
+    //Устанавливает инпут, вызывать при инициализации
     private void changeInput() {
         GLFW.glfwSetKeyCallback(window, (long window, int key, int scancode, int action, int mods) -> {
             try {
                 controlState.inputCallback(key, scancode, action, mods);
-            } catch (MenuException e) {
-                throw new InputCallbackException(e);
             } catch (ControlException e) {
                 throw new InputCallbackException(e);
             }
         });
     }
 
-    public void changeStateNative(ControlState state) throws MenuException, ControlException {
+    public void changeStateNative(ControlState state) throws ControlException {
         state.init();
         controlState = state;
         newControlState = state;
         resetTimer();
     }
 
-    public void updateInput() throws MenuException, ControlException {
+    public void updateInput() throws ControlException {
         try {
             GLFW.glfwPollEvents();
         } catch (InputCallbackException e) {
-            if (e.getException() instanceof MenuException)
-                throw (MenuException)e.getException();
-            else
-                throw (ControlException)e.getException();
+            throw e.getException();
         }
     }
 
@@ -159,54 +163,55 @@ public class Control {
         int fps = 0;
         int ups = 0;
         for (;;) {
-            try {
-                if (controlState != newControlState) {
-                    if (newControlState == null)
-                        break;
-                    newControlState.init();
-                    controlState = newControlState;
-                    resetTimer();
-                }
+            if (controlState != newControlState) {
+                if (newControlState == null)
+                    break;
+                newControlState.init();
+                controlState = newControlState;
+                resetTimer();
+            }
 
-                updateTimer();
+            updateTimer();
+            if (accumulator >= INTERVAL) {
+                int lagUpdatesCount = 0;
                 while (accumulator >= INTERVAL) {
-                    if (GLFW.glfwGetTime() - fpsT >= 1) {
-                        System.out.println(fps);
-                        System.out.println(ups);
-                        fpsT += Math.floor(GLFW.glfwGetTime() - fpsT);
-                        fps = 0;
-                        ups = 0;
-                    }
-                    ups++;
+                    lagUpdatesCount++;
                     controlState.input();
                     controlState.update();
                     accumulator -= INTERVAL;
                     updateTimer();
                 }
 
+                if (lagUpdatesCount > 1) {
+                    System.out.println("Лаг");
+                    System.out.println(lagUpdatesCount);
+                    System.out.println();
+                }
+
                 GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
                 controlState.draw();
                 GLFW.glfwSwapBuffers(window);
                 fps++;
+            }
 
-                {
-                    updateTimer();
-                    double sleepTime = INTERVAL - accumulator;
-                    /*if (sleepTime > 0)
-                        try {
-                            Thread.sleep((long) Math.ceil(sleepTime * 1000));
-                        } catch (InterruptedException e) {
-                            changeState(null);
-                        }*/
-                }
-            } catch (MenuException e) {
-                MenuException.trainError(e);
+            {
+                updateTimer();
+                double sleepTime = INTERVAL - accumulator;
+                if (sleepTime > 0)
+                    try {
+                        Thread.sleep((long) Math.ceil(sleepTime * 1000));
+                    } catch (InterruptedException e) {
+                        changeState(null);
+                    }
             }
         }
     }
 
     public void destroy() {
-        audio.destroy();
+        if (audio != null)
+            audio.destroy();
+
+       //System.out.println(System.getProperties().getProperty("class.path"));
 
         if (window != 0) {
             glfwFreeCallbacks(window);
@@ -214,7 +219,9 @@ public class Control {
         }
 
         GLFW.glfwTerminate();
-        GLFW.glfwSetErrorCallback(null).free();
+
+        GLFWErrorCallback ec = GLFW.glfwSetErrorCallback(null);
+        if (ec != null)
+            ec.free();
     }
 }
-

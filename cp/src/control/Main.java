@@ -4,7 +4,6 @@ import config.CmdLineParser;
 import config.Config;
 import menu.MainMenu;
 import menu.Menu;
-import save.ProgramPath;
 
 public class Main {
     public static void main(String[] args) throws ControlException {
@@ -13,7 +12,7 @@ public class Main {
 
         try {
             Config.defaultNull();
-            ProgramPath.init();
+
 
             Control.getInstance().init(new MainMenu());
             Control.getInstance().loop();

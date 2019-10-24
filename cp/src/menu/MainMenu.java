@@ -1,5 +1,6 @@
 package menu;
 
+import config.Log;
 import config.MusicPool;
 import control.*;
 import config.PlayerSave;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 public class MainMenu extends Menu {
     FileSprite cpSprite;
 
-    public void init() throws ControlException {
+    public void init() throws ControlException{
         Graphics.changeView(0, 0);
         Graphics.setColor(1.f, 1.f, 1.f);
         FileSprite playSprite;
@@ -34,17 +35,23 @@ public class MainMenu extends Menu {
                 (Control.WINDOW_HEIGHT - playSprite.getH()) / 2 - 20 + 146,
                 (Control.WINDOW_WIDTH - selectedSprite.getW()) / 2,
                 (Control.WINDOW_HEIGHT - selectedSprite.getH()) / 2 - 20 + 146) {
-            public void onPress() throws MenuException, ControlException {
-                PlayerSave save = new PlayerSave("save");
-                PlayerSave.setCurSave(save);
-                int count = save.getOpenedEpisodesCount();
-                if (count == 0)
-                    Control.getInstance().changeStateNative(new Logo());
-                else if (count == 1) {
-                    if (save.getEpisodeProgress(0) == 0)
+            public void onPress() throws ControlException {
+                try {
+                    PlayerSave save = new PlayerSave("save");
+                    PlayerSave.setCurSave(save);
+                    int count = save.getOpenedEpisodesCount();
+                    if (count == 0)
+                        Control.getInstance().changeStateNative(new Logo());
+                    else if (save.getCompletedLevelCount(1) == 0)
                         Control.getInstance().changeStateNative(new Game(new Level(1)));
-                    else
+                    else if (save.getCompletedLevelCount(1) < 18)
                         Control.getInstance().changeStateNative(new LevelSelect(1, 0));
+                    else
+                        Control.getInstance().changeStateNative(new EpisodeSelect());
+                } catch (IOException e) {
+                    Control.getInstance().changeStateNative(new ErrorMenu("Save not loaded: " + e.getMessage(),
+                            MainMenu.this));
+                    Log.printThrowable("хз", e);
                 }
             }
         };
@@ -69,7 +76,12 @@ public class MainMenu extends Menu {
         setSelectables(selectables, playButton);
         Graphics.setBackgroundColor(0.f, 0.f, 0.f, 0.f);
 
-        MusicPool.getInstance().toMainMenu();
+        try {
+            MusicPool.getInstance().toMainMenu();
+        } catch (IOException e) {
+            Control.getInstance().changeStateNative(new ErrorMenu("LMain menu init error: " + e.getMessage(),
+                    new MainMenu()));
+        }
     }
 
     public void onExit() {

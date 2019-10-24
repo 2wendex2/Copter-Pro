@@ -6,7 +6,7 @@ import control.Drawable;
 public abstract class Selectable implements Drawable {
     private Selectable left, right, up, down;
 
-    public abstract void onPress() throws MenuException, ControlException;
+    public abstract void onPress() throws ControlException;
 
     public Selectable getLeft() {
         return left;

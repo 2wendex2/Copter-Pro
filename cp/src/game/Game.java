@@ -3,16 +3,11 @@ package game;
 import config.MusicPool;
 import config.PlayerSave;
 import control.*;
+import menu.ErrorMenu;
 import menu.LevelSelect;
 import menu.MainMenu;
-import menu.Menu;
-import menu.MenuException;
-import org.lwjgl.glfw.*;
-import org.lwjgl.system.MemoryUtil;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
 
-import static control.Control.TARGET_UPS;
+import java.io.IOException;
 
 public class Game implements ControlState {
     public static final int SCREEN_WIDTH = 800;
@@ -31,10 +26,15 @@ public class Game implements ControlState {
     }
 
     @Override
-    public void init() {
+    public void init() throws ControlException {
         level.init();
         Graphics.setBackgroundColor(1.f, 1.f, 0.f, 1.f);
-        MusicPool.getInstance().toGame(getLevelId());
+        try {
+            MusicPool.getInstance().toGame(getLevelId());
+        } catch (IOException e) {
+            Control.getInstance().changeStateNative(new ErrorMenu("Music change error: " + e.getMessage(),
+                    new MainMenu()));
+        }
     }
 
     public void input() {
@@ -42,14 +42,19 @@ public class Game implements ControlState {
     }
 
     @Override
-    public void inputCallback(int key, int scancode, int action, int mods) throws MenuException, ControlException {
+    public void inputCallback(int key, int scancode, int action, int mods) throws ControlException {
         input.inputCallback(key, scancode, action, mods);
     }
 
-    public void update() throws MenuException {
+    public void update() throws ControlException {
         level.update(input);
         if (level.isEnded()) {
-            PlayerSave.getCurSave().setLevelComplete(level.getId());
+            try {
+                PlayerSave.getCurSave().setLevelComplete(level.getId());
+            } catch (IOException e) {
+                Control.getInstance().changeStateNative(new ErrorMenu("Save error: " + e.getMessage(),
+                        new MainMenu()));
+            }
             Graphics.changeView(0, 0);
             Control.getInstance().changeState(new LevelSelect(1, level.getId() < 18 ?
                     level.getId() + 1 : 18));

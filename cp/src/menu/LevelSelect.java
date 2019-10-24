@@ -15,23 +15,28 @@ public class LevelSelect extends Menu {
     private int height;
     private int x;
     private int y;
-    private int compl = PlayerSave.getCurSave().getEpisodeProgress(episode) + 1;
-    private Sprite[] levelSprite = new Sprite[compl > 18 ? 18 : compl];
+    private int compl;
+    private Sprite[] levelSprite ;
     private Sprite notCompleted;
     private int notCompletedX, notCompletedY;
 
     public LevelSelect(int episode, int level) {
         this.episode = episode;
         this.level = level;
+        compl = PlayerSave.getCurSave().getCompletedLevelCount(episode) + 1;
+        levelSprite = new Sprite[compl > 18 ? 18 : compl];
     }
 
     @Override
-    public void onExit() throws MenuException, ControlException {
-        Control.getInstance().changeStateNative(new MainMenu());
+    public void onExit() throws ControlException {
+        if (PlayerSave.getCurSave().getCompletedLevelCount(1) < 18)
+            Control.getInstance().changeStateNative(new MainMenu());
+        else
+            Control.getInstance().changeStateNative(new EpisodeSelect());
     }
 
     @Override
-    public void init() throws MenuException, ControlException {
+    public void init() throws ControlException {
         Graphics.changeView(0, 0);
 
         width = levelSprite.length < 9 ? (levelSprite.length) * 80 + 16 : 9 * 80 + 16;
@@ -46,11 +51,6 @@ public class LevelSelect extends Menu {
                 levelSprite[i] = new FileSprite("level" + (i + 1));
             selected = new FileSprite("selectlevel");
             notCompleted = new FileSprite("notcompletedlevel");
-        } catch (IOException e) {
-            if (!(Control.getInstance().getState() instanceof MainMenu))
-                Control.getInstance().changeStateNative(new MainMenu());
-            throw new MenuException(e.getMessage(), e);
-        }
 
         ArrayList<Button> selectables = new ArrayList<>(levelSprite.length);
         for (int i = 0; i < levelSprite.length && i < 9; i++)
@@ -110,12 +110,11 @@ public class LevelSelect extends Menu {
         setSelectables(selectables, selectables.get(level - 1));
         Graphics.setBackgroundColor(1.f, 1.f, 0.f, 1.f);
 
-        int levMusic;
-        if (level <= 9)
-            levMusic = 0;
-        else
-            levMusic = 10;
-        MusicPool.getInstance().toGame(levMusic);
+        MusicPool.getInstance().toLevelSelect(episode, level);
+        } catch (IOException e) {
+            Control.getInstance().changeStateNative(new ErrorMenu("Level select init error: " + e.getMessage(),
+                    new MainMenu()));
+        }
     }
 
     @Override
@@ -136,7 +135,7 @@ public class LevelSelect extends Menu {
         }
 
         @Override
-        public void onPress() throws MenuException, ControlException {
+        public void onPress() throws ControlException {
             Control.getInstance().changeStateNative(new Game(new Level(levelNum)));
         }
     }

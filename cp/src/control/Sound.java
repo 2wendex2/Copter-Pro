@@ -1,11 +1,12 @@
 package control;
 
-import control.Main;
+import config.Log;
 import org.lwjgl.openal.AL10;
 import org.lwjgl.stb.STBVorbisInfo;
 import org.lwjgl.stb.STBVorbis;
 import org.lwjgl.system.MemoryUtil;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -27,45 +28,52 @@ public class Sound {
         return bufferId;
     }
 
-    public Sound(String s) {
+    public Sound(String s) throws IOException {
         bufferId = AL10.alGenBuffers();
-        StringBuilder path = new StringBuilder(17);
-        path.append("/DATA/SND/");
-        path.append(s);
-        path.append(".dat");
+        int alError = AL10.alGetError();
+        if (alError != AL10.AL_NO_ERROR)
+            throw new IOException("Sound " + s + " loading error: OpenAL error: " + alError);
         STBVorbisInfo info = STBVorbisInfo.malloc();
-        try {
-            InputStream is = control.Main.class.getResourceAsStream(path.toString());
-            ByteBuffer vorbis = ByteBuffer.allocateDirect(4*1024*1024).order(ByteOrder.nativeOrder());
-            vorbis.put(is.readAllBytes());
-            is.close();
-            vorbis.flip();
+        InputStream is = Resourse.getResourseAsInputStream("SND", s);
+        if (is == null)
+            throw new IOException("Sound " + s + " loading error: unable to read resourse");
+        ByteBuffer vorbis = ByteBuffer.allocateDirect(4*1024*1024).order(ByteOrder.nativeOrder());
+        vorbis.put(is.readAllBytes());
+        is.close();
+        vorbis.flip();
 
-            IntBuffer error = ByteBuffer.allocateDirect(4).order(ByteOrder.nativeOrder()).asIntBuffer();
-            long decoder = STBVorbis.stb_vorbis_open_memory(vorbis, error, null);
-            if ( decoder == MemoryUtil.NULL )
-                            throw new RuntimeException("Failed to open Ogg Vorbis file. Error: " + error.get(0));
+        IntBuffer error = ByteBuffer.allocateDirect(4).order(ByteOrder.nativeOrder()).asIntBuffer();
+        long decoder = STBVorbis.stb_vorbis_open_memory(vorbis, error, null);
+        if ( decoder == MemoryUtil.NULL )
+            throw new IOException("Sound " + s + " loading error: STBVorbis error: open memory: " +
+                    error.get(0));
 
-            STBVorbis.stb_vorbis_get_info(decoder, info);
-            int channels = info.channels();
+        STBVorbis.stb_vorbis_get_info(decoder, info);
+        int channels = info.channels();
 
-            int lengthSamples = STBVorbis.stb_vorbis_stream_length_in_samples(decoder);
+        int lengthSamples = STBVorbis.stb_vorbis_stream_length_in_samples(decoder);
 
-            ShortBuffer pcm = MemoryUtil.memAllocShort(lengthSamples*channels);
+        ShortBuffer pcm = MemoryUtil.memAllocShort(lengthSamples*channels);
 
-            pcm.limit(STBVorbis.stb_vorbis_get_samples_short_interleaved(decoder, channels, pcm) * channels);
-            float lengthSeconds = STBVorbis.stb_vorbis_stream_length_in_seconds(decoder);
-            STBVorbis.stb_vorbis_close(decoder);
+        pcm.limit(STBVorbis.stb_vorbis_get_samples_short_interleaved(decoder, channels, pcm) * channels);
+        int error2 = STBVorbis.stb_vorbis_get_error(decoder);
+        if (error2 != STBVorbis.VORBIS__no_error)
+            throw new IOException("Sound " + s + " loading error: STBVorbis error: " +
+                    error2);
+        STBVorbis.stb_vorbis_close(decoder);
 
-            AL10.alBufferData(bufferId, info.channels() == 1 ? AL10.AL_FORMAT_MONO16 : AL10.AL_FORMAT_STEREO16, pcm, info.sample_rate());
-            //AL10.alBufferData(bufferId, AL10.AL_FORMAT_MONO16, pcm, info.sample_rate());
-            info.free();
-        } catch (Exception e) {
-            throw new RuntimeException("SOUND CORRUPTED", e);
-        }
+        AL10.alBufferData(bufferId, info.channels() == 1 ? AL10.AL_FORMAT_MONO16 : AL10.AL_FORMAT_STEREO16, pcm, info.sample_rate());
+        alError = AL10.alGetError();
+        if (alError != AL10.AL_NO_ERROR)
+            throw new IOException("Sound " + s + " loading error: OpenAL error: " + alError);
+        info.free();
+        is.close();
     }
 
     public void clean() {
         AL10.alDeleteBuffers(bufferId);
+        int alError = AL10.alGetError();
+        if (alError != AL10.AL_NO_ERROR)
+            Log.println("Clean sound openAL error: " + alError);
     }
 }

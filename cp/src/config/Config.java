@@ -1,7 +1,7 @@
 package config;
 
 import control.ControlException;
-import save.ProgramPath;
+import control.Main;
 
 import java.io.File;
 
@@ -40,7 +40,7 @@ public class Config {
 
     public static void defaultNull() throws ControlException {
         if (configDir == null)
-            configDir = programPath();
+            configDir = ".";
 
         if (configName == null)
             configName = "config.dat";
@@ -51,7 +51,7 @@ public class Config {
 
     private static String programPath() throws ControlException {
         try {
-            return (new File(ProgramPath.class.getProtectionDomain().getCodeSource().getLocation()
+            return (new File(Main.class.getProtectionDomain().getCodeSource().getLocation()
                     .toURI())).getParentFile().toString();
         } catch (Exception e) {
             throw new ControlException("Unable to get default program path, try specifying this path explicitly" +
