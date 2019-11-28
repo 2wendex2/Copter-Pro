@@ -30,5 +30,6 @@ public class Graphics {
         GL11.glVertex2i(x+w, y);
         GL11.glVertex2i(x+w, y+h);
         GL11.glEnd();
+        GL11.glColor3f(1.f, 1.f, 1.f);
     }
 }

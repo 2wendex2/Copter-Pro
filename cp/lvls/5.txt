@@ -10,6 +10,7 @@
 %swall 10t 0t 1t 3t 0 0
 %swall 11t 0t 84t 2t 0 0
 %swall 94t 2t 1t 5t 0 0 
+%item 0t 92t 4t
 
 ;средн€€ полоса
 %swall 14t 8t 1t 3t 0 0

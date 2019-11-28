@@ -24,6 +24,8 @@ public interface ControlState {
 
     default void update() throws ControlException {}
     void draw() throws ControlException;
-    void init() throws ControlException;
+
+    //меняющая состояние функция должна знать, как закончилась инициализация, иначе она перейдёт не на то состояние
+    boolean init() throws ControlException;
     void inputCallback(int key, int scancode, int action, int mods) throws ControlException;
 }

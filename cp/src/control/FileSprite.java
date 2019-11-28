@@ -17,45 +17,41 @@ public class FileSprite implements Sprite {
     protected int w, h, texture;
 
     public FileSprite(String path) throws IOException {
-        try {
-            ByteBuffer data;
-            InputStream is = Resourse.getResourseAsInputStream("IMG", path);
-            if (is == null)
-                throw new IOException("Sprite " + path + " loading error: unable to read resourse");
+        ByteBuffer data;
+        InputStream is = Resourse.getResourseAsInputStream("IMG", path);
+        if (is == null)
+            throw new IOException("Sprite " + path + " loading error: unable to read resourse");
 
-            byte[] bytes = is.readAllBytes();
-            is.close();
-            data = ByteBuffer.allocateDirect(bytes.length);
-            data.put(bytes);
-            data.flip();
+        byte[] bytes = is.readAllBytes();
+        is.close();
+        data = ByteBuffer.allocateDirect(bytes.length);
+        data.put(bytes);
+        data.flip();
 
-            MemoryStack stack = MemoryStack.stackPush();
-            IntBuffer w = stack.mallocInt(1);
-            IntBuffer h = stack.mallocInt(1);
-            IntBuffer channels = stack.mallocInt(1);
+        MemoryStack stack = MemoryStack.stackPush();
+        IntBuffer w = stack.mallocInt(1);
+        IntBuffer h = stack.mallocInt(1);
+        IntBuffer channels = stack.mallocInt(1);
 
-            ByteBuffer image = STBImage.stbi_load_from_memory(data, w, h, channels, 4);
-            if (image == null)
-                throw new IOException("Sprite " + path + " loading error: STBImage error: " +
-                        STBImage.stbi_failure_reason());
+        ByteBuffer image = STBImage.stbi_load_from_memory(data, w, h, channels, 4);
+        if (image == null)
+            throw new IOException("Sprite " + path + " loading error: STBImage error: " +
+                    STBImage.stbi_failure_reason());
 
-            int internalFormat, format;
-                internalFormat = GL11.GL_RGBA8;
-                format = GL11.GL_RGBA;
+        int internalFormat, format;
+        internalFormat = GL11.GL_RGBA8;
+        format = GL11.GL_RGBA;
 
-            this.w = w.get(0);
-            this.h = h.get(0);
-            this.texture = GL11.glGenTextures();
-            GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.texture);
-            GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
-            GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
-            GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, internalFormat, this.w, this.h, 0,
-                    format, GL11.GL_UNSIGNED_BYTE, image);
+        this.w = w.get(0);
+        this.h = h.get(0);
+        this.texture = GL11.glGenTextures();
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.texture);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
+        GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, internalFormat, this.w, this.h, 0,
+                format, GL11.GL_UNSIGNED_BYTE, image);
 
             //ControlNative.glThrowIfError();
-        } catch (Exception e) {
-            throw new IOException("Sprite " + path + " loading error: " + e.toString(), e);
-        }
     }
 
     public void draw(int x, int y) {

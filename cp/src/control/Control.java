@@ -3,8 +3,6 @@ package control;
 import config.Config;
 import config.Log;
 import config.MusicPool;
-import config.SpritePool;
-import menu.ErrorMenu;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
@@ -36,6 +34,7 @@ public class Control {
     private static final String WINDOW_TITLE = "Copter Pro v" + Config.version;
 
     private long window;
+    private ErrorState commonError;
     private final double INTERVAL = 1. / TARGET_UPS;
     private Audio audio;
     private ControlState controlState = null;
@@ -84,7 +83,6 @@ public class Control {
 
         GLFW.glfwSwapInterval(1);
         ControlNative.glThrowIfError();
-        SpritePool.init();
 
         try {
             audio = new Audio();
@@ -94,8 +92,7 @@ public class Control {
             controlState = state;
             newControlState = controlState;
         } catch (ControlNativeException e) {
-            controlState = new ErrorMenu("Audio init error: " + e.getMessage(),
-                    state);
+            controlState = new ErrorState("Audio init error: " + e.getMessage(), state);
             newControlState = controlState;
             Log.printThrowable("Audio init error", e);
         }
@@ -106,6 +103,11 @@ public class Control {
 
     public void changeState(ControlState state) {
         newControlState = state;
+    }
+
+    public void changeStateImm(ControlState state) {
+        newControlState = state;
+        controlState = state;
     }
 
     private void resetTimer() {
@@ -126,6 +128,10 @@ public class Control {
         bgm.play();
     }
 
+    public void stopBgm() {
+        bgm.stop();
+    }
+
     //Устанавливает инпут, вызывать при инициализации
     private void changeInput() {
         GLFW.glfwSetKeyCallback(window, (long window, int key, int scancode, int action, int mods) -> {
@@ -138,7 +144,9 @@ public class Control {
     }
 
     public void changeStateNative(ControlState state) throws ControlException {
-        state.init();
+        if (!state.init())
+            return;
+
         controlState = state;
         newControlState = state;
         resetTimer();
@@ -166,6 +174,7 @@ public class Control {
             if (controlState != newControlState) {
                 if (newControlState == null)
                     break;
+                Graphics.changeView(0, 0);
                 newControlState.init();
                 controlState = newControlState;
                 resetTimer();
@@ -173,20 +182,20 @@ public class Control {
 
             updateTimer();
             if (accumulator >= INTERVAL) {
-                int lagUpdatesCount = 0;
+                //int lagUpdatesCount = 0;
                 while (accumulator >= INTERVAL) {
-                    lagUpdatesCount++;
+                    //lagUpdatesCount++;
                     controlState.input();
                     controlState.update();
                     accumulator -= INTERVAL;
                     updateTimer();
                 }
 
-                if (lagUpdatesCount > 1) {
+                /*if (lagUpdatesCount > 1) {
                     System.out.println("Лаг");
                     System.out.println(lagUpdatesCount);
                     System.out.println();
-                }
+                }*/
 
                 GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
                 controlState.draw();

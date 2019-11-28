@@ -1,6 +1,12 @@
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+/*
+	Один из четырёх основных классов
+	На самом деле определяется подид
+	Простейшие содержат id, x и y
+*/
+
 public class Enemy implements LevelGenerator {
 	protected int id;
 	protected int x, y;

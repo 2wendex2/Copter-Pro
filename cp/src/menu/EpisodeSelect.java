@@ -1,14 +1,10 @@
 package menu;
 
-import config.MusicPool;
-import config.PlayerSave;
-import config.SpritePool;
+import config.*;
 import control.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-import static config.PlayerSave.getCurSave;
 
 public class EpisodeSelect extends Menu {
     private Sprite title;
@@ -31,30 +27,23 @@ public class EpisodeSelect extends Menu {
     public EpisodeSelect() {}
 
     @Override
-    public void init() throws ControlException
+    public boolean init() throws ControlException
     {
-        try {
+        if (title == null) {
+            ErrorManager.getInstance().clear(EpisodeSelect.this);
+
             title = SpritePool.get("epselect");
 
-            int commonEpisodes = PlayerSave.getCurSave().getOpenedEpisodesCount();
-            Sprite suckingSprite;
-            if (commonEpisodes == 7) {
-                suckingSprite = SpritePool.get("ep7");
-                commonEpisodes = 6;
-            }
-            else
-                suckingSprite = SpritePool.get("epempty");
-
-
+            int regularEpisodes = PlayerSave.getCurSave().getOpenedEpisodesCount();
+            int commonEpisodes = regularEpisodes > 6 ? 6 : regularEpisodes;
 
             Sprite episodeSelected = SpritePool.get("selectep");
-            Sprite suckingSelected = SpritePool.get("selectempty");
             Sprite ep1s = SpritePool.get("ep1");
 
             int epw = ep1s.getW();
             int eph = ep1s.getH();
-            int suckh = suckingSprite.getH();
             int titleh = title.getH();
+            int suckh = titleh;
 
             //рассчёт локации
             int[] xarr = new int[commonEpisodes];
@@ -75,18 +64,18 @@ public class EpisodeSelect extends Menu {
                     xarr[1] = xarr[0] * 3 + epw;
                     xarr[2] = xarr[0] * 5 + 2 * epw;
                     yarr[0] = (Control.WINDOW_HEIGHT - ep1s.getH()) / 2;
+                    yarr[1] = yarr[0];
                     yarr[2] = yarr[0];
-                    yarr[3] = yarr[0];
                     break;
                 case 4:
                     xarr[0] = (Control.WINDOW_WIDTH - epw * 2) / 4;
-                    xarr[1] = xarr[0] * 3 + epw;
-                    xarr[2] = xarr[0];
-                    xarr[3] = xarr[1];
-                    yarr[0] = (Control.WINDOW_HEIGHT - (64 + titleh + suckh)) + 32 + titleh;
-                    yarr[1] = yarr[0];
-                    yarr[2] = (Control.WINDOW_HEIGHT - (64 + titleh + suckh)) - eph * 2 + yarr[0];
-                    yarr[3] = yarr[2];
+                    xarr[2] = xarr[0] * 3 + epw;
+                    xarr[1] = xarr[0];
+                    xarr[3] = xarr[2];
+                    yarr[0] = (Control.WINDOW_HEIGHT - (26 + titleh + suckh) - eph * 2) / 3 + 10 + titleh;
+                    yarr[2] = yarr[0];
+                    yarr[1] = (Control.WINDOW_HEIGHT - (26 + titleh + suckh) - eph * 2) / 3 + eph + yarr[0];
+                    yarr[3] = yarr[1];
                     break;
                 case 5:
                     xarr[0] = (Control.WINDOW_WIDTH - epw * 3) / 6;
@@ -94,11 +83,11 @@ public class EpisodeSelect extends Menu {
                     xarr[2] = xarr[0] * 3 + epw;
                     xarr[3] = xarr[0] * 5 + 2 * epw;
                     xarr[4] = xarr[3];
-                    yarr[0] = (Control.WINDOW_HEIGHT - (64 + titleh + suckh)) + 32 + titleh;
-                    yarr[1] = yarr[0];
+                    yarr[0] = (Control.WINDOW_HEIGHT - (26 + titleh + suckh) - eph * 2) / 3 + 10 + titleh;
+                    yarr[1] = (Control.WINDOW_HEIGHT - (26 + titleh + suckh) - eph * 2) / 3 + eph + yarr[0];
                     yarr[2] = (Control.WINDOW_HEIGHT - ep1s.getH()) / 2;
-                    yarr[3] = (Control.WINDOW_HEIGHT - (64 + titleh + suckh)) - eph * 2 + yarr[0];
-                    yarr[4] = yarr[2];
+                    yarr[3] = yarr[0];
+                    yarr[4] = yarr[1];
                     break;
                 case 6:
                     xarr[0] = (Control.WINDOW_WIDTH - epw * 3) / 6;
@@ -107,10 +96,10 @@ public class EpisodeSelect extends Menu {
                     xarr[3] = xarr[0];
                     xarr[4] = xarr[1];
                     xarr[5] = xarr[2];
-                    yarr[0] = (Control.WINDOW_HEIGHT - (64 + titleh + suckh)) + 32 + titleh;
+                    yarr[0] = (Control.WINDOW_HEIGHT - (26 + titleh + suckh) - eph * 2) / 3 + 10 + titleh;
                     yarr[1] = yarr[0];
                     yarr[2] = yarr[0];
-                    yarr[3] = (Control.WINDOW_HEIGHT - (64 + titleh + suckh)) - eph * 2 + yarr[0];
+                    yarr[3] = (Control.WINDOW_HEIGHT - (26 + titleh + suckh) - eph * 2) / 3 + eph + yarr[0];
                     yarr[4] = yarr[3];
                     yarr[5] = yarr[3];
             }
@@ -126,71 +115,161 @@ public class EpisodeSelect extends Menu {
                 selectables.add(epi);
             }
 
-            Button suckingb = new Button(suckingSprite, suckingSelected,
-                    (Control.WINDOW_WIDTH - suckingSprite.getW()) / 2,
-                    Control.WINDOW_HEIGHT - 16 - suckingSprite.getH(),
-                    (Control.WINDOW_WIDTH - suckingSprite.getW()) / 2 - 4,
-                    Control.WINDOW_HEIGHT - 16 - suckingSprite.getH() - 4) {
-                @Override
-                public void onPress() throws ControlException {
+            if (PlayerSave.getCurSave().getSuckingOpened()) {
+                Sprite suckingSprite;
+                if (regularEpisodes == 7) {
+                    suckingSprite = SpritePool.get("ep7");
+                } else
+                    suckingSprite = SpritePool.get("epempty");
+                Sprite suckingSelected = SpritePool.get("selectempty");
 
+                Button suckingb = new Button(suckingSprite, suckingSelected,
+                        (Control.WINDOW_WIDTH - suckingSprite.getW()) / 2,
+                        Control.WINDOW_HEIGHT - 16 - suckingSprite.getH(),
+                        (Control.WINDOW_WIDTH - suckingSprite.getW()) / 2 - 4,
+                        Control.WINDOW_HEIGHT - 16 - suckingSprite.getH() - 4) {
+                    @Override
+                    public void onPress() throws ControlException {
+                        Control.getInstance().changeStateNative(new LevelSelect(7, 0));
+                    }
+                };
+
+                //устанавливаем selectable'сы
+                switch (commonEpisodes) {
+                    case 1:
+                        selectables.get(0).setMarkUp(selectables.get(0), selectables.get(0),
+                                suckingb, suckingb);
+                        suckingb.setMarkUp(suckingb, suckingb, selectables.get(0), selectables.get(0));
+                        break;
+                    case 2:
+                        selectables.get(0).setMarkUp(selectables.get(1), selectables.get(1),
+                                suckingb, suckingb);
+                        selectables.get(1).setMarkUp(selectables.get(0), selectables.get(0),
+                                suckingb, suckingb);
+                        suckingb.setMarkUp(suckingb, suckingb, selectables.get(1), selectables.get(1));
+                        break;
+                    case 3:
+                        selectables.get(0).setMarkUp(selectables.get(2), selectables.get(1),
+                                suckingb, suckingb);
+                        selectables.get(1).setMarkUp(selectables.get(0), selectables.get(2),
+                                suckingb, suckingb);
+                        selectables.get(2).setMarkUp(selectables.get(1), selectables.get(0),
+                                suckingb, suckingb);
+                        suckingb.setMarkUp(suckingb, suckingb, selectables.get(1), selectables.get(1));
+                        break;
+                    case 4:
+                        selectables.get(0).setMarkUp(selectables.get(2), selectables.get(2),
+                                suckingb, selectables.get(1));
+                        selectables.get(1).setMarkUp(selectables.get(3), selectables.get(3),
+                                selectables.get(0), suckingb);
+                        selectables.get(2).setMarkUp(selectables.get(0), selectables.get(0),
+                                suckingb, selectables.get(3));
+                        selectables.get(3).setMarkUp(selectables.get(1), selectables.get(1),
+                                selectables.get(2), suckingb);
+                        suckingb.setMarkUp(suckingb, suckingb, selectables.get(1), selectables.get(0));
+                        break;
+                    case 5:
+                        selectables.get(0).setMarkUp(selectables.get(3), selectables.get(2),
+                                suckingb, selectables.get(1));
+                        selectables.get(1).setMarkUp(selectables.get(4), selectables.get(2),
+                                selectables.get(0), suckingb);
+                        selectables.get(2).setMarkUp(selectables.get(0), selectables.get(3),
+                                suckingb, suckingb);
+                        selectables.get(3).setMarkUp(selectables.get(2), selectables.get(0),
+                                suckingb, selectables.get(4));
+                        selectables.get(4).setMarkUp(selectables.get(2), selectables.get(1),
+                                selectables.get(3), suckingb);
+                        suckingb.setMarkUp(suckingb, suckingb, selectables.get(2), selectables.get(2));
+                    case 6:
+                        selectables.get(0).setMarkUp(selectables.get(2), selectables.get(1),
+                                suckingb, selectables.get(3));
+                        selectables.get(1).setMarkUp(selectables.get(0), selectables.get(2),
+                                suckingb, selectables.get(4));
+                        selectables.get(2).setMarkUp(selectables.get(1), selectables.get(0),
+                                suckingb, selectables.get(5));
+                        selectables.get(3).setMarkUp(selectables.get(5), selectables.get(4),
+                                selectables.get(0), suckingb);
+                        selectables.get(4).setMarkUp(selectables.get(3), selectables.get(5),
+                                selectables.get(1), suckingb);
+                        selectables.get(5).setMarkUp(selectables.get(4), selectables.get(3),
+                                selectables.get(2), suckingb);
+                        suckingb.setMarkUp(suckingb, suckingb, selectables.get(4), selectables.get(1));
                 }
-            };
-
-            //устанавливаем selectable'сы
-            switch (commonEpisodes) {
-                case 1:
-                    selectables.get(0).setMarkUp(selectables.get(0), selectables.get(0),
-                            suckingb, suckingb);
-                    suckingb.setMarkUp(suckingb, suckingb, selectables.get(0), selectables.get(0));
-                    break;
-                case 2:
-                    selectables.get(0).setMarkUp(selectables.get(1), selectables.get(1),
-                            suckingb, suckingb);
-                    selectables.get(1).setMarkUp(selectables.get(0), selectables.get(0),
-                            suckingb, suckingb);
-                    suckingb.setMarkUp(suckingb, suckingb, selectables.get(1), selectables.get(1));
-                    break;
-                case 3:
-                    selectables.get(0).setMarkUp(selectables.get(2), selectables.get(1),
-                            suckingb, suckingb);
-                    selectables.get(1).setMarkUp(selectables.get(0), selectables.get(2),
-                            suckingb, suckingb);
-                    selectables.get(2).setMarkUp(selectables.get(1), selectables.get(0),
-                            suckingb, suckingb);
-                    break;
-                case 4:
-                    selectables.get(0).setMarkUp(selectables.get(2), selectables.get(2),
-                            suckingb, selectables.get(1));
-                    selectables.get(1).setMarkUp(selectables.get(3), selectables.get(3),
-                            selectables.get(0), suckingb);
-                    selectables.get(2).setMarkUp(selectables.get(0), selectables.get(0),
-                            suckingb, selectables.get(3));
-                    selectables.get(3).setMarkUp(selectables.get(1), selectables.get(1),
-                            selectables.get(2), suckingb);
-                    break;
-                case 5:
-                    selectables.get(0).setMarkUp(selectables.get(3), selectables.get(2),
-                            suckingb, selectables.get(1));
-                    selectables.get(1).setMarkUp(selectables.get(4), selectables.get(2),
-                            selectables.get(0), suckingb);
-                    selectables.get(2).setMarkUp(selectables.get(0), selectables.get(0),
-                            suckingb, selectables.get(3));
-                    selectables.get(2).setMarkUp(selectables.get(0), selectables.get(0),
-                            suckingb, selectables.get(3));
-                    selectables.get(3).setMarkUp(selectables.get(1), selectables.get(1),
-                            selectables.get(2), suckingb);
+                selectables.add(suckingb);
+            } else {
+                switch (commonEpisodes) {
+                    case 2:
+                        selectables.get(0).setMarkUp(selectables.get(1), selectables.get(1),
+                                selectables.get(0), selectables.get(0));
+                        selectables.get(1).setMarkUp(selectables.get(0), selectables.get(0),
+                                selectables.get(1), selectables.get(1));
+                        break;
+                    case 3:
+                        selectables.get(0).setMarkUp(selectables.get(2), selectables.get(1),
+                                selectables.get(0), selectables.get(0));
+                        selectables.get(1).setMarkUp(selectables.get(0), selectables.get(2),
+                                selectables.get(1), selectables.get(1));
+                        selectables.get(2).setMarkUp(selectables.get(1), selectables.get(0),
+                                selectables.get(2), selectables.get(2));
+                        break;
+                    case 4:
+                        selectables.get(0).setMarkUp(selectables.get(2), selectables.get(2),
+                                selectables.get(1), selectables.get(1));
+                        selectables.get(1).setMarkUp(selectables.get(3), selectables.get(3),
+                                selectables.get(0), selectables.get(0));
+                        selectables.get(2).setMarkUp(selectables.get(0), selectables.get(0),
+                                selectables.get(3), selectables.get(3));
+                        selectables.get(3).setMarkUp(selectables.get(1), selectables.get(1),
+                                selectables.get(2), selectables.get(2));
+                        break;
+                    case 5:
+                        selectables.get(0).setMarkUp(selectables.get(3), selectables.get(2),
+                                selectables.get(1), selectables.get(1));
+                        selectables.get(1).setMarkUp(selectables.get(4), selectables.get(2),
+                                selectables.get(0), selectables.get(0));
+                        selectables.get(2).setMarkUp(selectables.get(0), selectables.get(3),
+                                selectables.get(2), selectables.get(2));
+                        selectables.get(3).setMarkUp(selectables.get(2), selectables.get(0),
+                                selectables.get(4), selectables.get(4));
+                        selectables.get(4).setMarkUp(selectables.get(2), selectables.get(1),
+                                selectables.get(3), selectables.get(3));
+                        break;
+                    case 6:
+                        selectables.get(0).setMarkUp(selectables.get(2), selectables.get(1),
+                                selectables.get(3), selectables.get(3));
+                        selectables.get(1).setMarkUp(selectables.get(0), selectables.get(2),
+                                selectables.get(4), selectables.get(4));
+                        selectables.get(2).setMarkUp(selectables.get(1), selectables.get(0),
+                                selectables.get(5), selectables.get(5));
+                        selectables.get(3).setMarkUp(selectables.get(5), selectables.get(4),
+                                selectables.get(0), selectables.get(0));
+                        selectables.get(4).setMarkUp(selectables.get(3), selectables.get(5),
+                                selectables.get(1), selectables.get(1));
+                        selectables.get(5).setMarkUp(selectables.get(4), selectables.get(3),
+                                selectables.get(2), selectables.get(2));
+                }
             }
-            selectables.add(suckingb);
 
             setSelectables(selectables, selectables.get(0));
-            MusicPool.getInstance().toEpisodeSelect();
+            try {
+                MusicPool.getInstance().toEpisodeSelect();
+            } catch (IOException e) {
+                ErrorManager.getInstance().addWarning("Episode select init error: " + e.getMessage());
+                Log.printThrowable("EpisodeSelect.init MusicPool", e);
+            }
 
-            Graphics.setBackgroundColor(1.f, 165.f/255.f, 0.f, 1.f);
-        } catch (IOException e) {
-            Control.getInstance().changeStateNative(new ErrorMenu("EpisodeSelect Menu init error: " +
-                    e.getMessage(), new MainMenu()));
+            if (SpritePool.isErrs()) {
+                String s = SpritePool.getErrsMessage();
+                ErrorManager.getInstance().addWarning("EpisodeSelect init error: Sprite loading error" + s);
+                Log.println("EpisodeSelect.init SpritePool\n" + s);
+            }
+
+            if (ErrorManager.getInstance().dispatchNative())
+                return false;
         }
+
+        Graphics.setBackgroundColor(1.f, 165.f/255.f, 0.f, 1.f);
+        return true;
     }
 
     @Override

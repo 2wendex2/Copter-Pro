@@ -2,41 +2,68 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="cpdep:jar" />
+      <artifact name="cpwindows:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="373692e7-d972-4f13-96c1-1661813a4434" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/cp/src/config/Log.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cp/src/config/SpritePool.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cp/src/menu/EpisodeSelect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cp/src/menu/ErrorMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/cp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/cp/cp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/src/DrawableActor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/src/UpdatableActor.java" beforeDir="false" />
+    <list default="true" id="373692e7-d972-4f13-96c1-1661813a4434" name="Default Changelist" comment="Эпизоды: начало">
+      <change afterPath="$PROJECT_DIR$/cp/manifest/windows/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cp/src/config/ErrorManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cp/src/control/ErrorState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cp/src/control/RectSprite.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cp/src/game/Item.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cp/src/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/cp_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/cpdep_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/cplinux_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/cpmac_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/cpwindows_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Admin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lwjgl.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/lvls/11.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cp/lvls/11.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/lvls/16.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cp/lvls/16.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/lvls/5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cp/lvls/5.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/src/DATA/IMG/ep3.dat" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/DATA/IMG/ep3.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/src/DATA/IMG/ep4.dat" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/DATA/IMG/ep4.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/src/DATA/IMG/ep5.dat" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/DATA/IMG/ep5.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/src/DATA/IMG/ep6.dat" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/DATA/IMG/ep6.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/src/DATA/LVL/11.dat" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/DATA/LVL/11.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/src/DATA/LVL/16.dat" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/DATA/LVL/16.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/src/DATA/LVL/5.dat" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/DATA/LVL/5.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cp/src/config/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/config/Config.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cp/src/config/MusicPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/config/MusicPool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cp/src/config/PlayerSave.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/config/PlayerSave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/src/control/Audio.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/control/Audio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/src/config/SpritePool.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/config/SpritePool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cp/src/control/Control.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/control/Control.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cp/src/control/ControlState.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/control/ControlState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/src/control/Drawable.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/control/Drawable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/src/control/InputCallbackException.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/control/InputCallbackException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/src/control/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/control/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/src/control/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/control/Sound.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/src/control/SoundSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/control/SoundSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/src/control/Sprite.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/control/Sprite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/src/control/FileSprite.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/control/FileSprite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/src/control/Graphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/control/Graphics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cp/src/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/src/game/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/game/Input.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/src/game/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/game/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/src/history.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/history.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cp/src/logo/Logo.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/logo/Logo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/src/menu/EpisodeSelect.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/menu/EpisodeSelect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/src/menu/ErrorMenu.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cp/src/menu/LevelSelect.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/menu/LevelSelect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cp/src/menu/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/menu/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/src/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/menu/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/src/menu/MenuException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/src/menu/Selectable.java" beforeDir="false" afterPath="$PROJECT_DIR$/cp/src/menu/Selectable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/src/save/ProgramPath.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cp/src/save/SaveException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cp/src/windows/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lvlcompiler/Dwall.java" beforeDir="false" afterPath="$PROJECT_DIR$/lvlcompiler/Dwall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lvlcompiler/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/lvlcompiler/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lvlcompiler/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/lvlcompiler/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lvlcompiler/LevelGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/lvlcompiler/LevelGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lvlcompiler/LvlCompile.java" beforeDir="false" afterPath="$PROJECT_DIR$/lvlcompiler/LvlCompile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lvlcompiler/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/lvlcompiler/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lvlcompiler/RectLeaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/lvlcompiler/RectLeaf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lvlcompiler/Swall.java" beforeDir="false" afterPath="$PROJECT_DIR$/lvlcompiler/Swall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/save.sav" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,86 +90,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cp/src/menu/MainMenu.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cp/src/game/Input.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="49" column="85" selection-start-line="49" selection-start-column="85" selection-end-line="49" selection-end-column="85" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="121">
+              <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cp/src/menu/ErrorMenu.java">
+        <entry file="file://$PROJECT_DIR$/cp/src/control/ControlException.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="74">
-              <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="34">
+              <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cp/src/menu/EpisodeSelect.java">
+        <entry file="file://$PROJECT_DIR$/cp/src/control/FileSprite.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="151" column="96" selection-start-line="151" selection-start-column="96" selection-end-line="151" selection-end-column="96" />
+            <state relative-caret-position="121">
+              <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
               <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cp/src/menu/Menu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="50" selection-start-line="50" selection-end-line="50" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cp/src/config/MusicPool.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="634">
-              <caret line="101" selection-start-line="16" selection-end-line="101" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cp/src/config/PlayerSave.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="121" column="35" selection-start-line="121" selection-start-column="35" selection-end-line="121" selection-end-column="35" />
-              <folding>
-                <element signature="e#975#976#0" expanded="true" />
-                <element signature="e#1032#1033#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cp/src/config/Log.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#2567#2568#0" expanded="true" />
+                <element signature="e#2591#2592#0" expanded="true" />
+                <element signature="e#2616#2617#0" expanded="true" />
+                <element signature="e#2640#2641#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -151,8 +126,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cp/src/config/Config.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="41">
-              <caret line="42" column="28" lean-forward="true" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
+            <state relative-caret-position="136">
+              <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -160,23 +135,69 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cp/src/config/CmdLineParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-69">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="195">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cp/src/menu/LevelSelect.java">
+        <entry file="file://$PROJECT_DIR$/cp/src/control/Control.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="59" selection-start-line="59" selection-end-line="59" />
+            <state relative-caret-position="85">
+              <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#3569#3570#0" expanded="true" />
+                <element signature="e#3608#3609#0" expanded="true" />
+                <element signature="e#4199#4200#0" expanded="true" />
+                <element signature="e#4225#4226#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cp/src/control/Sound.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+              <folding>
+                <element signature="e#661#662#0" expanded="true" />
+                <element signature="e#692#693#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cp/src/control/Graphics.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="196">
+              <caret line="32" column="37" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cp/src/module-info.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cp/src/logo/Logo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="128">
+              <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -189,8 +210,8 @@
         <option value="Singleton" />
         <option value="Interface" />
         <option value="package-info" />
-        <option value="module-info" />
         <option value="Class" />
+        <option value="module-info" />
       </list>
     </option>
   </component>
@@ -205,57 +226,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/cp/src/control/DrawableRect.java" />
-        <option value="$PROJECT_DIR$/cp/src/control/ColorSprite.java" />
-        <option value="$PROJECT_DIR$/cp/src/control/ColorRect.java" />
-        <option value="$PROJECT_DIR$/cp/src/control/ControlNativeException.java" />
-        <option value="$PROJECT_DIR$/cp/src/game/PlayerWrapping.java" />
-        <option value="$PROJECT_DIR$/cp/src/game/Bullet.java" />
-        <option value="$PROJECT_DIR$/cp/src/game/Player.java" />
-        <option value="$PROJECT_DIR$/cp/src/game/MovingSolidProtoActor.java" />
         <option value="$PROJECT_DIR$/cp/src/game/MovingSolidActor.java" />
         <option value="$PROJECT_DIR$/cp/src/game/SolidActor.java" />
         <option value="$PROJECT_DIR$/cp/src/control/GLFWCallbackException.java" />
         <option value="$PROJECT_DIR$/cp/src/save/ProgramPath.java" />
-        <option value="$PROJECT_DIR$/cp/src/control/Graphics.java" />
         <option value="$PROJECT_DIR$/cp/src/control/SoundPool.java" />
         <option value="$PROJECT_DIR$/cp/src/control/MusicPool.java" />
         <option value="$PROJECT_DIR$/cp/src/menu/MenuException.java" />
         <option value="$PROJECT_DIR$/cp/src/control/ControlNative.java" />
-        <option value="$PROJECT_DIR$/cp/src/control/FileSprite.java" />
         <option value="$PROJECT_DIR$/cp/src/menu/Window.java" />
         <option value="$PROJECT_DIR$/cp/src/menu/Button.java" />
-        <option value="$PROJECT_DIR$/cp/src/game/Level.java" />
         <option value="$PROJECT_DIR$/cp/src/game/Boss.java" />
         <option value="$PROJECT_DIR$/cp/src/game/Boss1m.java" />
         <option value="$PROJECT_DIR$/cp/src/game/Ammo.java" />
         <option value="$PROJECT_DIR$/cp/src/config/CmdLineParser.java" />
-        <option value="$PROJECT_DIR$/cp/src/config/Config.java" />
         <option value="$PROJECT_DIR$/cp/src/control/module-info.java" />
-        <option value="$PROJECT_DIR$/cp/src/module-info.java" />
         <option value="$PROJECT_DIR$/cp/src/history.txt" />
         <option value="$PROJECT_DIR$/cp/src/config/Log.java" />
         <option value="$PROJECT_DIR$/cp/src/control/SoundSource.java" />
         <option value="$PROJECT_DIR$/cp/src/control/Drawable.java" />
         <option value="$PROJECT_DIR$/cp/src/control/Sound.java" />
-        <option value="$PROJECT_DIR$/cp/src/menu/ErrorMenu.java" />
         <option value="$PROJECT_DIR$/cp/src/control/Audio.java" />
-        <option value="$PROJECT_DIR$/cp/src/control/ControlState.java" />
         <option value="$PROJECT_DIR$/cp/src/control/InputCallbackException.java" />
         <option value="$PROJECT_DIR$/cp/src/menu/Selectable.java" />
-        <option value="$PROJECT_DIR$/cp/src/game/Game.java" />
         <option value="$PROJECT_DIR$/cp/src/game/Input.java" />
-        <option value="$PROJECT_DIR$/cp/src/logo/Logo.java" />
-        <option value="$PROJECT_DIR$/cp/src/config/SpritePool.java" />
         <option value="$PROJECT_DIR$/cp/src/control/Main.java" />
-        <option value="$PROJECT_DIR$/cp/src/control/Control.java" />
         <option value="$PROJECT_DIR$/cp/src/control/Sprite.java" />
+        <option value="$PROJECT_DIR$/cp/src/control/ConfigException.java" />
+        <option value="$PROJECT_DIR$/cp/src/control/ErrorStack.java" />
+        <option value="$PROJECT_DIR$/cp/src/control/CommonErrs.java" />
+        <option value="$PROJECT_DIR$/cp/src/menu/ErrorMenu.java" />
+        <option value="$PROJECT_DIR$/cp/src/menu/ErrorState.java" />
+        <option value="$PROJECT_DIR$/cp/src/control/FileSprite.java" />
+        <option value="$PROJECT_DIR$/cp/src/config/SpritePool.java" />
+        <option value="$PROJECT_DIR$/cp/src/control/RectSprite.java" />
         <option value="$PROJECT_DIR$/cp/src/menu/Menu.java" />
-        <option value="$PROJECT_DIR$/cp/src/config/MusicPool.java" />
-        <option value="$PROJECT_DIR$/cp/src/menu/LevelSelect.java" />
+        <option value="$PROJECT_DIR$/cp/src/control/ControlState.java" />
         <option value="$PROJECT_DIR$/cp/src/menu/EpisodeSelect.java" />
-        <option value="$PROJECT_DIR$/cp/src/config/PlayerSave.java" />
         <option value="$PROJECT_DIR$/cp/src/menu/MainMenu.java" />
+        <option value="$PROJECT_DIR$/cp/src/config/MusicPool.java" />
+        <option value="$PROJECT_DIR$/cp/src/control/Control.java" />
+        <option value="$PROJECT_DIR$/cp/src/logo/Logo.java" />
+        <option value="$PROJECT_DIR$/cp/src/control/Graphics.java" />
+        <option value="$PROJECT_DIR$/cp/src/config/ErrorManager.java" />
+        <option value="$PROJECT_DIR$/cp/src/control/ErrorState.java" />
+        <option value="$PROJECT_DIR$/cp/src/game/Item.java" />
+        <option value="$PROJECT_DIR$/cp/src/game/Level.java" />
+        <option value="$PROJECT_DIR$/cp/src/config/PlayerSave.java" />
+        <option value="$PROJECT_DIR$/cp/src/game/Game.java" />
+        <option value="$PROJECT_DIR$/cp/src/menu/LevelSelect.java" />
+        <option value="$PROJECT_DIR$/cp/src/module-info.java" />
+        <option value="$PROJECT_DIR$/cp/src/config/Config.java" />
       </list>
     </option>
   </component>
@@ -266,7 +287,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="472" />
+    <option name="x" value="410" />
+    <option name="y" value="-16" />
     <option name="width" value="900" />
     <option name="height" value="688" />
   </component>
@@ -292,6 +314,16 @@
               <item name="CopterPro" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="control" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CopterPro" type="b2602c69:ProjectViewProjectNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CopterPro" type="b2602c69:ProjectViewProjectNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="logo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CopterPro" type="b2602c69:ProjectViewProjectNode" />
@@ -348,11 +380,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="11" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/cp/src/module-info.java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/cp/manifest/windows" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.excludes" />
@@ -432,7 +464,10 @@
       <workItem from="1566378484071" duration="2750000" />
       <workItem from="1567634798837" duration="7907000" />
       <workItem from="1568300665285" duration="7073000" />
-      <workItem from="1571650660565" duration="13577000" />
+      <workItem from="1571650660565" duration="15030000" />
+      <workItem from="1571947939723" duration="10308000" />
+      <workItem from="1572718839173" duration="11516000" />
+      <workItem from="1574626429480" duration="37103000" />
     </task>
     <task id="LOCAL-00001" summary="Разделение по состояниям и аргументы командной строки">
       <created>1565041489237</created>
@@ -452,7 +487,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="478889000" />
+    <option name="totallyTimeSpent" value="539269000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -467,14 +502,14 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.34795764" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.36535552" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49924356" weight="0.32843137" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.48033282" visible="true" weight="0.3611111" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.47881997" weight="0.3611111" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49848714" weight="0.39869282" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -482,17 +517,17 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49092284" weight="0.32843137" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.51966715" side_tool="true" visible="true" weight="0.3611111" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.52118003" side_tool="true" weight="0.3611111" />
       <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49924356" weight="0.32843137" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.48940998" weight="0.32843137" />
       <window_info anchor="right" id="Coverage" order="0" side_tool="true" weight="0.32980332" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="2" weight="0.24962178" />
+      <window_info anchor="right" id="Database" order="2" weight="0.32980332" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
-      <window_info anchor="right" id="Database" order="6" weight="0.32980332" />
-      <window_info anchor="right" id="Maven" order="7" weight="0.32980332" />
+      <window_info anchor="right" id="Maven" order="6" weight="0.32980332" />
+      <window_info anchor="right" id="Ant Build" order="7" weight="0.24962178" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -521,118 +556,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/cp/src/game/Bullet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://Q:/Sdks/lwjgl-3.2.1/lwjgl-glfw/lwjgl-glfw-sources.jar!/org/lwjgl/glfw/GLFWWindowCloseCallbackI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="44" column="9" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/control/ControlNativeException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/menu/Window.java" />
-    <entry file="file://$PROJECT_DIR$/cp/src/game/MovingSolidProtoActor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/game/Level.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-620">
-          <caret line="95" column="91" lean-forward="true" selection-start-line="95" selection-start-column="91" selection-end-line="95" selection-end-column="91" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1046#1047#0" expanded="true" />
-            <element signature="e#1071#1072#0" expanded="true" />
-            <element signature="e#8832#8833#0" expanded="true" />
-            <element signature="e#8908#8909#0" expanded="true" />
-            <element signature="e#8998#8999#0" expanded="true" />
-            <element signature="e#9067#9068#0" expanded="true" />
-            <element signature="e#9139#9140#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/game/MovingSolidActor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/game/Boss.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/game/SolidActor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="33" column="12" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/game/Boss1b.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/game/Boss1m.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="52" column="54" selection-start-line="52" selection-start-column="54" selection-end-line="52" selection-end-column="54" />
-          <folding>
-            <element signature="e#1211#1212#0" expanded="true" />
-            <element signature="e#1276#1277#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/game/Ammo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="10" column="5" lean-forward="true" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
-          <folding>
-            <element signature="e#307#308#0" expanded="true" />
-            <element signature="e#335#336#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/game/Collidable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cp/src/save/ProgramPath.java" />
     <entry file="file://$PROJECT_DIR$/cp/src/package-info.java" />
     <entry file="file://$PROJECT_DIR$/cp/src/control/module-info.java" />
@@ -643,36 +566,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/module-info.java" />
     <entry file="file://$PROJECT_DIR$/cp/src/menu/MenuException.java" />
-    <entry file="file://$PROJECT_DIR$/cp/src/control/Audio.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="50" column="9" lean-forward="true" selection-start-line="50" selection-start-column="9" selection-end-line="50" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/control/ControlException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cp/src/control/ControlNative.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="37" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/control/ControlState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="75" selection-start-line="27" selection-start-column="75" selection-end-line="27" selection-end-column="75" />
         </state>
       </provider>
     </entry>
@@ -697,18 +595,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/control/Sound.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-504">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#661#662#0" expanded="true" />
-            <element signature="e#692#693#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cp/src/menu/Selectable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -719,16 +605,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/game/Game.java">
+    <entry file="file://$PROJECT_DIR$/cp/src/menu/Button.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="48" column="48" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
+        <state relative-caret-position="153">
+          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding>
+            <element signature="e#242#243#0" expanded="true" />
+            <element signature="e#267#268#0" expanded="true" />
+            <element signature="e#291#292#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/control/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="55" lean-forward="true" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1058#1059#0" expanded="true" />
-            <element signature="e#1088#1089#0" expanded="true" />
-            <element signature="e#2012#2013#0" expanded="true" />
-            <element signature="e#2048#2049#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/control/Sprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/control/SoundSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/config/Log.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -750,179 +668,150 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/menu/Button.java">
+    <entry file="file://$PROJECT_DIR$/cp/src/control/ErrorStack.java" />
+    <entry file="file://$PROJECT_DIR$/cp/src/control/ErrorState.java" />
+    <entry file="file://$PROJECT_DIR$/cp/src/control/CommonErrs.java" />
+    <entry file="file://$PROJECT_DIR$/cp/src/control/Audio.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-          <folding>
-            <element signature="e#242#243#0" expanded="true" />
-            <element signature="e#267#268#0" expanded="true" />
-            <element signature="e#291#292#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/game/Input.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="39" column="47" selection-start-line="39" selection-start-column="47" selection-end-line="39" selection-end-column="47" />
+        <state relative-caret-position="332">
+          <caret line="50" column="9" lean-forward="true" selection-start-line="50" selection-start-column="9" selection-end-line="50" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/logo/Logo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="67" column="39" selection-start-line="67" selection-start-column="39" selection-end-line="67" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#818#819#0" expanded="true" />
-            <element signature="e#854#855#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/control/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="55" lean-forward="true" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/control/Graphics.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/control/Sprite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/control/FileSprite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="77" column="4" selection-start-line="77" selection-start-column="4" selection-end-line="77" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2835#2836#0" expanded="true" />
-            <element signature="e#2859#2860#0" expanded="true" />
-            <element signature="e#2884#2885#0" expanded="true" />
-            <element signature="e#2908#2909#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cp/src/config/SpritePool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#235#236#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/control/Control.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="140" selection-start-line="140" selection-end-line="140" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3575#3576#0" expanded="true" />
-            <element signature="e#3614#3615#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/control/SoundSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/menu/LevelSelect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
+        <state relative-caret-position="112">
+          <caret line="24" column="68" lean-forward="true" selection-start-line="24" selection-start-column="68" selection-end-line="24" selection-end-column="68" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/config/Log.java">
+    <entry file="file://$PROJECT_DIR$/cp/src/control/RectSprite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        <state relative-caret-position="65">
+          <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#691#692#0" expanded="true" />
+            <element signature="e#715#716#0" expanded="true" />
+            <element signature="e#754#755#0" expanded="true" />
+            <element signature="e#778#779#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/config/CmdLineParser.java">
+    <entry file="jar://Q:/Sdks/lwjgl-3.2.1/lwjgl-glfw/lwjgl-glfw-sources.jar!/org/lwjgl/glfw/GLFW.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-69">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/config/Config.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="42" column="28" lean-forward="true" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="156">
+          <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cp/src/menu/Menu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        <state relative-caret-position="89">
+          <caret line="35" column="31" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/control/ControlState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="29" column="91" selection-start-line="29" selection-start-column="91" selection-end-line="29" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/cp/src/config/MusicPool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="634">
-          <caret line="101" selection-start-line="16" selection-end-line="101" />
+        <state relative-caret-position="234">
+          <caret line="58" column="28" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/config/ErrorManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="31" column="27" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#974#975#0" expanded="true" />
+            <element signature="e#1013#1014#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/game/Bullet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/game/MovingSolidProtoActor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-172">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/game/SolidActor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/game/Item.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="71">
+          <caret line="5" column="63" selection-start-line="5" selection-start-column="63" selection-end-line="5" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#166#167#0" expanded="true" />
+            <element signature="e#199#200#0" expanded="true" />
+            <element signature="e#247#248#0" expanded="true" />
+            <element signature="e#287#288#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/game/MovingSolidActor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-62">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/game/Level.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-609">
+          <caret line="102" column="27" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
+          <folding>
+            <element signature="e#9174#9175#0" expanded="true" />
+            <element signature="e#9202#9203#0" expanded="true" />
+            <element signature="e#9633#9634#0" expanded="true" />
+            <element signature="e#9709#9710#0" expanded="true" />
+            <element signature="e#9799#9800#0" expanded="true" />
+            <element signature="e#9868#9869#0" expanded="true" />
+            <element signature="e#9940#9941#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cp/src/menu/EpisodeSelect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="151" column="96" selection-start-line="151" selection-start-column="96" selection-end-line="151" selection-end-column="96" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cp/src/menu/ErrorMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        <state relative-caret-position="182">
+          <caret line="140" column="4" selection-start-line="140" selection-start-column="4" selection-end-line="140" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -931,19 +820,149 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cp/src/config/PlayerSave.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="121" column="35" selection-start-line="121" selection-start-column="35" selection-end-line="121" selection-end-column="35" />
+        <state relative-caret-position="114">
+          <caret line="172" column="60" selection-start-line="172" selection-start-column="60" selection-end-line="172" selection-end-column="60" />
           <folding>
-            <element signature="e#975#976#0" expanded="true" />
-            <element signature="e#1032#1033#0" expanded="true" />
+            <element signature="e#514#515#0" expanded="true" />
+            <element signature="e#544#545#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/game/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/game/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="71" column="63" selection-start-line="71" selection-start-column="63" selection-end-line="71" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3064#3065#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cp/src/menu/MainMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="49" column="85" selection-start-line="49" selection-start-column="85" selection-end-line="49" selection-end-column="85" />
+        <state relative-caret-position="322">
+          <caret line="45" column="70" selection-start-line="45" selection-start-column="70" selection-end-line="45" selection-end-column="70" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/menu/LevelSelect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="173" column="60" selection-start-line="173" selection-start-column="60" selection-end-line="173" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/module-info.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/game/Input.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/control/ControlException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/control/FileSprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+          <folding>
+            <element signature="e#2567#2568#0" expanded="true" />
+            <element signature="e#2591#2592#0" expanded="true" />
+            <element signature="e#2616#2617#0" expanded="true" />
+            <element signature="e#2640#2641#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/logo/Logo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/control/Control.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+          <folding>
+            <element signature="e#3569#3570#0" expanded="true" />
+            <element signature="e#3608#3609#0" expanded="true" />
+            <element signature="e#4199#4200#0" expanded="true" />
+            <element signature="e#4225#4226#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/control/Sound.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+          <folding>
+            <element signature="e#661#662#0" expanded="true" />
+            <element signature="e#692#693#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/control/Graphics.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="32" column="37" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/control/ErrorState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="64" column="56" selection-start-line="64" selection-start-column="56" selection-end-line="64" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/config/Config.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cp/src/config/CmdLineParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -970,12 +989,12 @@
             <show-sorted>false</show-sorted>
             <show-content>
               <type id="artifact" />
-              <type id="library" />
-              <type id="jpa-descriptors" />
               <type id="javaee-facet-resources" />
+              <type id="jpa-descriptors" />
+              <type id="library" />
             </show-content>
           </artifact-editor>
-          <last-edited>cpdep:jar</last-edited>
+          <last-edited>cpwindows:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

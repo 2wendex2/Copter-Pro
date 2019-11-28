@@ -1,9 +1,9 @@
 package game;
 
-import config.MusicPool;
-import config.PlayerSave;
+import config.*;
 import control.*;
-import menu.ErrorMenu;
+import control.ErrorState;
+import menu.EpisodeSelect;
 import menu.LevelSelect;
 import menu.MainMenu;
 
@@ -13,7 +13,7 @@ public class Game implements ControlState {
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 576;
 
-    private Input input = new Input();
+    private Input input;
     private Level level;
     /*private int levelId = 1;
     private Audio audio;
@@ -26,15 +26,30 @@ public class Game implements ControlState {
     }
 
     @Override
-    public void init() throws ControlException {
+    public boolean init() throws ControlException {
+        if (input == null) {
+            ErrorManager.getInstance().clear(Control.getInstance().getState());
+            input = new Input();
+            try {
+                MusicPool.getInstance().toGame(getLevelId());
+            } catch (IOException e) {
+                ErrorManager.getInstance().addWarning("Game init error: " + e.getMessage());
+                Log.printThrowable("Game.init MusicPool", e);
+            }
+
+            if (SpritePool.isErrs()) {
+                String s = SpritePool.getErrsMessage();
+                ErrorManager.getInstance().addWarning("LevelSelect init error: Sprite loading error" + s);
+                Log.println("Game.init SpritePool\n" + s);
+            }
+
+            if (ErrorManager.getInstance().dispatchNative())
+                return false;
+        }
+
         level.init();
         Graphics.setBackgroundColor(1.f, 1.f, 0.f, 1.f);
-        try {
-            MusicPool.getInstance().toGame(getLevelId());
-        } catch (IOException e) {
-            Control.getInstance().changeStateNative(new ErrorMenu("Music change error: " + e.getMessage(),
-                    new MainMenu()));
-        }
+        return true;
     }
 
     public void input() {
@@ -48,16 +63,23 @@ public class Game implements ControlState {
 
     public void update() throws ControlException {
         level.update(input);
-        if (level.isEnded()) {
-            try {
+        try {
+            if (level.isEnded()) {
                 PlayerSave.getCurSave().setLevelComplete(level.getId());
-            } catch (IOException e) {
-                Control.getInstance().changeStateNative(new ErrorMenu("Save error: " + e.getMessage(),
-                        new MainMenu()));
+                Control.getInstance().changeState(new LevelSelect(1, level.getId() < 18 ?
+                        level.getId() + 1 : 18));
+            } else if (level.isStarEnded()) {
+                PlayerSave.getCurSave().openStar(getLevelId());
+                if (PlayerSave.getCurSave().getOpenedStarsCount(getLevelId() / 19 + 1) == 3)
+                    Control.getInstance().changeState(new EpisodeSelect());
+                else
+                    Control.getInstance().changeState(new LevelSelect(1, level.getId()));
             }
-            Graphics.changeView(0, 0);
-            Control.getInstance().changeState(new LevelSelect(1, level.getId() < 18 ?
-                    level.getId() + 1 : 18));
+        } catch (IOException e) {
+            ErrorManager.getInstance().clear(new MainMenu());
+            ErrorManager.getInstance().addWarning("Save error: " + e.getMessage());
+            ErrorManager.getInstance().dispatch();
+            Log.printThrowable("Game.update save", e);
         }
     }
 

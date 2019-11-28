@@ -45,13 +45,19 @@ public class MusicPool {
     }
 
     private void changeMusic(String newMusic) throws IOException {
-        if (music != null) {
-            int num = musicNum(newMusic);
-            if (music[num] == null)
-                music[num] = new Sound(newMusic);
-            if (curMusic != music[num])
-                Control.getInstance().changeBgm(music[num]);
-            curMusic = music[num];
+        try {
+            if (music != null) {
+                int num = musicNum(newMusic);
+                if (music[num] == null)
+                    music[num] = new Sound(newMusic);
+                if (curMusic != music[num])
+                    Control.getInstance().changeBgm(music[num]);
+                curMusic = music[num];
+            }
+        } catch (IOException e) {
+            Control.getInstance().stopBgm();
+            curMusic = null;
+            throw e;
         }
     }
 

@@ -73,8 +73,7 @@ class Parser {
 	
 	private Item parseItem() throws ParserException {
 		try {
-			return new Item(lexer.tokenizeInteger(), lexer.tokenizeInteger(), lexer.tokenizeInteger(),
-				lexer.tokenizeInteger(), lexer.tokenizeInteger(), lexer.tokenizeInteger());
+			return new Item(lexer.tokenizeInteger(), lexer.tokenizeInteger(), lexer.tokenizeInteger());
 		} catch (Exception e) {
 			throw new ParserException("Item syntax error", e);
 		}

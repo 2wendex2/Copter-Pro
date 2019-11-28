@@ -36,7 +36,13 @@ public class PlayerSave {
     }
 
     public boolean getSuckingOpened() {
-        return episodes > 0 && completed[0] >= 18;
+        return (episodes > 0 && getCompletedLevelCount(1) >= 18) ||
+                (episodes > 1 && getCompletedLevelCount(2) >= 18) ||
+                (episodes > 2 && getCompletedLevelCount(3) >= 18) ||
+                (episodes > 3 && getCompletedLevelCount(4) >= 18) ||
+                (episodes > 4 && getCompletedLevelCount(5) >= 18) ||
+                (episodes > 5 && getCompletedLevelCount(6) >= 18) ||
+                episodes > 6;
     }
 
     //Звёзды эпизода
@@ -52,27 +58,54 @@ public class PlayerSave {
         return (completed[ep - 1] & (1 << (starNum + 4))) != 0;
     }
 
+    public boolean getOpenedStar(int id) {
+        switch (id) {
+            case 5:
+                return getOpenedStar(1, 1);
+            case 11:
+                return getOpenedStar(1, 2);
+            case 16:
+                return getOpenedStar(1, 3);
+        }
+        return true;
+    }
+
     public void openStar(int ep, int starNum) throws IOException {
         completed[ep - 1] |= (1 << (starNum + 4));
         write();
+        if (getOpenedStarsCount(ep) == 3) {
+            episodes++;
+        }
+    }
+
+    public void openStar(int id) throws IOException {
+        switch (id) {
+            case 5:
+                openStar(1, 1);
+                break;
+            case 11:
+                openStar(1, 2);
+                break;
+            case 16:
+                openStar(1, 3);
+        }
     }
 
     public void setLevelComplete(int id) throws IOException {
         int ep0 = id / 19;
 
-        if (completed[ep0] < id % 19) {
+        if (getCompletedLevelCount(ep0 + 1) < id % 19) {
             completed[ep0] = (byte)((id % 19) | (completed[ep0] & 0xE0));
             write();
         }
     }
 
     public void setEpisodeComplete(int ep) throws IOException {
-        if (ep > episodes) {
-            episodes = (byte)ep;
+        if (ep >= episodes) {
+            episodes = (byte)(ep + 1);
             write();
         }
     }
-
 
 
 
@@ -111,6 +144,8 @@ public class PlayerSave {
                 throw new IOException("Save file \"" + name + ".sav\" corrupted");
 
             episodes = i;
+            if (episodes > 0 && getOpenedStarsCount(episodes) == 3)
+                episodes++;
 
             if (!checkPossibility())
                 throw new IOException("Save file \"" + name + ".sav\" corrupted");
@@ -134,7 +169,12 @@ public class PlayerSave {
         }
 
         try {
-            for (int i = 0; i < episodes; i++)
+            int epo;
+            if (episodes > 1 && completed[episodes - 1] == 0)
+                epo = episodes - 1;
+            else
+                epo = episodes;
+            for (int i = 0; i < epo; i++)
                 stream.write(completed[i]);
         } catch (IOException e) {
             throw new IOException("Error writing save file \"" + getFilePath() + '\"', e);

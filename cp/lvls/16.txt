@@ -43,10 +43,11 @@
 %swall 208t 10t 15t 8t 0 0
 %swall 222t 9t 1t 1t 0 0
 
-%dwall 160t 19t 1t 1t 0 0 01 160t 25t 0 176
-%dwall 170t 26t 1t 1t 0 0 01 170t 33t 0 -176
-%dwall 180t 19t 1t 1t 0 0 01 180t 25t 0 176
-%dwall 194t 26t 1t 1t 0 0 01 194t 33t 0 176
-%dwall 205t 26t 1t 1t 0 0 01 205t 33t 0 -176
+%dwall 160t 19t 1t 1t 0 0 01 160t 25t 0 5t
+%dwall 170t 26t 1t 1t 0 0 01 170t 33t 0 -5t
+%dwall 180t 19t 1t 1t 0 0 01 180t 25t 0 5t
+%dwall 194t 26t 1t 1t 0 0 01 194t 33t 0 5t
+%dwall 205t 26t 1t 1t 0 0 01 205t 33t 0 -5t
 
 %swall 239t 18t 1t 17t 0 0
+%item 0 237t 25t

@@ -1,14 +1,12 @@
 package logo;
 
-import config.MusicPool;
-import config.PlayerSave;
+import config.*;
 import control.*;
 import game.Game;
 import game.Level;
-import menu.ErrorMenu;
+import control.ErrorState;
 import menu.MainMenu;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.system.CallbackI;
 
 import java.io.IOException;
 
@@ -17,16 +15,29 @@ public class Logo implements ControlState {
     private int timer;
 
     @Override
-    public void init() throws ControlException {
-        try {
-            beginLogo = new FileSprite("begin");
+    public boolean init() throws ControlException {
+        if (beginLogo == null) {
+            ErrorManager.getInstance().clear(Logo.this);
+            beginLogo = SpritePool.get("begin");
 
-        MusicPool.getInstance().toBeginGame();
-        Graphics.setBackgroundColor(1.f, 1.f, 1.f, 1.f);
-        } catch (IOException e) {
-            Control.getInstance().changeStateNative(new ErrorMenu("Logo init error: " + e.getMessage(),
-                    new MainMenu()));
+            try {
+                MusicPool.getInstance().toBeginGame();
+            } catch (IOException e) {
+                ErrorManager.getInstance().addWarning("Logo init error: " + e.getMessage());
+                Log.printThrowable("Logo.init MusicPool", e);
+            }
+
+            if (SpritePool.isErrs()) {
+                String s = SpritePool.getErrsMessage();
+                ErrorManager.getInstance().addWarning("Logo init error: Sprite loading error" + s);
+                Log.println("Logo.init SpritePool\n" + s);
+            }
+
+            if (ErrorManager.getInstance().dispatchNative())
+                return false;
         }
+        Graphics.setBackgroundColor(1.f, 1.f, 1.f, 1.f);
+        return true;
     }
 
     @Override
@@ -69,8 +80,10 @@ public class Logo implements ControlState {
                 Control.getInstance().changeState(new Game(new Level(1)));
             }
         } catch (IOException e) {
-            Control.getInstance().changeStateNative(new ErrorMenu("Logo update error: " + e.getMessage(),
-                    new MainMenu()));
+            ErrorManager.getInstance().clear(new MainMenu());
+            ErrorManager.getInstance().addWarning("Save error: " + e.getMessage());
+            ErrorManager.getInstance().dispatch();
+            Log.printThrowable("Logo.update save", e);
         }
     }
 }

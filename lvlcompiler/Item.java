@@ -1,19 +1,26 @@
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class Item extends RectLeaf {
+/*
+	Один из четырёх основных классов
+	На самом деле определяется подид
+	Простейшие содержат id, x и y
+	Такой же, как Enemy, разделены для простоты
+*/
+
+public class Item implements LevelGenerator {
 	protected int id;
-	protected int sprite;
+	protected int x, y;
 	
-	public Item(int x, int y, int w, int h, int id, int sprite) {
-		super(x, y, w, h);
+	public Item(int id, int x, int y) {
 		this.id = id;
-		this.sprite = sprite;
+		this.x = x;
+		this.y = y;
 	}
 	
 	public void generate(DataOutputStream data) throws IOException {
-		super.generate(data);
 		data.writeInt(id);
-		data.writeInt(sprite);
+		data.writeInt(x);
+		data.writeInt(y);
 	}
 }
