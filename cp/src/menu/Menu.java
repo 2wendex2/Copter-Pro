@@ -22,15 +22,17 @@ public abstract class Menu implements ControlState {
     }
 
     public void draw() {
+        if (selected == null)
+            return;
         selected.drawSelected();
         for (Selectable i : selectables)
             i.draw();
     }
 
-    public abstract void onExit() throws MenuException, ControlException;
+    public abstract void onExit() throws ControlException;
 
     @Override
-    public void inputCallback(int key, int scancode, int action, int mods) throws MenuException, ControlException {
+    public void inputCallback(int key, int scancode, int action, int mods) throws ControlException {
         if (action == GLFW.GLFW_PRESS) {
             switch (key) {
                 case GLFW.GLFW_KEY_LEFT:

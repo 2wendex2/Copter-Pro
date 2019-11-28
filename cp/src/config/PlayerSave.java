@@ -1,7 +1,5 @@
 package config;
 
-import menu.MenuException;
-
 import java.io.*;
 
 public class PlayerSave {
@@ -10,31 +8,106 @@ public class PlayerSave {
     private byte episodes;
     private byte[] completed = new byte[7];
 
-    public PlayerSave(String name) throws MenuException {
+    //Читает сохранение name и записывает в соответствующий объект
+    //Если файла нет, создаёт его
+    public PlayerSave(String name) throws IOException {
         this.name = name;
         read();
     }
 
+    //Для удобства всегда есть такое понятие как текущее сохранение
     public static PlayerSave getCurSave() {
         return curSave;
     }
-
-    //битмап
-
-    /*
-     */
 
     public static void setCurSave(PlayerSave curSave) {
         PlayerSave.curSave = curSave;
     }
 
+    //Количество открытых эпизодов
     public int getOpenedEpisodesCount() {
         return episodes;
     }
 
-    public int getEpisodeProgress(int ep) {
-        return completed[ep];
+    //ep — номер эпизода
+    //ep0 — номер эпизода - 1 и индекс в массиве completed
+    public int getCompletedLevelCount(int ep) {
+        return completed[ep - 1] & 0x1F;
     }
+
+    public boolean getSuckingOpened() {
+        return (episodes > 0 && getCompletedLevelCount(1) >= 18) ||
+                (episodes > 1 && getCompletedLevelCount(2) >= 18) ||
+                (episodes > 2 && getCompletedLevelCount(3) >= 18) ||
+                (episodes > 3 && getCompletedLevelCount(4) >= 18) ||
+                (episodes > 4 && getCompletedLevelCount(5) >= 18) ||
+                (episodes > 5 && getCompletedLevelCount(6) >= 18) ||
+                episodes > 6;
+    }
+
+    //Звёзды эпизода
+    public int getOpenedStarsCount(int ep) {
+        int count = 0;
+        for (int i = 5; i < 8; i++)
+            if ((completed[ep - 1] & (1 << i)) != 0)
+                count++;
+        return count;
+    }
+
+    public boolean getOpenedStar(int ep, int starNum) {
+        return (completed[ep - 1] & (1 << (starNum + 4))) != 0;
+    }
+
+    public boolean getOpenedStar(int id) {
+        switch (id) {
+            case 5:
+                return getOpenedStar(1, 1);
+            case 11:
+                return getOpenedStar(1, 2);
+            case 16:
+                return getOpenedStar(1, 3);
+        }
+        return true;
+    }
+
+    public void openStar(int ep, int starNum) throws IOException {
+        completed[ep - 1] |= (1 << (starNum + 4));
+        write();
+        if (getOpenedStarsCount(ep) == 3) {
+            episodes++;
+        }
+    }
+
+    public void openStar(int id) throws IOException {
+        switch (id) {
+            case 5:
+                openStar(1, 1);
+                break;
+            case 11:
+                openStar(1, 2);
+                break;
+            case 16:
+                openStar(1, 3);
+        }
+    }
+
+    public void setLevelComplete(int id) throws IOException {
+        int ep0 = id / 19;
+
+        if (getCompletedLevelCount(ep0 + 1) < id % 19) {
+            completed[ep0] = (byte)((id % 19) | (completed[ep0] & 0xE0));
+            write();
+        }
+    }
+
+    public void setEpisodeComplete(int ep) throws IOException {
+        if (ep >= episodes) {
+            episodes = (byte)(ep + 1);
+            write();
+        }
+    }
+
+
 
     private String getFilePath() {
         StringBuilder sb = new StringBuilder();
@@ -45,7 +118,7 @@ public class PlayerSave {
         return sb.toString();
     }
 
-    public void read() throws MenuException {
+    public void read() throws IOException {
         if (!fileCheckSoft()) {
             write();
             return;
@@ -56,7 +129,7 @@ public class PlayerSave {
             stream = new FileInputStream(getFilePath());
         } catch (IOException e) {
             fileCheckHard(e);
-            throw new MenuException("Unable to read save file \"" + getFilePath() + '\"', e);
+            throw new IOException("Unable to read save file \"" + getFilePath() + '\"', e);
         }
 
         try {
@@ -68,43 +141,48 @@ public class PlayerSave {
                 completed[i] = (byte)b;
             }
             if (i == 7 && stream.read() >= 0)
-                throw new MenuException("Save file \"" + name + ".sav\" corrupted");
+                throw new IOException("Save file \"" + name + ".sav\" corrupted");
 
             episodes = i;
+            if (episodes > 0 && getOpenedStarsCount(episodes) == 3)
+                episodes++;
 
             if (!checkPossibility())
-                throw new MenuException("Save file \"" + name + ".sav\" corrupted");
-        } catch (IOException e) {
-            throw new MenuException("Error reading save file \"" + getFilePath() + '\"', e);
+                throw new IOException("Save file \"" + name + ".sav\" corrupted");
         } finally {
             try {
                 stream.close();
             } catch (IOException e) {
                 //Я просто хочу закрыть ёбаный поток, я что, многого прошу??
-                throw new MenuException("Error closing save file \"" + getFilePath() + '\"', e);
+                throw new IOException("Error closing save file \"" + getFilePath() + '\"', e);
             }
         }
     }
 
-    public void write() throws MenuException{
+    public void write() throws IOException{
         FileOutputStream stream;
         try {
             stream = new FileOutputStream(getFilePath());
         } catch (IOException e) {
             fileCheckHard(e);
-            throw new MenuException("Unable to write save file \"" + getFilePath() + '\"', e);
+            throw new IOException("Unable to write save file \"" + getFilePath() + '\"', e);
         }
 
         try {
-            for (int i = 0; i < episodes; i++)
+            int epo;
+            if (episodes > 1 && completed[episodes - 1] == 0)
+                epo = episodes - 1;
+            else
+                epo = episodes;
+            for (int i = 0; i < epo; i++)
                 stream.write(completed[i]);
         } catch (IOException e) {
-            throw new MenuException("Error writing save file \"" + getFilePath() + '\"', e);
+            throw new IOException("Error writing save file \"" + getFilePath() + '\"', e);
         } finally {
             try {
                 stream.close();
             } catch (IOException e) {
-                throw new MenuException("Error closing save file \"" + getFilePath() + '\"', e);
+                throw new IOException("Error closing save file \"" + getFilePath() + '\"', e);
             }
         }
     }
@@ -123,29 +201,26 @@ public class PlayerSave {
         return false;
     }
 
-    private void fileCheckHard(Throwable cause) throws MenuException {
+    private void fileCheckHard(Throwable cause) throws IOException {
         File savesDir = new File(Config.getSavesDir());
         if (!savesDir.exists())
-            throw new MenuException("Unable to create saves folder \"" + Config.getSavesDir() + '\"', cause);
+            throw new IOException("Unable to create saves folder \"" + Config.getSavesDir() + '\"', cause);
 
         if (!savesDir.isDirectory())
-            throw new MenuException("Saves folder path \"" + Config.getSavesDir() + "\" is not folder", cause);
+            throw new IOException("Saves folder path \"" + Config.getSavesDir() + "\" is not folder", cause);
 
         File saveFile = new File(getFilePath());
         if (!saveFile.exists())
-            throw new MenuException("Unable to create file \"" + getFilePath() + '\"', cause);
+            throw new IOException("Unable to create file \"" + getFilePath() + '\"', cause);
 
         if (!saveFile.isFile())
-            throw new MenuException("Save file path \"" + getFilePath() + "\" is not file", cause);
-    }
-
-    public void openEpisode() throws MenuException {
-        episodes++;
-        write();
+            throw new IOException("Save file path \"" + getFilePath() + "\" is not file", cause);
     }
 
     private boolean checkPossibility() {
         //для каждого эпизода всё проверять отдельно
+        //medals это stars
+        //TODO добавить проверку звёзд
         if (episodes < 1) return true;
         int comp = completed[0] & 31;
         int medals = completed[0] & 224;
@@ -187,12 +262,5 @@ public class PlayerSave {
         if (comp < 0 || comp > 2) return false;
 
         return true;
-    }
-
-    public void setLevelComplete(int id) throws MenuException {
-        if (completed[0] < id) {
-            completed[0] = (byte)id;
-            write();
-        }
     }
 }

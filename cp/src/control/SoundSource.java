@@ -10,7 +10,7 @@ import org.lwjgl.openal.AL10;
 public class SoundSource {
     private int sourceId;
 
-    public void init(boolean loop) {
+    public SoundSource(boolean loop) {
         this.sourceId = AL10.alGenSources();
         if (loop)
             AL10.alSourcei(sourceId, AL10.AL_LOOPING, AL10.AL_TRUE);

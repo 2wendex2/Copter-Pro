@@ -4,20 +4,14 @@ package control;
 //Этот класс — костыль на него
 //Использовать исключительно как обёртку над нормальным исключением
 
-import menu.MenuException;
-
 class InputCallbackException extends RuntimeException{
-    private Exception exc;
-
-    public InputCallbackException(MenuException exception) {
-        exc = exception;
-    }
+    private ControlException exc;
 
     public InputCallbackException(ControlException exception) {
         exc = exception;
     }
 
-    public Exception getException() {
+    public ControlException getException() {
         return exc;
     }
 }

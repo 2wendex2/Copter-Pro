@@ -1,5 +1,6 @@
 package game;
 
+import config.PlayerSave;
 import control.Sprite;
 import game.Game;
 import game.Input;
@@ -18,6 +19,8 @@ public class Level {
     private ArrayList<MovingSolidActor> movingSolid;
     private ArrayList<Bullet> bullets;
     private ArrayList<Ammo> ammos;
+    private ArrayList<Item> item;
+    private int items;
     private Player player;
     private Boss boss;
     private int id;
@@ -74,6 +77,7 @@ public class Level {
             solid = new ArrayList<>();
             movingSolidProto = new ArrayList<>();
             movingSolid = new ArrayList<>();
+            item = new ArrayList<>();
             int n;
 
             for (int j = 0; j < classCount; j++) {
@@ -107,6 +111,14 @@ public class Level {
                                 boss = new Boss1b(data.readInt(), data.readInt());
                             }
                         }
+                        break;
+                    case 3:
+                        n = data.readInt();
+                        for (int i = 0; i < n; i++) {
+                            int idf = data.readInt();
+                            if (idf == 0 && !PlayerSave.getCurSave().getOpenedStar(id))
+                                item.add(new Item(data.readInt(), data.readInt(), 32, 32));
+                        }
                 }
             }
             stream.close();
@@ -132,6 +144,7 @@ public class Level {
             movingSolid.add(i.generate());
         if (boss != null)
             boss.restart();
+        items = item.size();
     }
 
     public int updViewX() {
@@ -162,6 +175,8 @@ public class Level {
         for (Bullet i : bullets)
             i.draw();
         for (Ammo i : ammos)
+            i.draw();
+        for (Item i : item)
             i.draw();
         player.draw();
         if (boss != null)
@@ -265,6 +280,15 @@ public class Level {
                 }
                 else
                     player.onCollisionSolidNK(i);
+
+        for (Item i : item)
+            if (player.testCollision(i)) {
+                items = -1;
+            }
+    }
+
+    public boolean isStarEnded() {
+        return items == -1;
     }
 
     public boolean isEnded() {

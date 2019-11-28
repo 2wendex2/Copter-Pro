@@ -17,15 +17,15 @@ package control;
     Вызов draw после исчерпания итерационной задержки
 */
 
-import menu.MenuException;
-
 public interface ControlState {
-    default void input() throws MenuException, ControlException {
+    default void input() throws ControlException {
         Control.getInstance().updateInput();
     }
 
-    default void update() throws MenuException, ControlException {}
-    void draw() throws MenuException, ControlException;
-    void init() throws MenuException, ControlException;
-    void inputCallback(int key, int scancode, int action, int mods) throws MenuException, ControlException;
+    default void update() throws ControlException {}
+    void draw() throws ControlException;
+
+    //меняющая состояние функция должна знать, как закончилась инициализация, иначе она перейдёт не на то состояние
+    boolean init() throws ControlException;
+    void inputCallback(int key, int scancode, int action, int mods) throws ControlException;
 }

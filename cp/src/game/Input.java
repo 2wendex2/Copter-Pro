@@ -6,8 +6,6 @@ import control.ControlException;
 import control.Graphics;
 import menu.LevelSelect;
 import menu.MainMenu;
-import menu.Menu;
-import menu.MenuException;
 import org.lwjgl.glfw.*;
 import java.util.Arrays;
 
@@ -24,7 +22,7 @@ public class Input {
     private boolean[] pressedKeys = new boolean[KEY_COUNT];
     private boolean[] releasedKeys = new boolean[KEY_COUNT];
 
-    public void inputCallback(int key, int scancode, int action, int mods) throws MenuException, ControlException {
+    public void inputCallback(int key, int scancode, int action, int mods) throws ControlException {
         if (action == GLFW.GLFW_PRESS)
             switch(key) {
                 case GLFW.GLFW_KEY_SPACE:
@@ -39,7 +37,7 @@ public class Input {
                     break;
                 case GLFW.GLFW_KEY_ESCAPE:
                     Graphics.changeView(0, 0);
-                    if (PlayerSave.getCurSave().getOpenedEpisodesCount() > 0)
+                    if (PlayerSave.getCurSave().getCompletedLevelCount(1) > 0)
                         Control.getInstance().changeStateNative(new LevelSelect(1,
                             ((Game)Control.getInstance().getState()).getLevelId()));
                     else
