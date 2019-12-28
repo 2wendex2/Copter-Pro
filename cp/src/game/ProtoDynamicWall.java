@@ -2,11 +2,12 @@ package game;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class MovingSolidProtoActor {
+public class ProtoDynamicWall {
     private int x, y, w, h, xr, yr, xspeed, yspeed;
     private byte flags, dflags;
 
-    public MovingSolidProtoActor(int x, int y, int w, int h, byte flags, byte dflags, int xr, int yr, int xspeed, int yspeed) {
+    public ProtoDynamicWall(int x, int y, int w, int h, byte flags, byte dflags, int xr, int yr,
+                            int xspeed, int yspeed) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -22,14 +23,14 @@ public class MovingSolidProtoActor {
     private static final int HVAR = 1 << 1;
     private static final int VVAR = 1 << 0;
 
-    public MovingSolidActor generate() {
+    public DynamicWall generate() {
         if ((dflags & HVAR) != 0 && ThreadLocalRandom.current().nextInt(0, 2) != 0)
             xspeed = -xspeed;
 
         if ((dflags & VVAR) != 0 && ThreadLocalRandom.current().nextInt(0, 2) != 0)
             yspeed = -yspeed;
 
-        return new MovingSolidActor(ThreadLocalRandom.current().nextInt(x, xr + 1),
+        return new DynamicWall(ThreadLocalRandom.current().nextInt(x, xr + 1),
                 ThreadLocalRandom.current().nextInt(y, yr + 1), w, h, flags,
                 xspeed, yspeed);
     }

@@ -4,7 +4,15 @@ public interface Collidable {
     boolean testCollision(Collidable other);
     boolean testCollisionRect(Rect other);
 
-    class Rect implements Collidable {
+    interface RectI extends Collidable {
+        int getH();
+        int getW();
+        int getX();
+        int getY();
+        boolean outerRect(int ws, int hs);
+    }
+
+    class Rect implements RectI {
         public boolean testCollision(Collidable other) {
             return other.testCollisionRect(this);
         }

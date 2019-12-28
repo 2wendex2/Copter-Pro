@@ -4,5 +4,4 @@ module cp {
     requires org.lwjgl.opengl;
     requires org.lwjgl.stb;
     requires org.lwjgl.openal;
-
 }

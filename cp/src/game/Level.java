@@ -2,8 +2,6 @@ package game;
 
 import config.PlayerSave;
 import control.Sprite;
-import game.Game;
-import game.Input;
 
 import java.io.DataInputStream;
 import java.io.InputStream;
@@ -13,17 +11,23 @@ import java.util.Iterator;
 
 public class Level {
     private int w, h;
+    private int id;
+    private WallManager wm;
+    private ItemManager im;
+    private EnemyManager cm;
+    private Player player;
+
     private int x, y;
     private ArrayList<SolidActor> solid;
-    private ArrayList<MovingSolidProtoActor> movingSolidProto;
+    private ArrayList<ProtoDynamicWall> movingSolidProto;
     private ArrayList<MovingSolidActor> movingSolid;
     private ArrayList<Bullet> bullets;
     private ArrayList<Ammo> ammos;
-    private ArrayList<Item> item;
+    private ArrayList<StaticItem> item;
     private int items;
-    private Player player;
+
     private Boss boss;
-    private int id;
+
 
     private Sprite solidSprite;
     private Sprite solidNotKillSprite;
@@ -95,7 +99,7 @@ public class Level {
                         n = data.readInt();
                         for (int i = 0; i < n; i++) {
                             int f;
-                            movingSolidProto.add(new MovingSolidProtoActor(data.readInt(), data.readInt(), data.readInt(),
+                            movingSolidProto.add(new ProtoDynamicWall(data.readInt(), data.readInt(), data.readInt(),
                                     data.readInt(), data.readByte() , (byte)(data.readByte()+ (byte)((f = data.readInt()) * 0)),
                                     data.readInt(), data.readInt(), data.readInt(), data.readInt()));
                         }
@@ -117,7 +121,7 @@ public class Level {
                         for (int i = 0; i < n; i++) {
                             int idf = data.readInt();
                             if (idf == 0 && !PlayerSave.getCurSave().getOpenedStar(id))
-                                item.add(new Item(data.readInt(), data.readInt(), 32, 32));
+                                item.add(new StaticItem(data.readInt(), data.readInt(), 32, 32));
                         }
                 }
             }
@@ -140,7 +144,7 @@ public class Level {
         movingSolid.clear();
         bullets.clear();
         ammos.clear();
-        for (MovingSolidProtoActor i : movingSolidProto)
+        for (ProtoDynamicWall i : movingSolidProto)
             movingSolid.add(i.generate());
         if (boss != null)
             boss.restart();
@@ -176,7 +180,7 @@ public class Level {
             i.draw();
         for (Ammo i : ammos)
             i.draw();
-        for (Item i : item)
+        for (StaticItem i : item)
             i.draw();
         player.draw();
         if (boss != null)
@@ -192,6 +196,7 @@ public class Level {
             player.updateRelease();
         if (input.getKey(Input.KEY_SHOOT) && !input.getPrev(Input.KEY_SHOOT))
             player.shoot(this);
+
         //движущиеся стены
         for (MovingSolidActor i : movingSolid)
             i.update();
@@ -281,7 +286,7 @@ public class Level {
                 else
                     player.onCollisionSolidNK(i);
 
-        for (Item i : item)
+        for (StaticItem i : item)
             if (player.testCollision(i)) {
                 items = -1;
             }
