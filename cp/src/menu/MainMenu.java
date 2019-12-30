@@ -37,7 +37,7 @@ public class MainMenu extends Menu {
                         if (count == 0)
                             Control.getInstance().changeStateNative(new Logo());
                         else if (save.getCompletedLevelCount(1) == 0)
-                            Control.getInstance().changeStateNative(new Game(new Level(1)));
+                            Control.getInstance().changeStateNative(new Game(1));
                         else if (!save.getSuckingOpened() && count < 2)
                             Control.getInstance().changeStateNative(new LevelSelect(1, 0));
                         else
@@ -89,6 +89,7 @@ public class MainMenu extends Menu {
         }
 
         Graphics.setColor(1.f, 1.f, 1.f);
+        MusicPool.getInstance().inMainMenu();
         return true;
     }
 

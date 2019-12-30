@@ -1,23 +1,16 @@
 package game;
 
-import control.Drawable;
 import control.Graphics;
 
-public class Bullet extends Collidable.Rect implements Drawable {
-    //force: true — бомба, false — пуля
-    private boolean force;
-
-    public Bullet(int x, int y, int w, int h, boolean force) {
-        super(x, y, w, h);
-        this.force = force;
+public class Bullet extends SimpleMoving implements EnemyItem {
+    public Bullet(int x, int y) {
+        super(x, y, 32, 32, 7*32, 0);
     }
 
-    public void update() {
-        x += 7;
-    }
-
-    public boolean getForce() {
-        return force;
+    public void collisionEnemy(Enemy enemy) {
+        enemy.hurt();
+        if (enemy instanceof Boss1b)
+            Level.getInstance().getItemManager().addPlayerQitem(new DynamicAmmo(x + 16, y + 8, 2));
     }
 
     public void draw() {

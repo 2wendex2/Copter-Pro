@@ -1,3 +1,5 @@
 package game;
 
-public interface GameObject {}
+import control.Drawable;
+
+public interface GameObject extends Drawable, Collidable {}

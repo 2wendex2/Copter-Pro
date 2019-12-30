@@ -21,7 +21,7 @@ public class StaticWall extends Collidable.Rect implements Wall, Cloneable {
     }
 
     public boolean isEnemyKiller() {
-        return (state | ENEMY_KILLER) != 0;
+        return (state & ENEMY_KILLER) != 0;
     }
 
     public void draw() {

@@ -1,43 +1,41 @@
 package game;
 
-import config.PlayerSave;
-import control.Sprite;
-
-import java.io.DataInputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
-
-
 public class Level {
     private int w, h;
-    private int id;
     private WallManager wm;
     private ItemManager im;
-    private EnemyManager cm;
+    private EnemyManager em;
     private Player player;
+    private boolean isDeath = false;
 
-    private int x, y;
-    private ArrayList<SolidActor> solid;
-    private ArrayList<ProtoDynamicWall> movingSolidProto;
-    private ArrayList<MovingSolidActor> movingSolid;
-    private ArrayList<Bullet> bullets;
-    private ArrayList<Ammo> ammos;
-    private ArrayList<StaticItem> item;
-    private int items;
+    /*private int vx = 0;
+    private int vvx = 0;
+    private boolean redirectionX = false;
+    private boolean vxdirection = false;*/
 
-    private Boss boss;
+    public Level(int w, int h, WallManager wm, ItemManager im, EnemyManager em, Player player) {
+        this.w = w;
+        this.h = h;
+        this.wm = wm;
+        this.im = im;
+        this.em = em;
+        this.player = player;
+    }
+
+    public static Level getInstance() {
+        return Game.getInstance().getLevel();
+    }
+
+    public void changeViewXDirection() {
+        /*vx = 0;
+        vvx = updViewX();
+        redirectionX = true;*/
+    }
+
+    public WallManager getWallManager() {return wm;}
 
 
-    private Sprite solidSprite;
-    private Sprite solidNotKillSprite;
-    //private ArrayList<EnemyActor> enemies;
-    //private ArrayList<ItemActor> items;
-    //private ArrayList<BulletActor> bullet;
 
-    //private ArrayList<RectModelObject> walls;
-
-    //private ArrayList<DynamicRectObject> movingWalls;
     public int getW() {
         return w;
     }
@@ -46,119 +44,44 @@ public class Level {
         return h;
     }
 
-    public Level(int id) {
-        this.id = id;
-    }
+    public ItemManager getItemManager() {return im;}
 
-    public int getId() {
-        return id;
-    }
+    public Player getPlayer() {return player;}
 
-    public  void init(){
-        StringBuilder path = new StringBuilder(17);
-        path.append("/DATA");
-        //path.append(File.separatorChar);
-        path.append("/LVL/");
-        //path.append(File.separatorChar);
-        path.append(id);
-        path.append(".dat");
-        //File file = new File(path.toString());
-
-        try {
-            //FileInputStream stream = new FileInputStream(file);
-            InputStream stream = control.Main.class.getResourceAsStream(path.toString());
-            DataInputStream data = new DataInputStream(stream);
-            //terrain
-            x = data.readInt();
-            y = data.readInt();
-            w = data.readInt();
-            h = data.readInt();
-            data.readInt();
-            int state = data.readInt();
-            int bulletCount = data.readInt(), bombCount = data.readInt();
-            //количество классов объектов
-            int classCount = data.readInt();
-            solid = new ArrayList<>();
-            movingSolidProto = new ArrayList<>();
-            movingSolid = new ArrayList<>();
-            item = new ArrayList<>();
-            int n;
-
-            for (int j = 0; j < classCount; j++) {
-                switch (data.readInt()) {
-                    case 0:
-                        n = data.readInt();
-                        for (int i = 0; i < n; i++) {
-                            byte f;
-                            solid.add(new SolidActor(data.readInt(), data.readInt(),
-                                    data.readInt(), data.readInt(), f = data.readByte()));
-                            data.readInt();
-                        }
-                        break;
-                    case 1:
-                        n = data.readInt();
-                        for (int i = 0; i < n; i++) {
-                            int f;
-                            movingSolidProto.add(new ProtoDynamicWall(data.readInt(), data.readInt(), data.readInt(),
-                                    data.readInt(), data.readByte() , (byte)(data.readByte()+ (byte)((f = data.readInt()) * 0)),
-                                    data.readInt(), data.readInt(), data.readInt(), data.readInt()));
-                        }
-                        break;
-                    case 2:
-                        n = data.readInt();
-                        for (int i = 0; i < n; i++) {
-                            switch (data.readInt()) {
-                            case 0:
-                                boss = new Boss1m(data.readInt(), data.readInt());
-                                break;
-                            case 1:
-                                boss = new Boss1b(data.readInt(), data.readInt());
-                            }
-                        }
-                        break;
-                    case 3:
-                        n = data.readInt();
-                        for (int i = 0; i < n; i++) {
-                            int idf = data.readInt();
-                            if (idf == 0 && !PlayerSave.getCurSave().getOpenedStar(id))
-                                item.add(new StaticItem(data.readInt(), data.readInt(), 32, 32));
-                        }
-                }
-            }
-            stream.close();
-            if ((state & Player.WRAPPING_V) == 0)
-                player = new Player(x, y, state, bulletCount, bombCount);
-            else
-                player = new PlayerWrapping(x, y, state, bulletCount, bombCount, w, h, 1);
-
-            bullets = new ArrayList<>();
-            ammos = new ArrayList<>();
-            restart();
-        } catch (Exception e) {
-            throw new RuntimeException("LEVEL CORRUPTED", e);
-        }
+    void death() {
+        isDeath = true;
     }
 
     public void restart() {
         player.restart();
-        movingSolid.clear();
-        bullets.clear();
-        ammos.clear();
-        for (ProtoDynamicWall i : movingSolidProto)
-            movingSolid.add(i.generate());
-        if (boss != null)
-            boss.restart();
-        items = item.size();
+        wm.restart();
+        im.restart();
+        em.restart();
+
+        /*vx = 0;
+        vvx = 0;
+        redirectionX = false;
+        vxdirection = false;*/
     }
 
     public int updViewX() {
-        if (player.getX() > Game.SCREEN_WIDTH/4 - player.getW()/2)
-            if (player.getX() < w - Game.SCREEN_WIDTH * 3 / 4 - player.getW()/2)
-                return player.getX() - Game.SCREEN_WIDTH/4 + player.getW()/2;
+        //if (!vxdirection) {
+            if (player.getX() > Game.SCREEN_WIDTH / 4 - player.getW() / 2)
+                if (player.getX() < w - Game.SCREEN_WIDTH * 3 / 4 - player.getW() / 2) {
+                    return player.getX() - Game.SCREEN_WIDTH / 4 + player.getW() / 2;
+                } else
+                    return w - Game.SCREEN_WIDTH;
             else
-                return w - Game.SCREEN_WIDTH;
-        else
-            return 0;
+                return 0;
+        /*} else {
+            if (player.getX() > Game.SCREEN_WIDTH * 3 / 4 - player.getW() / 2)
+                if (player.getX() < w - Game.SCREEN_WIDTH  / 4 - player.getW() / 2)
+                    return player.getX() - Game.SCREEN_WIDTH * 3 / 4 + player.getW() / 2;
+                else
+                    return w - Game.SCREEN_WIDTH;
+            else
+                return 0;
+        }*/
     }
 
     public int updViewY() {
@@ -172,154 +95,29 @@ public class Level {
     }
 
     public void draw() {
-        for (SolidActor i : solid)
-            i.draw();
-        for (MovingSolidActor i : movingSolid)
-            i.draw();
-        for (Bullet i : bullets)
-            i.draw();
-        for (Ammo i : ammos)
-            i.draw();
-        for (StaticItem i : item)
-            i.draw();
         player.draw();
-        if (boss != null)
-            boss.draw();
+        wm.draw();
+        im.draw();
+        em.draw();
     }
 
     public void update(Input input) {
+        if (isDeath) {
+            restart();
+            isDeath = false;
+        }
+
         //обновление игрока
-        player.update();
-        if (input.getKey(Input.KEY_UP))
-            player.updatePress();
-        else
-            player.updateRelease();
-        if (input.getKey(Input.KEY_SHOOT) && !input.getPrev(Input.KEY_SHOOT))
-            player.shoot(this);
+        player.update(input);
+        wm.update();
+        em.update();
+        im.update();
 
-        //движущиеся стены
-        for (MovingSolidActor i : movingSolid)
-            i.update();
-        //пули
-        for (Bullet i : bullets)
-            i.update();
-        //патроны
-        for (Ammo i : ammos)
-            i.update();
-        //босс
-        if (boss != null)
-            boss.update(this);
-
-        //столкновения движущихся стен со стенами
-        for (Iterator<MovingSolidActor> it = movingSolid.iterator(); it.hasNext();) {
-            MovingSolidActor i = it.next();
-            if (i.outerRect(w, h)) {
-                it.remove();
-                continue;
-            }
-
-            for (SolidActor j : solid)
-                if (j.testCollision(i))
-                    i.collisionSolidActor(j);
-        }
-
-        //столкновение босса со стенами
-        if (boss != null)
-            for (SolidActor j : solid)
-                if (j.testCollision(boss))
-                    boss.collisionSolidActor(j);
-
-        for (Iterator<Ammo> it = ammos.iterator(); it.hasNext();) {
-            Ammo i = it.next();
-            if (i.outerRect(w, h)) {
-                it.remove();
-                continue;
-            }
-
-            if (player.testCollision(i)) {
-                player.addBullet(i.getBulletCount());
-                it.remove();
-            }
-        }
-
-        //столкновения пуль
-        bulletLabel:
-        for (Iterator<Bullet> it = bullets.iterator(); it.hasNext();) {
-            Bullet i = it.next();
-            if (i.outerRect(w, h)) {
-                it.remove();
-                continue;
-            }
-
-            for (SolidActor j : solid)
-                if (j.testCollision(i)) {
-                    it.remove();
-                    continue bulletLabel;
-                }
-
-            for (MovingSolidActor j : movingSolid)
-                if (j.testCollision(i)) {
-                    it.remove();
-                    continue bulletLabel;
-                }
-
-            if (boss != null && i.testCollision(boss)) {
-                boss.bulletCollision(this, i);
-                it.remove();
-                continue;
-            }
-        }
-
-        for (SolidActor i : solid)
-            if (player.testCollision(i))
-                if (i.isPlayerKiller())
-                    restart();
-                else
-                    player.onCollisionSolidNK(i);
-
-        for (MovingSolidActor i : movingSolid)
-            if (player.testCollision(i))
-                if (i.isPlayerKiller()) {
-                    restart();
-                    return;
-                }
-                else
-                    player.onCollisionSolidNK(i);
-
-        for (StaticItem i : item)
-            if (player.testCollision(i)) {
-                items = -1;
-            }
-    }
-
-    public boolean isStarEnded() {
-        return items == -1;
-    }
-
-    public boolean isEnded() {
-        if ((player.getState() & Player.WRAP_NOT_WIN) == 0)
-            return player.outerRect(w, h);
-        else
-            return boss.isEnd();
-    }
-
-    public void addBullet(Bullet bullet) {
-        bullets.add(bullet);
-    }
-
-    public void addBulletCount(int c) {
-        player.addBullet(c);
-    }
-
-    public void addMovingSolid(MovingSolidActor ms) {
-        movingSolid.add(ms);
-    }
-
-    public void addAmmo(Ammo ammo) {
-        ammos.add(ammo);
-    }
-
-    public Sprite getSolidSprite() {
-        return solidSprite;
+        wm.collisionUpdate(this);
+        em.collisionWalls(wm, this);
+        em.collisionItems(im, this);
+        im.collisionPlayer(player);
+        im.collisionWalls(wm);
+        wm.collisionPlayer(player);
     }
 }

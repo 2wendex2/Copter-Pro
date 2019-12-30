@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="lwjgl">
     <CLASSES>
-      <root url="file://Q:/Sdks/lwjgl-3.2.1/lwjgl" />
       <root url="file://Q:/Sdks/lwjgl-3.2.1/lwjgl-glfw" />
       <root url="file://Q:/Sdks/lwjgl-3.2.1/lwjgl-opengl" />
       <root url="file://Q:/Sdks/lwjgl-3.2.1/lwjgl-openal" />
       <root url="file://Q:/Sdks/lwjgl-3.2.1/lwjgl-stb" />
+      <root url="file://Q:/Sdks/lwjgl-3.2.1/lwjgl" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

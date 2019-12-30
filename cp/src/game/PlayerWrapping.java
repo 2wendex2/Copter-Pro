@@ -6,7 +6,7 @@ public class PlayerWrapping extends Player {
     private Player wrapping;
     private int wrape;
 
-    //wrapMode: 1 вверх-вниз, 2 вправо-влево
+    //wrapMode: 1 вверх-вниз, 2 вправо-влево, 0 и то, и то
     public PlayerWrapping(int x, int y, int state, int bulletCount, int bombCount, int w, int h, int wrapMode) {
         super(x, y, state, bulletCount, bombCount);
         wrapping = new Player(x, y - h, state, bulletCount, bombCount);
@@ -18,9 +18,10 @@ public class PlayerWrapping extends Player {
         wrapping.restart();
     }
 
-    public void update() {
-        super.update();
-        wrapping.update();
+    public void update(Input input) {
+        super.update(input);
+        wrapping.update(input);
+        shrinkToWrape();
     }
 
     private void shrinkToWrape() {
@@ -37,32 +38,21 @@ public class PlayerWrapping extends Player {
         }
     }
 
-    public void updateRelease() {
-        super.updateRelease();
-        wrapping.updateRelease();
-        shrinkToWrape();
-    }
-
-    public void updatePress() {
-        super.updatePress();
-        wrapping.updatePress();
-        shrinkToWrape();
-    }
-
     public void draw() {
         super.draw();
         wrapping.draw();
     }
 
-    public void onCollisionSolidNK(SolidActor other) {
-        super.onCollisionSolidNK(other);
-        wrapping.onCollisionSolidNK(other);
+    @Override
+    public void onCollisionSoftWall(Wall other) {
+        super.onCollisionSoftWall(other);
+        wrapping.onCollisionSoftWall(other);
         shrinkToWrape();
     }
 
-    public void shoot(Level level) {
-        super.shoot(level);
-        wrapping.shoot(level);
+    public void shoot() {
+        super.shoot();
+        wrapping.shoot();
     }
 
     public void addBullet(int c) {

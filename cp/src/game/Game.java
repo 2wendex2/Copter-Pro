@@ -15,14 +15,14 @@ public class Game implements ControlState {
 
     private Input input;
     private Level level;
-    /*private int levelId = 1;
-    private Audio audio;
-    private Sound curMusic;
-    private SoundSource curSource;
-    static final private int TARGET_UPS = 60;*/
+    private int levelId;
 
-    public Game(Level level) {
-        this.level = level;
+    public Game(int levelId) {
+        this.levelId = levelId;
+    }
+
+    public static Game getInstance() {
+        return (Game)Control.getInstance().getState();
     }
 
     @Override
@@ -31,7 +31,14 @@ public class Game implements ControlState {
             ErrorManager.getInstance().clear(Control.getInstance().getState());
             input = new Input();
             try {
-                MusicPool.getInstance().toGame(getLevelId());
+                level = LevelLoader.load(levelId);
+            } catch (IOException e) {
+                ErrorManager.getInstance().addWarning("Game init error: Level loader: " + e.getMessage());
+                Log.printThrowable("Game.init LevelLoader", e);
+            }
+
+            try {
+                MusicPool.getInstance().toGame(levelId);
             } catch (IOException e) {
                 ErrorManager.getInstance().addWarning("Game init error: " + e.getMessage());
                 Log.printThrowable("Game.init MusicPool", e);
@@ -47,9 +54,14 @@ public class Game implements ControlState {
                 return false;
         }
 
-        level.init();
+        level.restart();
+        MusicPool.getInstance().inGame(levelId);
         Graphics.setBackgroundColor(1.f, 1.f, 0.f, 1.f);
         return true;
+    }
+
+    public Level getLevel() {
+        return level;
     }
 
     public void input() {
@@ -61,26 +73,36 @@ public class Game implements ControlState {
         input.inputCallback(key, scancode, action, mods);
     }
 
-    public void update() throws ControlException {
-        level.update(input);
+    public void levelComplete() {
         try {
-            if (level.isEnded()) {
-                PlayerSave.getCurSave().setLevelComplete(level.getId());
-                Control.getInstance().changeState(new LevelSelect(1, level.getId() < 18 ?
-                        level.getId() + 1 : 18));
-            } else if (level.isStarEnded()) {
-                PlayerSave.getCurSave().openStar(getLevelId());
-                if (PlayerSave.getCurSave().getOpenedStarsCount(getLevelId() / 19 + 1) == 3)
-                    Control.getInstance().changeState(new EpisodeSelect());
-                else
-                    Control.getInstance().changeState(new LevelSelect(1, level.getId()));
-            }
+            PlayerSave.getCurSave().setLevelComplete(levelId);
+            Control.getInstance().changeState(new LevelSelect(levelId));
         } catch (IOException e) {
             ErrorManager.getInstance().clear(new MainMenu());
             ErrorManager.getInstance().addWarning("Save error: " + e.getMessage());
             ErrorManager.getInstance().dispatch();
-            Log.printThrowable("Game.update save", e);
+            Log.printThrowable("Game.levelComplete save", e);
         }
+    }
+
+    public void starOpen() {
+        try {
+            PlayerSave.getCurSave().openStar(getLevelId());
+            if (PlayerSave.getCurSave().getOpenedStarsCount(levelId / 19 + 1) == 3)
+                Control.getInstance().changeState(new EpisodeSelect());
+            else
+                Control.getInstance().changeState(new LevelSelect(1, levelId));
+        } catch (IOException e) {
+            ErrorManager.getInstance().clear(new MainMenu());
+            ErrorManager.getInstance().addWarning("Save error: " + e.getMessage());
+            ErrorManager.getInstance().dispatch();
+            Log.printThrowable("Game.starOpen save", e);
+        }
+    }
+
+    public void update() {
+        level.update(input);
+
     }
 
     public void draw(){
@@ -89,6 +111,6 @@ public class Game implements ControlState {
     }
 
     public int getLevelId() {
-        return level.getId();
+        return levelId;
     }
 }

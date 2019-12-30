@@ -180,6 +180,7 @@ public class EpisodeSelect extends Menu {
                         selectables.get(4).setMarkUp(selectables.get(2), selectables.get(1),
                                 selectables.get(3), suckingb);
                         suckingb.setMarkUp(suckingb, suckingb, selectables.get(2), selectables.get(2));
+                        break;
                     case 6:
                         selectables.get(0).setMarkUp(selectables.get(2), selectables.get(1),
                                 suckingb, selectables.get(3));
@@ -269,6 +270,7 @@ public class EpisodeSelect extends Menu {
         }
 
         Graphics.setBackgroundColor(1.f, 165.f/255.f, 0.f, 1.f);
+        MusicPool.getInstance().inEpisodeSelect();
         return true;
     }
 

@@ -92,10 +92,11 @@ public class PlayerSave {
     }
 
     public void setLevelComplete(int id) throws IOException {
-        int ep0 = id / 19;
+        int ep0 = (id - 1) / 19;
+        int lvl = id % 19 == 0 ? 19 : id % 19;
 
-        if (getCompletedLevelCount(ep0 + 1) < id % 19) {
-            completed[ep0] = (byte)((id % 19) | (completed[ep0] & 0xE0));
+        if (getCompletedLevelCount(ep0 + 1) < lvl) {
+            completed[ep0] = (byte)(lvl | (completed[ep0] & 0xE0));
             write();
         }
     }

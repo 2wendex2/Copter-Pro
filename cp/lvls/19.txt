@@ -1,0 +1,42 @@
+%define-terrain 1t 9t 122t 21t 1100 0t 0t
+%swall 0t 0t 132t 1t 0 0
+%swall 0t 1t 1t 19t 0 0
+%swall 0t 20t 132t 1t 0 0
+%swall 21t 1t 110t 1t 0 0
+%swall 21t 7t 110t 1t 0 0
+%swall 21t 13t 110t 1t 0 0
+%swall 21t 19t 110t 1t 0 0
+%swall 121t 0t 1t 21t 0 0 
+
+%item 1 21t 4t
+%item 1 31t 4t
+%item 1 41t 4t
+%item 1 51t 4t
+%item 1 61t 4t
+%item 1 71t 4t
+%item 1 81t 4t
+%item 1 91t 4t
+%item 1 101t 4t
+%item 1 111t 4t
+
+%item 1 21t 10t
+%item 1 31t 10t
+%item 1 41t 10t
+%item 1 51t 10t
+%item 1 61t 10t
+%item 1 71t 10t
+%item 1 81t 10t
+%item 1 91t 10t
+%item 1 101t 10t
+%item 1 111t 10t
+
+%item 1 21t 16t
+%item 1 31t 16t
+%item 1 41t 16t
+%item 1 51t 16t
+%item 1 61t 16t
+%item 1 71t 16t
+%item 1 81t 16t
+%item 1 91t 16t
+%item 1 101t 16t
+%item 1 111t 16t

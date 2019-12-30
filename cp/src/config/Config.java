@@ -9,7 +9,7 @@ import java.io.File;
 //если вернул false продолжить
 
 public class Config {
-    public static final String version = "0.1.2";
+    public static final String version = "0.1.3";
     private static String configDir;
     private static String configName;
     private static String savesDir;

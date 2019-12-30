@@ -1,5 +1,6 @@
 package control;
 
+import config.MusicPool;
 import control.Control;
 import control.ControlException;
 import control.ControlState;
@@ -57,6 +58,7 @@ public class ErrorState implements ControlState {
     public ErrorState() {}
 
     public boolean init() {
+        MusicPool.getInstance().stopMusic();
         if (nextState == null)
             nextState = Control.getInstance().getState();
         while (!stack.empty())
