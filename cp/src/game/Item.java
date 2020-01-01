@@ -1,15 +1,16 @@
 package game;
 
 import control.Drawable;
-import control.Graphics;
 
-public class Item extends Collidable.Rect implements Drawable {
-    public Item(int x, int y, int w, int h) {
-        super(x, y, w, h);
-    }
+//Итемы
+//Есть итемы игрока и врага
+//Вражеские всегда движутся (иначе нахер они нужны?)
+//Игрока нет
+//У игрока их вообще три вида
+//Статические и динамические, динамические делятся на длинные и короткие
+//Длинные отталкиваются от стен
+//Короткие от них умирают
+//Также итемы игрока могут убиваться или нет от игрока
+//Наследоваться от PlayerLongItem, PlayerQuickItem, EnemyItem
 
-    @Override
-    public void draw() {
-        Graphics.drawColorRect(x, y, 32, 32, 1.f, 0.f, 1.f);
-    }
-}
+public interface Item extends GameObject, Drawable, Collidable {}

@@ -38,8 +38,7 @@ public class Input {
                 case GLFW.GLFW_KEY_ESCAPE:
                     Graphics.changeView(0, 0);
                     if (PlayerSave.getCurSave().getCompletedLevelCount(1) > 0)
-                        Control.getInstance().changeStateNative(new LevelSelect(1,
-                            ((Game)Control.getInstance().getState()).getLevelId()));
+                        Control.getInstance().changeStateNative(new LevelSelect(Game.getInstance().getLevelId()));
                     else
                         Control.getInstance().changeStateNative(new MainMenu());
             }

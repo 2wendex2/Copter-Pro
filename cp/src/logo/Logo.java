@@ -37,6 +37,7 @@ public class Logo implements ControlState {
                 return false;
         }
         Graphics.setBackgroundColor(1.f, 1.f, 1.f, 1.f);
+        MusicPool.getInstance().inBeginGame();
         return true;
     }
 
@@ -77,7 +78,7 @@ public class Logo implements ControlState {
                 Graphics.setBackgroundColor(0.f, 1.f - black, 0.f, 1.f);
             } else if (timer == 1055) {
                 PlayerSave.getCurSave().setEpisodeComplete(0);
-                Control.getInstance().changeState(new Game(new Level(1)));
+                Control.getInstance().changeState(new Game(1));
             }
         } catch (IOException e) {
             ErrorManager.getInstance().clear(new MainMenu());

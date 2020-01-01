@@ -37,7 +37,7 @@ public class Sound {
         InputStream is = Resourse.getResourseAsInputStream("SND", s);
         if (is == null)
             throw new IOException("Sound " + s + " loading error: unable to read resourse");
-        ByteBuffer vorbis = ByteBuffer.allocateDirect(4*1024*1024).order(ByteOrder.nativeOrder());
+        ByteBuffer vorbis = ByteBuffer.allocateDirect(4*8*1024*1024).order(ByteOrder.nativeOrder());
         vorbis.put(is.readAllBytes());
         is.close();
         vorbis.flip();

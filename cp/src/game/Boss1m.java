@@ -5,11 +5,9 @@ import game.Level;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Boss1m extends MovingSolidActor implements Boss{
+public class Boss1m extends SimpleMoving implements Boss{
     protected int hp = 15;
-    protected int hpStart = 15;
     private int alarm = 100;
-    private int xStart, yStart;
 
     private static int getYspeed() {
         int ys = 8*32;
@@ -18,32 +16,35 @@ public class Boss1m extends MovingSolidActor implements Boss{
         return ys;
     }
 
-    public void restart() {
-        x = xStart;
-        y = yStart;
-        hp = hpStart;
-    }
-
     public Boss1m(int x, int y) {
-        super(x, y, 150, 100, (byte)0, 0, getYspeed());
-        xStart = x;
-        yStart = y;
+        super(x, y, 150, 100, 0, getYspeed());
     }
 
-    public boolean isEnd() {
+    public void onCollisionSoftWall(Wall other) {
+        onCollisionWall(other);
+    }
+
+    public void onCollisionHardWall(Wall wall) {
+        onCollisionWall(wall);
+        hurt();
+    }
+
+    public boolean isDeath() {
         return hp < 0;
     }
 
-    public void bulletCollision(Level level, Bullet bullet) {
+    public void hurt() {
         hp--;
-        level.addBulletCount(3);
+        if (hp < 0)
+            Game.getInstance().levelComplete();
+        Level.getInstance().getPlayer().addBullet(3);
     }
 
-    public void update(Level level) {
+    public void update() {
         super.update();
         if (alarm == 0) {
             alarm = ThreadLocalRandom.current().nextInt(25, 60);
-            level.addMovingSolid(new MovingSolidActor(x - 32, y + (h - 32) / 2, 32,
+            WallManager.getWallManager().addDwall(new DynamicWall(x - 32, y + (h - 32) / 2, 32,
                     32, (byte)0, -8*32, 0));
         }
         alarm--;
