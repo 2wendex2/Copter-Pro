@@ -87,8 +87,8 @@
         <option value="Singleton" />
         <option value="package-info" />
         <option value="module-info" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -191,7 +191,8 @@
       <workItem from="1577632491509" duration="47253000" />
       <workItem from="1596895683423" duration="19403000" />
       <workItem from="1596983358415" duration="22131000" />
-      <workItem from="1597232515892" duration="231000" />
+      <workItem from="1597232515892" duration="4179000" />
+      <workItem from="1597245022279" duration="1921000" />
     </task>
     <task id="LOCAL-00001" summary="Разделение по состояниям и аргументы командной строки">
       <created>1565041489237</created>
@@ -245,10 +246,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="618" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1536.824@0.0.1536.824" timestamp="1596895800812" />
-    <state x="566" y="298" width="403" height="236" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1596979270611">
+    <state x="566" y="298" width="403" height="236" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1597233204785">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="566" y="298" width="403" height="236" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1596979270611" />
+    <state x="566" y="298" width="403" height="236" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1597233204785" />
     <state x="414" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1597232622189">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -281,10 +282,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="498" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1596983211115" />
-    <state x="300" y="152" key="com.intellij.ide.util.TipDialog" timestamp="1597232524832">
+    <state x="300" y="152" key="com.intellij.ide.util.TipDialog" timestamp="1597245022430">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="300" y="152" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1597232524832" />
+    <state x="300" y="152" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1597245022430" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1596907127670">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

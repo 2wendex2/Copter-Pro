@@ -3,7 +3,6 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <content url="file://$MODULE_DIR$/src">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
-      <excludeFolder url="file://$MODULE_DIR$/src/config" />
       <excludeFolder url="file://$MODULE_DIR$/src/game" />
       <excludeFolder url="file://$MODULE_DIR$/src/linux" />
       <excludeFolder url="file://$MODULE_DIR$/src/linux/META-INF" />
