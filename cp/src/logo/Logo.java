@@ -3,8 +3,6 @@ package logo;
 import config.*;
 import control.*;
 import game.Game;
-import game.Level;
-import control.ErrorState;
 import menu.MainMenu;
 import org.lwjgl.glfw.GLFW;
 

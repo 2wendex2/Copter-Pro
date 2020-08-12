@@ -1,29 +1,17 @@
 package control;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import org.lwjgl.opengl.GL14;
-import org.lwjgl.opengl.GL30;
 import org.lwjgl.stb.STBImage;
 import org.lwjgl.system.MemoryStack;
 
-public class FileSprite implements Sprite {
+public class FileSprite implements RectSprite {
     protected int w, h, texture;
 
-    public FileSprite(String path) throws IOException {
+    public FileSprite(byte[] bytes, Graphics graphics) throws ControlException {
         ByteBuffer data;
-        InputStream is = Resourse.getResourseAsInputStream("IMG", path);
-        if (is == null)
-            throw new IOException("Sprite " + path + " loading error: unable to read resourse");
-
-        byte[] bytes = is.readAllBytes();
-        is.close();
         data = ByteBuffer.allocateDirect(bytes.length);
         data.put(bytes);
         data.flip();
@@ -35,7 +23,7 @@ public class FileSprite implements Sprite {
 
         ByteBuffer image = STBImage.stbi_load_from_memory(data, w, h, channels, 4);
         if (image == null)
-            throw new IOException("Sprite " + path + " loading error: STBImage error: " +
+            throw new ControlException("FileSprite load error: STBImage load from memory error: " +
                     STBImage.stbi_failure_reason());
 
         int internalFormat, format;
@@ -50,8 +38,7 @@ public class FileSprite implements Sprite {
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
         GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, internalFormat, this.w, this.h, 0,
                 format, GL11.GL_UNSIGNED_BYTE, image);
-
-            //ControlNative.glThrowIfError();
+        graphics.glThrowIfError("FileSprite loading error");
     }
 
     public void draw(int x, int y) {
@@ -77,5 +64,12 @@ public class FileSprite implements Sprite {
 
     public int getH() {
         return h;
+    }
+
+    public void clear() {
+        if (texture != 0){
+            GL11.glDeleteTextures(texture);
+            texture = 0;
+        }
     }
 }

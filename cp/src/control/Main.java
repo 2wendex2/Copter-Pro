@@ -1,26 +1,22 @@
 package control;
 
-import config.CmdLineParser;
-import config.Config;
-import menu.MainMenu;
-import menu.Menu;
-
 public class Main {
     public static void main(String[] args) throws ControlException {
-        if (CmdLineParser.parse(args))
-            return;
-
+        Log log = new Log();
+        Control control = new Control();
         try {
-            Config.defaultNull();
-
-
-            Control.getInstance().init(new MainMenu());
-            Control.getInstance().loop();
-            Control.getInstance().destroy();
-        } catch (ControlException | RuntimeException | Error e) {
-            Control.getInstance().destroy();
-            ControlException.trainFatalError(e);
-            throw e;
+            ErrorCommonManager errorCommonManager = new ErrorCommonManager(log);
+            control.init(60, 800, 600, "control test", errorCommonManager);
+            control.changeState(new TestControlState(control.getGraphics()));
+            control.loop();
+            control.destroy();
+            throw new RuntimeException("Пинус");
+        } catch (Throwable throwable) {
+            log.println("FATAL ERROR");
+            log.printThrowable(throwable);
+            control.destroy();
+            ErrorFatalControl.dispatch(throwable);
+            throw throwable;
         }
     }
 }

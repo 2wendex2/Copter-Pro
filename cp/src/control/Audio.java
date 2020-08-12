@@ -9,45 +9,51 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 /*
-Audio — класс для инициализации звука
-Использовать исключительно для инициализации и уничтожения в классе Control
-Также в некоторых других звуковых классах, таких как Sound и SoundSource
-Данный класс → не обязателен для игрового процесса, поэтому он бросает MenuException лишь при инициализации
-Все остальные методы никогда не сообщают пользователю,
-    была ли ошибка при инициализации
-Их использование в такой ситуации ни производят никаких действий
-Это нужно для того, чтобы можно было отдельно не обрабатывать случай неудачной инициализация
-Ну неудачная она, ну и хуй с ним, сильно нам звуковой класс нужен что-ли
-Мы будем считать, что удачная
+Audio - класс, для манипуляций со звуком (да ладно, правда что-ли?)
+Сам Audio без инициализации не обязан работать
+Публичных методов нет
+
+Пакетно-приватные методы:
+Конструктор просто создаёт объект Audio без его инициализации
+init инициализирует Audio. В случае неудачной инициализации бросает исключение ControlException
+isWorking проверяет, инициализирован ли объект
+destroy - уничтожает его, может быть вызван даже если объект не инициалиирован
 */
 
 public class Audio {
-    private long device;
-    private long context;
+    private long device = MemoryUtil.NULL;
+    private long context = MemoryUtil.NULL;
 
-    public Audio() throws ControlNativeException {
+    Audio() {}
+
+    void init() throws ControlException {
         device = ALC10.alcOpenDevice((ByteBuffer) null);
         if (device == MemoryUtil.NULL) {
-            throw new ControlNativeException("Failed to open the default OpenAL device.");
+            throw new ControlException("Audio init: Failed to open the default OpenAL device");
         }
         ALCCapabilities deviceCaps = ALC.createCapabilities(device);
         context = ALC10.alcCreateContext(device, (IntBuffer) null);
         if (context == MemoryUtil.NULL) {
             ALC10.alcCloseDevice(device);
-            throw new ControlNativeException("Failed to create OpenAL context.");
+            throw new ControlException("Audio init: Failed to create OpenAL context");
         }
         ALC10.alcMakeContextCurrent(context);
         AL.createCapabilities(deviceCaps);
     }
 
-    public boolean isWorking() {
-        return context != 0;
+    boolean isWorking() {
+        return context != MemoryUtil.NULL;
     }
 
-    public void destroy() {
-        if (isWorking()) {
+    void destroy() {
+        if (context != MemoryUtil.NULL) {
             ALC10.alcDestroyContext(context);
+            context = MemoryUtil.NULL;
+        }
+
+        if (device != MemoryUtil.NULL) {
             ALC10.alcCloseDevice(device);
+            device = MemoryUtil.NULL;
         }
     }
 }

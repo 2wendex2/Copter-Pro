@@ -3,10 +3,14 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <content url="file://$MODULE_DIR$/src">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/src/config" />
+      <excludeFolder url="file://$MODULE_DIR$/src/game" />
       <excludeFolder url="file://$MODULE_DIR$/src/linux" />
       <excludeFolder url="file://$MODULE_DIR$/src/linux/META-INF" />
+      <excludeFolder url="file://$MODULE_DIR$/src/logo" />
       <excludeFolder url="file://$MODULE_DIR$/src/mac" />
       <excludeFolder url="file://$MODULE_DIR$/src/mac/META-INF" />
+      <excludeFolder url="file://$MODULE_DIR$/src/menu" />
       <excludeFolder url="file://$MODULE_DIR$/src/windows" />
       <excludeFolder url="file://$MODULE_DIR$/src/windows/META-INF" />
     </content>

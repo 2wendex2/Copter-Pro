@@ -2,7 +2,6 @@ package game;
 
 import config.*;
 import control.*;
-import control.ErrorState;
 import menu.EpisodeSelect;
 import menu.LevelSelect;
 import menu.MainMenu;

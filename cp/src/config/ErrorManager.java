@@ -3,7 +3,6 @@ package config;
 import control.Control;
 import control.ControlException;
 import control.ControlState;
-import control.ErrorState;
 
 public class ErrorManager {
     static private ErrorManager instance = new ErrorManager();

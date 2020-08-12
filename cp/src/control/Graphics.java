@@ -1,35 +1,48 @@
 package control;
 
+import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
 public class Graphics {
-    public static void setBackgroundColor(float r, float g, float b, float a) {
+    Graphics() {}
+
+    void fill(float r, float g, float b, float a) {
         GL11.glClearColor(r, g, b, a);
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
     }
 
-    public static void changeView(int x, int y) {
+    void setView(int x, int y) {
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glLoadIdentity();
         GL11.glTranslatef(x, y,0);
     }
 
-    public static void setColor(float r, float g, float b) {
-        GL11.glColor3f(r, g, b);
+    void glThrowIfError(String errString) throws ControlException {
+        int e = GL11.glGetError();
+        if (e == GL11.GL_NO_ERROR)
+            return;
+
+        StringBuilder s = new StringBuilder();
+        s.append(errString + ": OpenGL error: ");
+        s.append(e);
+        for (e = GL11.glGetError(); e != GL11.GL_NO_ERROR; e = GL11.glGetError()){
+            s.append(", ");
+            s.append(e);
+        }
+
+        throw new ControlException(s.toString());
     }
 
-    public static void drawColorRect(int x, int y, int w, int h, float r, float g, float b) {
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+    void init(int windowWidth, int windowHeight) throws ControlException {
+        GL.createCapabilities();
 
-        GL11.glColor3f(r, g, b);
-        GL11.glBegin(GL11.GL_TRIANGLES);
-        GL11.glVertex2i(x, y);
-        GL11.glVertex2i(x+w, y);
-        GL11.glVertex2i(x, y+h);
+        GL11.glMatrixMode(GL11.GL_PROJECTION);
+        GL11.glLoadIdentity();
+        GL11.glOrtho(0.0, windowWidth, windowHeight, 0.0, 1.0, -1.0);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-        GL11.glVertex2i(x, y+h);
-        GL11.glVertex2i(x+w, y);
-        GL11.glVertex2i(x+w, y+h);
-        GL11.glEnd();
-        GL11.glColor3f(1.f, 1.f, 1.f);
+        glThrowIfError("Graphics init");
     }
+
+    void destroy() {}
 }

@@ -1,6 +1,5 @@
 package control;
 
-import config.Log;
 import org.lwjgl.openal.AL10;
 import org.lwjgl.stb.STBVorbisInfo;
 import org.lwjgl.stb.STBVorbis;
@@ -22,30 +21,26 @@ import java.nio.ShortBuffer;
 */
 
 public class Sound {
-    private int bufferId;
+    private int bufferId = 0;
 
-    public int getBuffer() {
+    int getOpenALBuffer() {
         return bufferId;
     }
 
-    public Sound(String s) throws IOException {
+    public Sound(byte[] bytes, Audio audio) throws ControlException {
         bufferId = AL10.alGenBuffers();
         int alError = AL10.alGetError();
         if (alError != AL10.AL_NO_ERROR)
-            throw new IOException("Sound " + s + " loading error: OpenAL error: " + alError);
+            throw new ControlException("Sound load: OpenAL generating buffers error: " + alError);
         STBVorbisInfo info = STBVorbisInfo.malloc();
-        InputStream is = Resourse.getResourseAsInputStream("SND", s);
-        if (is == null)
-            throw new IOException("Sound " + s + " loading error: unable to read resourse");
         ByteBuffer vorbis = ByteBuffer.allocateDirect(4*8*1024*1024).order(ByteOrder.nativeOrder());
-        vorbis.put(is.readAllBytes());
-        is.close();
+        vorbis.put(bytes);
         vorbis.flip();
 
         IntBuffer error = ByteBuffer.allocateDirect(4).order(ByteOrder.nativeOrder()).asIntBuffer();
         long decoder = STBVorbis.stb_vorbis_open_memory(vorbis, error, null);
         if ( decoder == MemoryUtil.NULL )
-            throw new IOException("Sound " + s + " loading error: STBVorbis error: open memory: " +
+            throw new ControlException("Sound load: STBVorbis open memory error: " +
                     error.get(0));
 
         STBVorbis.stb_vorbis_get_info(decoder, info);
@@ -58,22 +53,21 @@ public class Sound {
         pcm.limit(STBVorbis.stb_vorbis_get_samples_short_interleaved(decoder, channels, pcm) * channels);
         int error2 = STBVorbis.stb_vorbis_get_error(decoder);
         if (error2 != STBVorbis.VORBIS__no_error)
-            throw new IOException("Sound " + s + " loading error: STBVorbis error: " +
+            throw new ControlException("Sound load: STBVorbis get samples short interleaved error: " +
                     error2);
         STBVorbis.stb_vorbis_close(decoder);
 
         AL10.alBufferData(bufferId, info.channels() == 1 ? AL10.AL_FORMAT_MONO16 : AL10.AL_FORMAT_STEREO16, pcm, info.sample_rate());
         alError = AL10.alGetError();
         if (alError != AL10.AL_NO_ERROR)
-            throw new IOException("Sound " + s + " loading error: OpenAL error: " + alError);
+            throw new ControlException("Sound load: OpenAL buffer data error: " + alError);
         info.free();
-        is.close();
     }
 
-    public void clean() {
-        AL10.alDeleteBuffers(bufferId);
-        int alError = AL10.alGetError();
-        if (alError != AL10.AL_NO_ERROR)
-            Log.println("Clean sound openAL error: " + alError);
+    public void clear() {
+        if (bufferId != 0) {
+            AL10.alDeleteBuffers(bufferId);
+            bufferId = 0;
+        }
     }
 }
