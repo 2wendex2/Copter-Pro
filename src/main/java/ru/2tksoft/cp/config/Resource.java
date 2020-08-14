@@ -1,9 +1,6 @@
 package config;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 //Корневая папка
 
@@ -35,5 +32,22 @@ public class Resourse {
         File typeFile = new File(data, type);
         File nameFile = new File(typeFile, name);
         return new FileInputStream(nameFile);
+    }
+
+    public InputStream getInputSettingsResourse(String type, String name) throws IOException {
+        File typeFile = new File(settings, type);
+        File nameFile = new File(typeFile, name);
+        return new FileInputStream(nameFile);
+    }
+
+    public OutputStream getOutputSettingsResourse(String type, String name) throws IOException {
+        File typeFile = new File(settings, type);
+        File nameFile = new File(typeFile, name);
+        return new FileOutputStream(nameFile);
+    }
+
+    public InputStreamReader getInputTextResource(String name) throws IOException {
+        FileInputStream is = new FileInputStream(name + ".txt");
+        return new InputStreamReader(is);
     }
 }
