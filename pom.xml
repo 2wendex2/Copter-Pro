@@ -4,25 +4,24 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>ru.2tksoft.cp</groupId>
-		<artifactId>parent</artifactId>
-		<version>1</version>
-	</parent>
-	<packaging>jar</packaging>
-
+	<groupId>ru.w2tksoft</groupId>
 	<artifactId>cp</artifactId>
 	<version>0.1.4-SNAPSHOT</version>
 	<name>Copter Pro</name>
 
 	<properties>
 		<lwjgl.version>3.2.3</lwjgl.version>
-		<main.class>control.Main</main.class>
+		<main.class>${project.groupId}.${project.artifactId}.control.Main</main.class>
 		<lib.directoryName>lib</lib.directoryName>
+		<dlib.directoryName>dlib</dlib.directoryName>
 		<lib.directory>${project.build.directory}/${lib.directoryName}</lib.directory>
-		<dlib.directory>${project.build.directory}/dlib</dlib.directory>
+		<dlib.directory>${project.build.directory}/${dlib.directoryName}</dlib.directory>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>8</maven.compiler.source>
+		<maven.compiler.target>8</maven.compiler.target>
+		<built.by>Wendex</built.by>
 	</properties>
-
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.lwjgl</groupId>
@@ -53,6 +52,13 @@
 			<artifactId>lwjgl-stb</artifactId>
 			<version>${lwjgl.version}</version>
 		</dependency>
+		
+		<dependency>
+      			<groupId>junit</groupId>
+    			<artifactId>junit</artifactId>
+    			<version>4.11</version>
+    			<scope>test</scope>
+   		</dependency>
 	</dependencies>
 
 	<build>
@@ -83,6 +89,63 @@
 			</plugin>
 			
 			<plugin>
+          			<groupId>org.apache.maven.plugins</groupId>
+          			<artifactId>maven-compiler-plugin</artifactId>
+          			<version>3.8.1</version>
+          		</plugin>
+          		
+          		<plugin>
+          			<groupId>org.apache.maven.plugins</groupId>
+          			<artifactId>maven-site-plugin</artifactId>
+          			<version>3.9.1</version>
+          		</plugin>
+          		
+          		<plugin>
+          			<groupId>org.apache.maven.plugins</groupId>
+          			<artifactId>maven-surefire-plugin</artifactId>
+          			<version>3.0.0</version>
+        		</plugin>
+			
+			<plugin>
+          			<groupId>org.apache.maven.plugins</groupId>
+          			<artifactId>maven-resources-plugin</artifactId>
+          			<version>3.2.0</version>
+          			<executions>
+          				<execution>
+          					<id>copy-res</id>
+          					<phase>process-resources</phase>
+          					<goals>
+          						<goal>copy-resources</goal>
+          					</goals>
+          					<configuration>
+          						<outputDirectory>${project.build.directory}</outputDirectory>
+          						<resources>
+          							<resource>
+          								<directory>src/main/non-packaged-resources</directory>
+          							</resource>
+          						</resources>
+          					</configuration>
+          				</execution>
+          				
+          				<execution>
+          					<id>copy-test-res</id>
+          					<phase>process-test-resources</phase>
+          					<goals>
+          						<goal>copy-resources</goal>
+          					</goals>
+          					<configuration>
+          						<outputDirectory>${project.build.directory}/test-files</outputDirectory>
+          						<resources>
+          							<resource>
+          								<directory>src/test/non-packaged-resources</directory>
+          							</resource>
+          						</resources>
+          					</configuration>
+          				</execution>
+          			</executions>
+          		</plugin>
+			
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>3.0.2</version>
@@ -90,7 +153,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>control.Main</mainClass>
+							<mainClass>${main.class}</mainClass>
 							<classpathPrefix>${lib.directoryName}/</classpathPrefix>
 						</manifest>
 						<manifestEntries>
@@ -116,6 +179,7 @@
 							<overWriteReleases>false</overWriteReleases>
 							<overWriteSnapshots>false</overWriteSnapshots>
 							<overWriteIfNewer>true</overWriteIfNewer>
+							<includeArtifactIds>lwjgl,lwjgl-glfw,lwjgl-opengl,lwjgl-openal,lwjgl-stb</includeArtifactIds>
 						</configuration>
 					</execution>
 					
@@ -247,7 +311,7 @@
             <activation>
                 <os>
                     <family>Linux</family>
-					<arch>i386,amd64</arch>
+					<arch>amd64</arch>
 				</os>
 			</activation>
             <properties>
@@ -268,5 +332,15 @@
             </properties>
 		</profile>
     </profiles>
+    
+    <reporting>
+    	<plugins>
+    		<plugin>
+    			<groupId>org.apache.maven.plugins</groupId>
+          		<artifactId>maven-javadoc-plugin</artifactId>
+          		<version>3.2.0</version>
+    		</plugin>
+    	</plugins>
+    </reporting>
 	
 </project>

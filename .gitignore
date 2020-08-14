@@ -1,6 +1,2 @@
-*.log
-/out/
-*.class
-/temp
-/saves
-/cp/target
+/target
+/lvlcompiler/target
