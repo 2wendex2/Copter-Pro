@@ -51,7 +51,7 @@ public class WallManager {
             }
 
             for (Wall wall : where)
-                if (wall.testCollision(dwall))
+                if (wall.testCollision(dwall) && wall != dwall)
                     dwall.collisionWall(wall);
         }
     }
@@ -82,6 +82,10 @@ public class WallManager {
         collisionUpdateArrayList(level, pkenDwall, pnenDwall);
         collisionUpdateArrayList(level, pnenDwall, pkekDwall);
         collisionUpdateArrayList(level, pnenDwall, pkenDwall);
+
+        //collisionUpdateArrayList(level, pnenDwall, pnenDwall);
+        //collisionUpdateArrayList(level, pkenDwall, pkenDwall);
+        //collisionUpdateArrayList(level, pkekDwall, pkekDwall);
     }
 
     public boolean collisionQuickItem(Item item) {

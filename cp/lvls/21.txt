@@ -1,28 +1,50 @@
-%define-terrain 1t 286 223t 18t 1000 0 0
-%swall 0t 0t 223t 1t 0 0
-%swall 0t 17t 223t 1t 0 0
-%swall 0t 1t 1t 16t 0 0
+%define-terrain 3t 286 320t 18t 1000 0 0
+%swall 0t 0t 500t 2t 0 0
+%swall 0t 16t 500t 2t 0 0
 
-%dwall 15t 1t 1t 1t 0 0 01 15t 8t 0 7t
-%dwall 27t 9t 1t 1t 0 0 01 27t 16t 0 7t
-%dwall 34t 1t 1t 1t 0 0 01 34t 8t 0 -7t
-%dwall 43t 9t 1t 1t 0 0 01 43t 16t 0 -7t
-%dwall 57t 1t 1t 1t 0 0 01 57t 8t 0 7t
+;обычные
+%dwall 20t 2t 1t 1t 0 0 01 20t 15t 0 7t
+%dwall 35t 2t 1t 1t 0 0 01 35t 15t 0 7t
+%dwall 50t 2t 1t 1t 0 0 01 50t 15t 0 7t
 
-%dwall 65t 9t 1t 1t 0 0 01 65t 16t 0 7t
-%dwall 78t 1t 1t 1t 0 0 01 78t 8t 0 -7t
-%dwall 89t 9t 1t 1t 0 0 01 89t 16t 0 -7t
-%dwall 98t 1t 1t 1t 0 0 01 98t 8t 0 7t
-%dwall 107t 9t 1t 1t 0 0 01 107t 16t 0 7t
 
-%dwall 121t 1t 1t 1t 0 0 01 121t 8t 0 -7t
-%dwall 133t 9t 1t 1t 0 0 01 133t 16t 0 -7t
-%dwall 143t 1t 1t 1t 0 0 01 143t 8t 0 7t
-%dwall 157t 9t 1t 1t 0 0 01 157t 16t 0 7t
-%dwall 170t 1t 1t 1t 0 0 01 170t 8t 0 -7t
+;ускорялки
+%dwall 65t 3t 1t 1t 0 0 01 65t 3t 0 8t
+%dwall 75t 3t 1t 1t 0 0 01 75t 3t 0 8t
+%dwall 85t 3t 1t 1t 0 0 01 85t 3t 0 8t
+%dwall 95t 3t 1t 1t 0 0 01 95t 3t 0 8t
+%dwall 105t 2t 1t 1t 0 0 01 105t 15t 0 9t
+%dwall 115t 2t 1t 1t 0 0 01 115t 15t 0 9t
+%dwall 125t 2t 1t 1t 0 0 01 125t 15t 0 9t
 
-%dwall 180t 9t 1t 1t 0 0 01 180t 16t 0 -7t
-%dwall 187t 1t 1t 1t 0 0 01 187t 8t 0 7t
-%dwall 202t 9t 1t 1t 0 0 01 202t 16t 0 7t
-%dwall 210t 1t 1t 1t 0 0 01 210t 8t 0 -7t
-%dwall 222t 9t 1t 1t 0 0 01 222t 16t 0 -7t
+;двойные
+%dwall 140t 2t 2t 1t 0 0 01 140t 15t 0 8t
+%dwall 160t 2t 2t 1t 0 0 01 165t 15t 0 8t
+%dwall 180t 2t 2t 2t 0 0 01 180t 14t 0 8t
+
+;несколько сразу
+%dwall 195t 2t 1t 1t 0 0 01 195t 15t 0 7t
+%dwall 198t 2t 1t 1t 0 0 01 198t 15t 0 5t
+
+%dwall 215t 2t 1t 1t 0 0 01 215t 15t 0 8t
+%dwall 217t 2t 1t 1t 0 0 01 217t 15t 0 7t
+
+
+
+;тройные
+%dwall 235t 2t 3t 1t 0 0 01 235t 15t 0 7t
+%dwall 255t 2t 3t 1t 0 0 01 255t 15t 0 7t
+
+;одна большая
+%dwall 275t 2t 8t 1t 0 0 01 275t 15t 0 5t
+
+;пиздец
+%dwall 300t 2t 1t 1t 0 0 01 300t 2t 0 7t
+%dwall 307t 6t 1t 1t 0 0 01 307t 6t 0 7t
+
+;%dwall 325t 2t 1t 1t 0 0 01 325t 2t 0 7t
+;%dwall 332t 6t 1t 1t 0 0 01 332t 6t 0 7t
+
+%dwall 319t 2t 1t 1t 0 0 01 319t 15t 0 10t
+
+%swall 0t 2t 2t 14t 0 0
