@@ -1,6 +1,6 @@
-package control;
+package ru.wendex.cp.control;
 
-import config.Log;
+import ru.wendex.cp.config.Log;
 import org.lwjgl.openal.AL10;
 import org.lwjgl.stb.STBVorbisInfo;
 import org.lwjgl.stb.STBVorbis;
@@ -8,10 +8,7 @@ import org.lwjgl.system.MemoryUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-import java.nio.ByteOrder;
-import java.nio.ShortBuffer;
+import java.nio.*;
 
 /*
 Хранит звук

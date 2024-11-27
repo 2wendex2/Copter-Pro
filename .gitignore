@@ -3,3 +3,6 @@
 *.class
 /temp
 /saves
+*.iml
+target
+.idea

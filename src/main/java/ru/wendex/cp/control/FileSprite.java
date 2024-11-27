@@ -1,8 +1,9 @@
-package control;
+package ru.wendex.cp.control;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
@@ -22,11 +23,11 @@ public class FileSprite implements Sprite {
         if (is == null)
             throw new IOException("Sprite " + path + " loading error: unable to read resourse");
 
-        byte[] bytes = is.readNBytes(Integer.MAX_VALUE);
+        byte[] bytes = InputUtil.readNBytes(is, Integer.MAX_VALUE);
         is.close();
         data = ByteBuffer.allocateDirect(bytes.length);
         data.put(bytes);
-        data.flip();
+        ((Buffer)data).flip();
 
         MemoryStack stack = MemoryStack.stackPush();
         IntBuffer w = stack.mallocInt(1);

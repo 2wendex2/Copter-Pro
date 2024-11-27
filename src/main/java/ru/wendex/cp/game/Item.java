@@ -1,0 +1,16 @@
+package ru.wendex.cp.game;
+
+import ru.wendex.cp.control.Drawable;
+
+//Итемы
+//Есть итемы игрока и врага
+//Вражеские всегда движутся (иначе нахер они нужны?)
+//Игрока нет
+//У игрока их вообще три вида
+//Статические и динамические, динамические делятся на длинные и короткие
+//Длинные отталкиваются от стен
+//Короткие от них умирают
+//Также итемы игрока могут убиваться или нет от игрока
+//Наследоваться от PlayerLongItem, PlayerQuickItem, EnemyItem
+
+public interface Item extends GameObject, Drawable, Collidable {}
