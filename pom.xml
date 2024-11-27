@@ -85,70 +85,84 @@
 							</arguments>
 						</configuration>
 					</execution>
+					<execution>
+						<id>lvlcompile</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<configuration>
+							<arguments>
+								<argument>src/main/lvls</argument>
+								<argument>target/classes/DATA/LVL</argument>
+							</arguments>
+							<mainClass>ru.wendex.cp.lvlcompiler.LvlCompile</mainClass>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 
 			<plugin>
-          			<groupId>org.apache.maven.plugins</groupId>
-          			<artifactId>maven-compiler-plugin</artifactId>
-          			<version>3.8.1</version>
-						<configuration>
-							<compilerVersion>1.8</compilerVersion>
-							<forceJavacCompilerUse>true</forceJavacCompilerUse>
-						</configuration>
-          		</plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+					<configuration>
+						<compilerVersion>1.8</compilerVersion>
+						<forceJavacCompilerUse>true</forceJavacCompilerUse>
+					</configuration>
+			</plugin>
           		
-          		<plugin>
-          			<groupId>org.apache.maven.plugins</groupId>
-          			<artifactId>maven-site-plugin</artifactId>
-          			<version>3.9.1</version>
-          		</plugin>
-          		
-          		<plugin>
-          			<groupId>org.apache.maven.plugins</groupId>
-          			<artifactId>maven-surefire-plugin</artifactId>
-          			<version>3.0.0</version>
-        		</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.9.1</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0</version>
+			</plugin>
 			
 			<plugin>
-          			<groupId>org.apache.maven.plugins</groupId>
-          			<artifactId>maven-resources-plugin</artifactId>
-          			<version>3.2.0</version>
-          			<executions>
-          				<execution>
-          					<id>copy-res</id>
-          					<phase>process-resources</phase>
-          					<goals>
-          						<goal>copy-resources</goal>
-          					</goals>
-          					<configuration>
-          						<outputDirectory>${project.build.directory}</outputDirectory>
-          						<resources>
-          							<resource>
-          								<directory>src/main/non-packaged-resources</directory>
-          							</resource>
-          						</resources>
-          					</configuration>
-          				</execution>
-          				
-          				<execution>
-          					<id>copy-test-res</id>
-          					<phase>process-test-resources</phase>
-          					<goals>
-          						<goal>copy-resources</goal>
-          					</goals>
-          					<configuration>
-          						<outputDirectory>${project.build.directory}/test-files</outputDirectory>
-          						<resources>
-          							<resource>
-          								<directory>src/test/non-packaged-resources</directory>
-          							</resource>
-          						</resources>
-          					</configuration>
-          				</execution>
-          			</executions>
-          		</plugin>
-			
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<id>copy-res</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/non-packaged-resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>copy-test-res</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/test-files</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/test/non-packaged-resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -164,6 +178,10 @@
 							<Built-By>${built.by}</Built-By>
 						</manifestEntries>
 					</archive>
+					<excludes>
+						<exclude>ru/wendex/cp/lvlcompiler/*</exclude>
+						<exclude>ru/wendex/cp/lvlcompiler</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
 	  
